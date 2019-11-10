@@ -1,0 +1,137 @@
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.Button-Padding{
+  padding: 3%;
+}
+
+.App-header {
+  background-color: #15202B;
+  min-height: 100vh;
+  width: 100%;
+  float: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  //font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.Tweet-Modal-Header {
+  background-color: #15202B;
+  color: #FFFFFF;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-left: 1px;
+  border-top: 1px;
+}
+
+.Tweet-Modal-Body {
+  background-color: #15202B;
+  color: #FFFFFF;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Tweet-Modal-Footer {
+  background-color: #15202B;
+  color: #FFFFFF;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.close {
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.close:hover {
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.tweet {
+  width: 100%;
+  overflow: hidden;
+  background-color: #15202B;
+}
+
+.tweet-image{
+  width: 15%;
+  float: left;
+  background-color: #15202B;
+}
+
+img {
+  max-width:69%;
+  height:auto;
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
+  overflow: hidden;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+}
+
+.tweet-body {
+  width: 85%;
+  float: left;
+  background-color: #15202B;
+}
+
+.tweet-body-text {
+  width: 100%;
+  float: left;
+  background-color: #15202B;
+  border-width: 0px;
+  outline-style: 0 none;
+  border: transparent;
+  color: white;
+  width: auto;
+  height: auto;
+}
+
+.tweet-body-text:focus {
+  width: 100%;
+  float: left;
+  background-color: #15202B;
+  border-width: 0px;
+  box-shadow: none !important;
+  border: transparent;
+  width: auto;
+  height: auto;
+  color: white;
+}

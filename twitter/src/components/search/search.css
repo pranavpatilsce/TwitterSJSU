@@ -1,0 +1,44 @@
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.Button-Padding{
+  padding: 3%;
+}
+
+.search-div {
+  background-color: #15202B;
+  min-height: 100vh;
+  width: 100%;
+  float: none;
+  //font-size: calc(10px + 2vmin);
+  color: white;
+  display: block;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.search-bar {
+  border-radius: 30px;
+  background-color: #15202B;
+  border-color: #00acee;
+}
+
+.search-bar:focus {
+  border-radius: 30px;
+  background-color: #15202B;
+  border-color: #00acee;
+}
+
+
+.App-link {
+  color: #09d3ac;
+}

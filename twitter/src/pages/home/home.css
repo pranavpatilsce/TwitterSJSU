@@ -1,0 +1,69 @@
+.Home {
+  width: 100%;
+  overflow: hidden;
+  background-color: #15202B;
+}
+
+.Home-Navigation{
+  position: fixed;
+
+  width: 25%;
+  float: left;
+  //border-radius: 2px;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Home-RightSide{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  float: right;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Home-Home{
+  float: none;
+  overflow: auto;
+}
+
+.Home-Home-Card {
+  padding-left: 20px;
+  padding-top: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* .App-logo {
+  height: 40vmin;
+} */
+
+.App-header {
+  //background-color: #282c34;
+  background-color: #15202B;
+  width: 50%;
+  float: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
