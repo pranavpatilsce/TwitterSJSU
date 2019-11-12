@@ -4,6 +4,9 @@ var connection =  new require('./kafka/Connection');
 var Database=require('./Database');
 var addPofile = require('./services/AddProfile');
 
+// Messages
+var CreateChat = require('./services/CreateChat.js');
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -38,5 +41,6 @@ function handleTopicRequest(topic_name,fname){
 // second argument is a function that will handle this topic request
 
 handleTopicRequest("add_profile",addPofile)
+handleTopicRequest("create_chat",CreateChat);
 
 

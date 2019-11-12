@@ -11,7 +11,7 @@ const multer = require("multer");
 const passport = require("passport");
 
 var profileRouter = require('./routes/profile');
-
+var messagesRouter = require('./routes/messages.js');
 var passportJWT = require("passport-jwt");
 
 const kafka = require('./kafka/kafka/client');
@@ -61,6 +61,7 @@ app.use(express.static(__dirname+'/uploads'));
 
 
 app.use('/profile', profileRouter);
+app.use('/messages', messagesRouter);
 
 
 
