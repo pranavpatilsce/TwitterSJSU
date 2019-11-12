@@ -1,8 +1,8 @@
 var connection =  new require('./kafka/Connection');
 //topics files
 
-var Database=require('../kafka-backend/Database');
-var AddProfile = require('./services/AddProfile.js');
+var Database=require('./Database');
+var addPofile = require('./services/AddProfile');
 
 
 function handleTopicRequest(topic_name,fname){ 

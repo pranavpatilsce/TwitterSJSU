@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var passport = require("passport");
-const kafka = require("../kafka/client");
+const kafka = require("../kafka/kafka/client");
 
 //Search Item from buyer page
-router.post('/addProfile', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+router.post('/addProfile',  function (req, res, next) {
      kafka.make_request('add_profile',req.body, function(error,results){
         if (error) {
             console.log("error in results ");
