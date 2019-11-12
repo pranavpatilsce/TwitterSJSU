@@ -10,6 +10,8 @@ const bcrypt = require('bcrypt');
 const multer = require("multer");
 const passport = require("passport");
 
+var profileRouter = require('./routes/profile');
+
 var passportJWT = require("passport-jwt");
 
 const kafka = require('./kafka/kafka/client');
@@ -56,6 +58,11 @@ app.use(session({
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname+'/uploads'));
+
+
+app.use('/profile', profileRouter);
+
+
 
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
