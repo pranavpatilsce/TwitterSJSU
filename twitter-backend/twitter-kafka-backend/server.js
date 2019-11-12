@@ -2,6 +2,8 @@ var connection =  new require('./kafka/Connection');
 //topics files
 
 var Database=require('../kafka-backend/Database');
+var AddProfile = require('./services/AddProfile.js');
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -35,6 +37,6 @@ function handleTopicRequest(topic_name,fname){
 // first argument is topic name
 // second argument is a function that will handle this topic request
 
-//handleTopicRequest("registerCust",registerCust)
+handleTopicRequest("add_profile",addPofile)
 
 
