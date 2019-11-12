@@ -20,8 +20,8 @@ var profileSchema = new mongoose.Schema({
     tweets:Array,
     followers:Array,
     following:Array,
-    bookmarkedTweets:Array,
-    messages:Array
+    bookmarkedTweets:Array, 
+    chats:Array
 })
 var profileModel = mongoose.model('profile', profileSchema);
 
