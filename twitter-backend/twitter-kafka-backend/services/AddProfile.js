@@ -1,8 +1,9 @@
 var db = require('../Database');
-var profileModel = db.profileModel;
+var profileModel = db.Profile;
 var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
+    console.log("Inside Add Profile msg----", msg)
     profileModel.find({ email: msg.email }, function (err, results) {
         if (results.length > 0) {
             console.log("email id exists");
@@ -10,7 +11,7 @@ function handle_request(msg, callback) {
 
         }
     });
-    console.log("msg----", msg)
+    
     var insertProfile = new profileModel({
         name: msg.name,
         birthDate: msg.birthDate,
