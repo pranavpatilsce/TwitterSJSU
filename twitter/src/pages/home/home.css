@@ -6,7 +6,7 @@
 
 .Home-Navigation{
   position: fixed;
-
+  background-color: #15202B;
   width: 25%;
   float: left;
   //border-radius: 2px;
@@ -20,6 +20,7 @@
 
 .Home-RightSide{
   position: fixed;
+  background-color: #15202B;
   bottom: 0;
   right: 0;
   width: 25%;
@@ -35,6 +36,7 @@
 .Home-Home{
   float: none;
   overflow: auto;
+  background-color: #15202B;
 }
 
 .Home-Home-Card {
@@ -62,8 +64,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #09d3ac;
 }
