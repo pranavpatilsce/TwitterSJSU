@@ -1,0 +1,288 @@
+.Profile {
+  width: 100%;
+  overflow: hidden;
+  background-color: #15202B;
+}
+
+.Profile-Navigation{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  float: left;
+  //border-radius: 2px;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Profile-RightSide{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  float: right;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Profile-Profile-Card {
+  overflow: hidden;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+.ProfileBar {
+  overflow: hidden;
+  background-color: #15202B;
+  position: fixed;
+  top: 0;
+  width: 50%;
+  z-index: 1;
+  left: 400px;
+}
+
+.BarTitle {
+  width: 85%;
+  float: right;
+  color: white;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  border: 1px;
+}
+.BarTitle:hover {
+  width: 85%;
+  float: right;
+  color: white;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  border: 1px;
+}
+
+.BackButton {
+  width: 15%;
+  float: left;
+  background-color: #15202B;
+  border: 1px;
+}
+
+.BackButton:hover {
+  width: 15%;
+  float: left;
+  background-color: #15202B;
+  border: 1px;
+}
+
+.ProfileCard-Parent{
+  position: relative;
+  top: 0px;
+  left: 400px;
+}
+
+.ProfileCard-Wallpaper{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.ProfileCard-Image{
+  position: absolute;
+  top: 300px;
+  left: 30px;
+}
+
+.image {
+  border-radius: 50%;
+  border-style: solid;
+}
+
+.EditButton{
+  background-color: #15202B;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  margin-left: 680px;
+  margin-top: 20px;
+  color: #00acee;
+}
+
+.EditButton2:hover {
+  background-color: #15202B;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  margin-left: 680px;
+  margin-top: 20px;
+  color: #00acee;
+}
+
+.ProfileName{
+  color: white;
+}
+
+.ProfileHandle{
+  color: #8899a6;
+}
+
+.ProfileBio{
+  color: white;
+}
+
+.UserInfo{
+  color: #8899a6;
+  width: 100%;
+  float: left;
+  overflow: hidden;
+  font-size: 15px;
+  margin-left: -5px;
+}
+
+.UserInfo-Location{
+  width: 11%;
+  float: left;
+}
+
+.UserInfo-Calendar{
+  width: 11%;
+  float: left;
+  padding-top: 3px;
+}
+
+.UserInfo-Birthday {
+  width: 14%;
+  float: left;
+}
+
+.overall{
+  margin-left: 30px;
+  margin-top: 25px;
+}
+
+.profileFollowers{
+  color: #8899a6;
+}
+
+.profileFollowers:hover{
+  color: white;
+}
+
+.followerNumber {
+  color: white;
+}
+
+.ProfileTabs{
+  color: #8899a6;
+  border-style: none;
+  width: 12.5%;
+  margin-top: 20px;
+}
+
+.ProfileTabsDiv{
+  width: 100%;
+  text-align: center;
+}
+.ProfileTabs:hover{
+  color: #00acee;
+  background-color: #15202B;
+  border-style: none;
+  border-radius: 0px;
+}
+
+.ProfileTabs:active{
+  color: #8899a6;
+  background-color: #15202B;
+  border-style: none;
+}
+
+.ProfileTabs:enabled{
+  color: #8899a6;
+  background-color: #15202B;
+}
+
+.MainAccouncement-Media {
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 11%;
+  margin-top: 3%;
+}
+
+.SubAccouncement-Media {
+  color: #8899a6;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 7.9%;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.buttonNoTweet{
+  text-align: center;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 30px;
+  margin-left: 19%;
+  margin-bottom: 20%;
+  border-color: #00acee;
+  background-color: #00acee;
+}
+.buttonNoTweet:hover {
+  text-align: center;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 30px;
+  margin-left: 19%;
+  margin-bottom: 20%;
+  border-color: #00acee;
+  background-color: #00acee;
+}
+
+.MainAccouncement-Likes {
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 16%;
+  margin-top: 3%;
+}
+
+.SubAccouncement-Likes {
+  color: #8899a6;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction:row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 6.3%;
+  margin-top: 1%;
+  margin-bottom: 40%;
+}

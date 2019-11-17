@@ -5,6 +5,7 @@ const kafka = require("../kafka/kafka/client");
 
 //Search Item from buyer page
 router.post('/addProfile',  function (req, res, next) {
+    console.log('Inside Add Profile.')
      kafka.make_request('add_profile',req.body, function(error,results){
         if (error) {
             console.log("error in results ");

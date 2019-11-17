@@ -51,8 +51,16 @@ const chatSchema = new mongoose.Schema(
 const chat = mongoose.model('chat', chatSchema);
 const message = mongoose.model('message',messageSchema);
 
+////////////////////////////////////////////////////////////////////////////////
+
+var tweetHashSchema = new mongoose.Schema({
+    hashData:[]
+})
+var tweetHashModel = mongoose.model('tweethash', tweetHashSchema);
+
 module.exports = {
   Profile:profileModel,
   Chat: chat,
-  Message :message
+  Message :message,
+  TweetHash:tweetHashModel
 }
