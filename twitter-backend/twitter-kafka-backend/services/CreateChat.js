@@ -1,16 +1,11 @@
 const database = require('../Database.js');
 const Chat = database.Chat;
 const Message = database.Message;
-//const profileModel = database.profileModel;
+const profileModel = database.Profile;
 
 function handle_request(msg, callback) {
+    console.log("**********************");
     console.log("Inside createChat, msg: ", msg);
-    
-    // let msg = {
-    //     senderId:"5dca4220beab640fd4d7ed6f",
-    //     receiverId: "5dca6e861c9d44000093c179",
-    //     message : "OKOKOKO"
-    // }
     let chat = new Chat({
         users: [msg.senderId, msg.receiverId]
     });
@@ -36,12 +31,25 @@ function handle_request(msg, callback) {
                 }
                 else{
                     console.log("Added the first message to the chat. DONE!!");
+                    console.log("**********************");
                     callback(null, true);
                     //saveChatInUserProfiles(updatedChat.users, updatedChat._id,()=>{});
+                    profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
+                        if(err){
+                            console.log("INSIDE ERROR OF PROFILE UPDATE - CREATE CHAT");
+                            callback(err,null);
+                        }
+                        else{
+                            console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
+                            callback(null, true);
+                        }
+                    })
                 }
             })
         }
     });
+
+ 
     
     // function saveChatInUserProfiles(users,chatId,callback){
     //     if(users.length == 2){
