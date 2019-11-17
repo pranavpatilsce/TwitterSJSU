@@ -25,7 +25,13 @@ var profileSchema = new mongoose.Schema({
 })
 var profileModel = mongoose.model('profile', profileSchema);
 
+var tweetHashSchema = new mongoose.Schema({
+    hashData:[]
+})
+var tweetHashModel = mongoose.model('tweethash', tweetHashSchema);
+
 
 module.exports = {
-  Profile:profileModel
+  Profile:profileModel,
+  TweetHash:tweetHashModel
 }

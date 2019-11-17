@@ -3,7 +3,8 @@ var connection =  new require('./kafka/Connection');
 
 var Database=require('./Database');
 var addPofile = require('./services/AddProfile');
-
+var addBookmark = require('./services/AddBookmark')
+var createTweet = require('./services/CreateTweet')
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -37,6 +38,8 @@ function handleTopicRequest(topic_name,fname){
 // first argument is topic name
 // second argument is a function that will handle this topic request
 
-handleTopicRequest("add_profile",addPofile)
+handleTopicRequest("add_profile",addPofile)  
+handleTopicRequest("bookmark",addBookmark)
+handleTopicRequest("tweet",createTweet)  
 
 
