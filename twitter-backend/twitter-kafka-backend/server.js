@@ -3,6 +3,10 @@ var connection =  new require('./kafka/Connection');
 
 var Database=require('./Database');
 var addPofile = require('./services/AddProfile');
+
+// Messages
+var CreateChat = require('./services/CreateChat.js');
+
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
 
@@ -38,8 +42,9 @@ function handleTopicRequest(topic_name,fname){
 // first argument is topic name
 // second argument is a function that will handle this topic request
 
-handleTopicRequest("add_profile",addPofile)  
-handleTopicRequest("bookmark",addBookmark)
-handleTopicRequest("tweet",createTweet)  
+handleTopicRequest("add_profile",addPofile);  
+handleTopicRequest("create_chat",CreateChat);
+handleTopicRequest("bookmark",addBookmark);
+handleTopicRequest("tweet",createTweet);
 
 
