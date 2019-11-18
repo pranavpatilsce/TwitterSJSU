@@ -16,6 +16,7 @@ function handle_request(msg, callback) {
         receiverId : msg.receiverId
     })
     
+    
     chat.save( function(err, createdChat){
         if(err){
             console.log("Error creating a chat at Kafka Backend");

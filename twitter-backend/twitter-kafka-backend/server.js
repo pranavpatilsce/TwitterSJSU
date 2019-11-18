@@ -6,6 +6,7 @@ var addPofile = require('./services/AddProfile');
 // Messages
 var CreateChat = require('./services/CreateChat.js');
 var GetChat = require('./services/GetChat.js');
+var AddMessageToChat = require('./services/AddMessageToChat.js');
 
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
@@ -45,6 +46,7 @@ function handleTopicRequest(topic_name,fname){
 handleTopicRequest("add_profile",addPofile);  
 handleTopicRequest("create_chat",CreateChat);
 handleTopicRequest("get_chat",GetChat);
+handleTopicRequest("add_message_to_chat",AddMessageToChat);
 handleTopicRequest("bookmark",addBookmark);
 handleTopicRequest("tweet",createTweet);
 

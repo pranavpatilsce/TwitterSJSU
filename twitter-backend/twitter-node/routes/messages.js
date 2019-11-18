@@ -39,6 +39,31 @@ router.get('/getChat/:chatId',  function (req, res, next) {
     });
 });
 
+// Add a new message to an existing chat
+router.post('/addMessageToChat',  function (req, res, next) {
+    
+    let chatData = {
+        chatId :req.body.chatId,
+        senderId : req.body.senderId,
+        receiverId : req.body.receiverId,
+        newMessage : req.body.message
+    }
+
+    console.log("MESSAGE: ", chatData.newMessage);
+    console.log("Inside /addMessageToChat.");
+    //res.end(JSON.stringify(req.body));
+
+    kafka.make_request('add_message_to_chat',chatData, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /addMessageToChat results ");
+            res.status(201).send(error)
+        }
+        else {
+            res.writeHead(200);
+            res.end(JSON.stringify(kafkaResult));
+        }
+    });
+});
 // router.post('/addProfile', passport.authenticate('jwt', { session: false }), function (req, res, next) {
 //     kafka.make_request('add_profile',req.body, function(error,results){
 //        if (error) {
