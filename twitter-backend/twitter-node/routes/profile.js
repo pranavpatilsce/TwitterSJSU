@@ -45,7 +45,6 @@ router.post('/signInProfile', function (req, res, next) {
             res.setHeader("Access-Control-Expose-Headers", "Authorization");
             // res.header('Authorization', "token " + token)
             res.send(profile);
-            
         }
     });
 });
@@ -64,6 +63,18 @@ router.post('/updateProfile',  function (req, res, next) {
 
 router.post('/getProfile',  function (req, res, next) {
     kafka.make_request('get_profile',req.body, function(error,results){
+       if (error) {
+           console.log("error in results ");
+           res.status(200).send(error)
+       }
+       else {
+           res.status(200).send(results);
+       };
+   });
+});
+
+router.post('/deleteProfile',  function (req, res, next) {
+    kafka.make_request('delete_profile',req.body, function(error,results){
        if (error) {
            console.log("error in results ");
            res.status(200).send(error)
