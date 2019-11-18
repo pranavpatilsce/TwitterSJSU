@@ -12,7 +12,9 @@ const passport = require("passport");
 
 var profileRouter = require('./routes/profile');
 var messagesRouter = require('./routes/messages.js');
-var userRouter= require('./routes/users')
+var userRouter= require('./routes/users');
+var dashboardRouter = require('./routes/dashboard.js');
+
 var passportJWT = require("passport-jwt");
 
 const kafka = require('./kafka/kafka/client');
@@ -64,6 +66,7 @@ app.use(express.static(__dirname+'/uploads'));
 app.use('/profile', profileRouter);
 app.use('/messages', messagesRouter);
 app.use('/users', userRouter);
+app.use('/dashboard',dashboardRouter);
 
 
 

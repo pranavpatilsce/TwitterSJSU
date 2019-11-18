@@ -48,11 +48,8 @@ router.post('/addMessageToChat',  function (req, res, next) {
         receiverId : req.body.receiverId,
         newMessage : req.body.message
     }
-
     console.log("MESSAGE: ", chatData.newMessage);
     console.log("Inside /addMessageToChat.");
-    //res.end(JSON.stringify(req.body));
-
     kafka.make_request('add_message_to_chat',chatData, function(error,kafkaResult){
         if (error) {
             console.log("error in /addMessageToChat results ");
@@ -64,17 +61,5 @@ router.post('/addMessageToChat',  function (req, res, next) {
         }
     });
 });
-// router.post('/addProfile', passport.authenticate('jwt', { session: false }), function (req, res, next) {
-//     kafka.make_request('add_profile',req.body, function(error,results){
-//        if (error) {
-//            console.log("error in results ");
-//            res.status(200).send(error)
-//        }
-//        else {
-//            res.cookie('section', results, { maxAge: 900000, httpOnly: false, path: '/' });
-//            res.status(200).send(results);
-//        };
-//    });
-// });
 
 module.exports = router;
