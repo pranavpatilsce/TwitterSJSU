@@ -19,7 +19,6 @@ function Home() {
         <div className="Home-Home-Card" jumbotron-fluid>
             <Tweet />
         </div>
-        {/* <img src={logo} alt="logo" /> */}
       </div>
 
       <div className="Home-RightSide">

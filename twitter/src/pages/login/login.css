@@ -1,22 +1,98 @@
-.App {
-  text-align: center;
+.Login {
+  width: 100%;
+  overflow: hidden;
+  //background-color: #15202B;
 }
 
-.App-logo {
-  height: 40vmin;
+.Login-Navigation{
+  position: absolute;
+  //background-color: #1da1f2;
+  //background-color: #15202B;
+  //padding-left: 120px;
+  top: 60px;
+  left: 60px;
+  width: 50%;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-right: 1px;
+  opacity: 0.69;
+  z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Login-Navigation-Bird{
+  opacity: 0.5;
+  width: 50%;
+}
+
+.tinted .Login-Navigation-Bird{
+  opacity: 0.5;
+}
+
+.Login-RightSide{
+  //background-color: #1da1f2;
+  //position: fixed;
+  /* top: 0;
+  right: 0; */
+  width: 50%;
+  float: right;
+
+  padding: 5%;
+  border-style: solid;
+  border-width: thin;
+  border-right: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-left: 2px;
+}
+
+.LogIn-RightSide-Bird{
+  padding-left: 15%;
+  padding-top: 30%;
+  padding-bottom: 6.9%;
+  zoom: 30%;
+}
+
+.LogIn-RightSide-Wording{
+  padding-left: 15%;
+}
+
+.LogIn-RightSide-Button{
+  width: 100%;
+  overflow: hidden;
+  padding-left: 15%;
+}
+
+.LogIn-RightSide-InLine{
+  width: 15%;
+  float: left;
+  border-radius: 30px;
+  background-color: white;
+  color: #00acee;
+  border-color: #00acee;
+}
+
+.LogIn-RightSide-SignUp{
+  width: 69%;
+  float: left;
+  border-radius: 30px;
+  background-color: #00acee;
   color: white;
+  border-color: #00acee;
 }
 
-.App-link {
-  color: #09d3ac;
+.LogIn-RightSide-LogIn{
+  width: 69%;
+  float: left;
+  border-radius: 30px;
+  background-color: white;
+  color: #00acee;
+  border-color: #00acee;
+}
+
+.LogIn-RightSide-LogIn-Padding{
+  padding-top: 10%;
 }

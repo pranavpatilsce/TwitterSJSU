@@ -193,6 +193,7 @@
 .ProfileTabsDiv{
   width: 100%;
   text-align: center;
+  background-color: #15202B;
 }
 .ProfileTabs:hover{
   color: #00acee;
@@ -211,6 +212,7 @@
   color: #8899a6;
   background-color: #15202B;
 }
+
 
 .MainAccouncement-Media {
   color: white;
