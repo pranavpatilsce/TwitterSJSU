@@ -5,6 +5,31 @@ var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const kafka = require("../kafka/kafka/client");
 const saltRounds = 10;
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/profileImages/')
+    },
+    filename: function (req, file, cb) {
+        // console.log(JSON.parse(req.cookies.getItemDetails).itemId)
+        cb(null, file.originalname);
+    }
+})
+const upload = multer({ storage: storage });
+router.post("/upload", upload.single('productImage'), (req, res, next) => {
+    console.log(req.body);
+    req.body.image = req.file.filename;
+    kafka.make_request('uploadImage', req.body, function (error, results) {
+        if (error) {
+            console.log("error in results--------", results);
+            throw error;
+        }
+        else {
+            console.log("Updated Image ",results)
+            res.status(202).send();
+        }
+    });
+})
 
 //Add Profile
 router.post('/addProfile',  function (req, res, next) {

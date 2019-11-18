@@ -7,6 +7,7 @@ var SignInProfile=require('./services/SignInProfile');
 var UpdateProfile= require('./services/UpdateProfile');
 var GetProfile= require('./services/GetProfile');
 var DeleteProfile=require('./services/DeleteProfile');
+var UploadImage= require('./services/UploadImage');
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -45,4 +46,5 @@ handleTopicRequest("signInProfile",SignInProfile)
 handleTopicRequest("update_profile",UpdateProfile)
 handleTopicRequest("get_profile",GetProfile)
 handleTopicRequest("delete_profile",DeleteProfile)
+handleTopicRequest("uploadImage",UploadImage)
 
