@@ -32,7 +32,7 @@ function handle_request(msg, callback) {
                 else{
                     console.log("Added the first message to the chat. DONE!!");
                     console.log("**********************");
-                    callback(null, true);
+                    //callback(null, true);
                     //saveChatInUserProfiles(updatedChat.users, updatedChat._id,()=>{});
                     profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
                         if(err){
@@ -41,7 +41,7 @@ function handle_request(msg, callback) {
                         }
                         else{
                             console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
-                            callback(null, true);
+                            callback(null, updatedChat);
                         }
                     })
                 }
