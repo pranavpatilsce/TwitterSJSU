@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LogIn from './login.js';
-
+import SignInAndPassword from './login.js'
 
 //const wrapper = shallow(<LogIn />);
 
@@ -30,12 +30,23 @@ describe('LogIn', () => {
         expect(logo.length).toBe(1);
   });
 
-  it('LogIn signin loaded', () => {
+  it('LogIn signin div loaded', () => {
 
         const component = shallow(<LogIn />);
         console.log(component.debug());
         const rightside = component.find('.Login-RightSide');
-        expect(rightside.length).toBe(1);
+        const rightsideTwo = component.find('.SignInAndPasswordMount');
+        expect(rightside.length + rightsideTwo.length).toBe(2);
+  });
+
+  it('LogIn signin component loaded', () => {
+        const component = shallow(
+        <div className="Login-RightSide">
+          <SignInAndPassword className="SignInAndPasswordMount"/>
+        </div>);
+        console.log(component.debug());
+        const signincomponent = component.find('.Login-RightSide');
+        expect(signincomponent.contains(<SignInAndPassword className="SignInAndPasswordMount"/>)).toEqual(true);
   });
 
 });

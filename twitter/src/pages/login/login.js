@@ -44,7 +44,7 @@ class LogIn extends React.Component {
         {/*<img className="Login-Navigation-Bird" src={logo} />*/}
 
       <div className="Login-RightSide">
-        <SignInAndPassword />
+        <SignInAndPassword className="SignInAndPasswordMount"/>
       </div>
 
     </div>
