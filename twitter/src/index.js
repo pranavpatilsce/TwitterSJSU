@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+
+import UserProfile from './components/profile/profile.js';
 //TODO: Add redux for isLoggedIn or not state
 
 class Routes extends React.Component {
@@ -17,7 +19,7 @@ class Routes extends React.Component {
       <Switch>
 
         <Route exact path='/' component={Home} />
-
+        <Route exact path='/profile' component={UserProfile} />
       </Switch>
     </Router>
     )

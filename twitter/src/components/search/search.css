@@ -30,6 +30,7 @@
   border-radius: 30px;
   background-color: #15202B;
   border-color: #00acee;
+  //border-width: 0px;
 }
 
 .search-bar:focus {
