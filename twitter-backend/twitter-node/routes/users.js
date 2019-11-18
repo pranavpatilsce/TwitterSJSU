@@ -45,5 +45,32 @@ router.post('/tweet/like',  function (req, res, next) {
     });
 });
 
+//Reply Tweet
+router.post('/tweet/reply',  function (req, res, next) {
+    console.log('Inside reply tweet kafka.');
+     kafka.make_request('replyTweet',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send({response:true});
+        };
+    });
+});
+
+//Retweet Tweet
+router.post('/tweet/retweet',  function (req, res, next) {
+    console.log('Inside retweet tweet kafka.');
+     kafka.make_request('replyTweet',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send({response:true});
+        };
+    });
+});
 
 module.exports = router;
