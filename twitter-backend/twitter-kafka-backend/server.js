@@ -3,7 +3,9 @@ var connection =  new require('./kafka/Connection');
 
 var Database=require('./Database');
 var AddProfile = require('./services/AddProfile.js');
-var SignInProfile=require('./services/SignInProfile')
+var SignInProfile=require('./services/SignInProfile');
+var UpdateProfile= require('./services/UpdateProfile');
+var GetProfile= require('./services/GetProfile');
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -39,5 +41,6 @@ function handleTopicRequest(topic_name,fname){
 
 handleTopicRequest("add_profile",AddProfile)
 handleTopicRequest("signInProfile",SignInProfile)
-
+handleTopicRequest("update_profile",UpdateProfile)
+handleTopicRequest("get_profile",GetProfile)
 

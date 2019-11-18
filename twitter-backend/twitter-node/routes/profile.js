@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const kafka = require("../kafka/kafka/client");
 
-//Search Item from buyer page
+//Add Profile
 router.post('/addProfile',  function (req, res, next) {
      kafka.make_request('add_profile',req.body, function(error,results){
         if (error) {
@@ -42,4 +42,27 @@ router.post('/signInProfile', function (req, res, next) {
     });
 });
 
+router.post('/updateProfile',  function (req, res, next) {
+    kafka.make_request('update_profile',req.body, function(error,results){
+       if (error) {
+           console.log("error in results ");
+           res.status(200).send(error)
+       }
+       else {
+           res.status(200).send(results);
+       };
+   });
+});
+
+router.post('/getProfile',  function (req, res, next) {
+    kafka.make_request('get_profile',req.body, function(error,results){
+       if (error) {
+           console.log("error in results ");
+           res.status(200).send(error)
+       }
+       else {
+           res.status(200).send(results);
+       };
+   });
+});
 module.exports = router;

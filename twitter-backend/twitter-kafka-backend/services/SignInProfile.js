@@ -1,11 +1,11 @@
-var db = require('../models/schema');
+var db = require('../Database');
 var profile = db.Profile;
 const bcrypt = require('bcrypt');
 
 // var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
-    profile.find({ email: msg.email }, function (error, results) {
+    profile.find({$or:[{ email: msg.email }, {userHandle: msg.userHandle}]}, function (error, results) {
         if (error) {
             console.log("error in results : error returned from database");
             throw error;

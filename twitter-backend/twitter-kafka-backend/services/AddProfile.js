@@ -19,7 +19,7 @@ function handle_request(msg, callback) {
         password: msg.password,
         bio: msg.bio,
         location: msg.location,
-        website: msg.website,
+        userHandle: msg.userHandle,
         profileImage: msg.profileImage,
         coverImage: msg.coverImage,
         tweets: msg.tweets,
