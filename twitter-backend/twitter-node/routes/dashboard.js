@@ -54,4 +54,51 @@ router.get('/getBookmarkedTweets/:userId',  function (req, res, next) {
     });
 });
 
+// get all tweets by the user
+router.get('/getTweets/:userId',  function (req, res, next) {
+    let userId = req.params.userId;
+    console.log("Inside /getTweets. User ID is: ",userId);
+    kafka.make_request('get_tweets',userId, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /getTweets results ");
+            res.status(201).send(error)
+        }
+        else {
+            res.writeHead(200);
+            res.end(JSON.stringify(kafkaResult));
+        }
+    });
+});
+
+// get all Retweets by the user
+router.get('/getRetweets/:userId',  function (req, res, next) {
+    let userId = req.params.userId;
+    console.log("Inside /getRetweets. User ID is: ",userId);
+    kafka.make_request('get_retweets',userId, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /getRetweets results ");
+            res.status(201).send(error)
+        }
+        else {
+            res.writeHead(200);
+            res.end(JSON.stringify(kafkaResult));
+        }
+    });
+});
+
+// get all Retweets by the user
+router.get('/getLikedTweets/:userId',  function (req, res, next) {
+    let userId = req.params.userId;
+    console.log("Inside /getLikedTweets. User ID is: ",userId);
+    kafka.make_request('get_liked_tweets',userId, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /getLikedTweets results ");
+            res.status(201).send(error)
+        }
+        else {
+            res.writeHead(200);
+            res.end(JSON.stringify(kafkaResult));
+        }
+    });
+});
 module.exports = router;

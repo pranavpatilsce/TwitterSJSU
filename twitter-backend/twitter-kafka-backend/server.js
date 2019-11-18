@@ -12,6 +12,9 @@ var AddMessageToChat = require('./services/AddMessageToChat.js');
 var GetFollowers = require('./services/GetFollowers.js');
 var GetFollowing = require('./services/GetFollowing.js');
 var GetBookmarkedTweets = require('./services/GetBookmarkedTweets.js');
+var GetTweets = require('./services/GetTweets.js');         
+var GetRetweets = require('./services/GetRetweets.js');     
+var GetLikedTweets = require('./services/GetLikedTweets.js');    
 
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
@@ -58,6 +61,9 @@ handleTopicRequest("add_message_to_chat",AddMessageToChat);
 handleTopicRequest("get_followers", GetFollowers);
 handleTopicRequest("get_following", GetFollowing);
 handleTopicRequest("get_bookmarked_tweets",GetBookmarkedTweets);
+handleTopicRequest("get_tweets", GetTweets);
+handleTopicRequest("get_retweets", GetRetweets);
+handleTopicRequest("get_liked_tweets", GetLikedTweets);
 handleTopicRequest("bookmark",addBookmark);
 handleTopicRequest("tweet",createTweet);
 handleTopicRequest("likeTweet",likeTweet) 
