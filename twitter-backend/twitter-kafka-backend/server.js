@@ -9,6 +9,9 @@ var CreateChat = require('./services/CreateChat.js');
 
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
+var likeTweet = require('./services/LikeTweet')
+var replyTweet = require('./services/ReplyTweet')
+var retweetTweet = require('./services/Retweet')
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -46,5 +49,9 @@ handleTopicRequest("add_profile",addPofile);
 handleTopicRequest("create_chat",CreateChat);
 handleTopicRequest("bookmark",addBookmark);
 handleTopicRequest("tweet",createTweet);
+handleTopicRequest("likeTweet",likeTweet) 
+handleTopicRequest("replyTweet",replyTweet) 
+handleTopicRequest("retweetTweet",retweetTweet) 
+
 
 
