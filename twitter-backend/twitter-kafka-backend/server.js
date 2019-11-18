@@ -5,6 +5,7 @@ var Database=require('./Database');
 var addPofile = require('./services/AddProfile');
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
+var likeTweet = require('./services/LikeTweet')
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -41,5 +42,6 @@ function handleTopicRequest(topic_name,fname){
 handleTopicRequest("add_profile",addPofile)  
 handleTopicRequest("bookmark",addBookmark)
 handleTopicRequest("tweet",createTweet)  
+handleTopicRequest("likeTweet",likeTweet) 
 
 
