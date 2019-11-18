@@ -4,9 +4,14 @@ var passport = require("passport");
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const kafka = require("../kafka/kafka/client");
+const saltRounds = 10;
 
 //Add Profile
 router.post('/addProfile',  function (req, res, next) {
+
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        // Store hash in your password DB.
+        req.body.hash = hash;
      kafka.make_request('add_profile',req.body, function(error,results){
         if (error) {
             console.log("error in results ");
@@ -18,26 +23,29 @@ router.post('/addProfile',  function (req, res, next) {
         };
     });
 });
+});
 
 router.post('/signInProfile', function (req, res, next) {
     kafka.make_request('signInProfile', req.body, function (error, results) {
-        if (results) {
-            console.log("COMPARE working-------------------")
-            output = "SuccessFull Login";
-            profile = JSON.stringify(results[0]);
-
-            // const token = jwt.sign({ _id: results[0]._id }, "cmpe273");
-            res.setHeader("Access-Control-Expose-Headers", "Authorization");
-            // res.header('Authorization', "token " + token)
-            res.send(profile);
-        }
-        else {
+        if (error) {
             console.log("not compare working-------------------");
             data = {
                 error: "Invalid login credentials"
             };
             output = "Invalid login credentials";
-            res.status(200).send(data);
+            res.status(200).send(JSON.parse(data));
+           
+        }
+        else {
+            console.log("COMPARE working-------------------")
+            output = "SuccessFull Login";
+            profile = results[0];
+
+            // const token = jwt.sign({ _id: results[0]._id }, "cmpe273");
+            res.setHeader("Access-Control-Expose-Headers", "Authorization");
+            // res.header('Authorization', "token " + token)
+            res.send(profile);
+            
         }
     });
 });

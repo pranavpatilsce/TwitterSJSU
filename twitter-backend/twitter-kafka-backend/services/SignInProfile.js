@@ -22,10 +22,13 @@ function handle_request(msg, callback) {
                     console.log("error in results ", error);
                     callback(error, "Error")
                 }
-                else {
+                else if(resSt){
                     console.log(results);
                     callback(null, results);
-                };
+                }else{
+                    console.log(resSt);
+                    callback(null,["credentials not Match"]);
+                }
             });
         };
     });

@@ -16,7 +16,7 @@ function handle_request(msg, callback) {
         name: msg.name,
         birthDate: msg.birthDate,
         email: msg.email,
-        password: msg.password,
+        password: msg.hash,
         bio: msg.bio,
         location: msg.location,
         userHandle: msg.userHandle,
