@@ -34,7 +34,9 @@ const SignInAndPassword = (props) => {
   );
 }
 
-function LogIn() {
+class LogIn extends React.Component {
+
+  render(){
   return (
     <div className="Login">
 
@@ -46,7 +48,8 @@ function LogIn() {
       </div>
 
     </div>
-  );
+    )
+  }
 }
 
 export default LogIn;
