@@ -15,6 +15,9 @@ var GetBookmarkedTweets = require('./services/GetBookmarkedTweets.js');
 
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
+var likeTweet = require('./services/LikeTweet')
+var replyTweet = require('./services/ReplyTweet')
+var retweetTweet = require('./services/Retweet')
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -57,5 +60,9 @@ handleTopicRequest("get_following", GetFollowing);
 handleTopicRequest("get_bookmarked_tweets",GetBookmarkedTweets);
 handleTopicRequest("bookmark",addBookmark);
 handleTopicRequest("tweet",createTweet);
+handleTopicRequest("likeTweet",likeTweet) 
+handleTopicRequest("replyTweet",replyTweet) 
+handleTopicRequest("retweetTweet",retweetTweet) 
+
 
 
