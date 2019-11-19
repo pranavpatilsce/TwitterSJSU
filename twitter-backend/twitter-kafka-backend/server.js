@@ -26,7 +26,7 @@ function handleTopicRequest(topic_name,fname){
                         correlationId:data.correlationId,
                         data : res
                     }),
-                    partition : 0
+                    // partition : 0
                 }
             ];
             producer.send(payloads, function(err, data){

@@ -10,7 +10,7 @@ function ConnectionProvider() {
                     console.warn('Error refreshing kafka metadata', err);
                 }
             });*/
-            this.kafkaConsumerConnection = new kafka.Consumer(this.client,[ { topic: topic_name, partition: 0 }]);
+            this.kafkaConsumerConnection = new kafka.Consumer(this.client,[ { topic: topic_name }]);//, partition: 0
             this.client.on('ready', function () { console.log('client ready!') })
         // }
         return this.kafkaConsumerConnection;
