@@ -8,7 +8,7 @@ router.get('/getFollowers/:userId',  function (req, res, next) {
     let userId = req.params.userId;
     console.log("Inside /getFollowers. User ID is: ",userId);
 
-    kafka.make_request('get_followers',userId, function(error,kafkaResult){
+    kafka.make_request('get_followerss',userId, function(error,kafkaResult){
         if (error) {
             console.log("error in /getFollowers results ");
             res.status(201).send(error)

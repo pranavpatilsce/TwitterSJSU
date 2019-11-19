@@ -38,12 +38,12 @@ function handleTopicRequest(topic_name,fname){
                     messages:JSON.stringify({
                         correlationId:data.correlationId,
                         data : res
-                    }),
-                    partition : 0
+                    })
+                    //partition : 0
                 }
             ];
             producer.send(payloads, function(err, data){
-                console.log(data);
+                console.log("here",data);
             });
             return;
         });
@@ -58,7 +58,7 @@ handleTopicRequest("add_profile",addPofile);
 handleTopicRequest("create_chat",CreateChat);
 handleTopicRequest("get_chat",GetChat);
 handleTopicRequest("add_message_to_chat",AddMessageToChat);
-handleTopicRequest("get_followers", GetFollowers);
+handleTopicRequest("get_followerss", GetFollowers);
 handleTopicRequest("get_following", GetFollowing);
 handleTopicRequest("get_bookmarked_tweets",GetBookmarkedTweets);
 handleTopicRequest("get_tweets", GetTweets);
