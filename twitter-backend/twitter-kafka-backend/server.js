@@ -16,11 +16,15 @@ var GetTweets = require('./services/GetTweets.js');
 var GetRetweets = require('./services/GetRetweets.js');     
 var GetLikedTweets = require('./services/GetLikedTweets.js');    
 
+
+//Tweet
 var addBookmark = require('./services/AddBookmark')
 var createTweet = require('./services/CreateTweet')
 var likeTweet = require('./services/LikeTweet')
 var replyTweet = require('./services/ReplyTweet')
 var retweetTweet = require('./services/Retweet')
+var addFollowers = require('./services/AddFollowers')
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -69,6 +73,7 @@ handleTopicRequest("tweet",createTweet);
 handleTopicRequest("likeTweet",likeTweet) 
 handleTopicRequest("replyTweet",replyTweet) 
 handleTopicRequest("retweetTweet",retweetTweet) 
+handleTopicRequest("addFollowers",addFollowers) 
 
 
 

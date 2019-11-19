@@ -62,7 +62,7 @@ router.post('/tweet/reply',  function (req, res, next) {
 //Retweet Tweet
 router.post('/tweet/retweet',  function (req, res, next) {
     console.log('Inside retweet tweet kafka.');
-     kafka.make_request('replyTweet',req.body, function(error,results){
+     kafka.make_request('retweetTweet',req.body, function(error,results){
         if (error) {
             console.log("error in results ");
             res.status(200).send(error)
@@ -72,5 +72,22 @@ router.post('/tweet/retweet',  function (req, res, next) {
         };
     });
 });
+
+
+//Add Followers
+//Retweet Tweet
+router.post('/addFollowers',  function (req, res, next) {
+    console.log('Inside add Followers kafka.');
+     kafka.make_request('addFollowers',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send({response:true});
+        };
+    });
+});
+
 
 module.exports = router;
