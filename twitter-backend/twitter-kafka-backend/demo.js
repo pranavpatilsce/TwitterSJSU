@@ -6,20 +6,10 @@ const profileModel = database.Profile;
 
 
 
-profileModel.findById("5dca6e861c9d44000093c179",function(err,profile){
+profileModel.find({tweets: {tweetId:"5dd1f431a4b0b444c0e76a12"}},function(err,result){
     if(err){console.log(err);}
     else{
-        //console.log(profile);
-        let chats = profile.chats;
-        console.log(chats)
-        Chat.find({_id:{$in:chats}}, function(err,chats){
-            if(err){console.log(err);}
-            else{
-                console.log(chats);
-            }
-        })
-
-        
+        console.log(result);
     }
 })
 

@@ -12,6 +12,9 @@ var AddMessageToChat = require('./services/AddMessageToChat.js');
 var GetFollowers = require('./services/GetFollowers.js');
 var GetFollowing = require('./services/GetFollowing.js');
 var GetBookmarkedTweets = require('./services/GetBookmarkedTweets.js');
+var GetTweets = require('./services/GetTweets.js');         
+var GetRetweets = require('./services/GetRetweets.js');     
+var GetLikedTweets = require('./services/GetLikedTweets.js');    
 
 
 //Tweet
@@ -39,12 +42,12 @@ function handleTopicRequest(topic_name,fname){
                     messages:JSON.stringify({
                         correlationId:data.correlationId,
                         data : res
-                    }),
-                    partition : 0
+                    })
+                    //partition : 0
                 }
             ];
             producer.send(payloads, function(err, data){
-                console.log(data);
+                console.log("here",data);
             });
             return;
         });
@@ -59,9 +62,12 @@ handleTopicRequest("add_profile",addPofile);
 handleTopicRequest("create_chat",CreateChat);
 handleTopicRequest("get_chat",GetChat);
 handleTopicRequest("add_message_to_chat",AddMessageToChat);
-handleTopicRequest("get_followers", GetFollowers);
+handleTopicRequest("get_followerss", GetFollowers);
 handleTopicRequest("get_following", GetFollowing);
 handleTopicRequest("get_bookmarked_tweets",GetBookmarkedTweets);
+handleTopicRequest("get_tweets", GetTweets);
+handleTopicRequest("get_retweets", GetRetweets);
+handleTopicRequest("get_liked_tweets", GetLikedTweets);
 handleTopicRequest("bookmark",addBookmark);
 handleTopicRequest("tweet",createTweet);
 handleTopicRequest("likeTweet",likeTweet) 
