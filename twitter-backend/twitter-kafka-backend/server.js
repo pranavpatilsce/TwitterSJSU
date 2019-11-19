@@ -11,6 +11,7 @@ var UpdateProfile= require('./services/UpdateProfile');
 var GetProfile= require('./services/GetProfile');
 var DeleteProfile=require('./services/DeleteProfile');
 var UploadImage= require('./services/UploadImage');
+var GetProfileKafka= require('./services/GetProfileKafka')
 
 // Messages
 var CreateChat = require('./services/CreateChat.js');
@@ -88,4 +89,5 @@ handleTopicRequest("likeTweet",likeTweet)
 handleTopicRequest("replyTweet",replyTweet) 
 handleTopicRequest("retweetTweet",retweetTweet) 
 handleTopicRequest("addFollowers",addFollowers) 
+handleTopicRequest("getProfileKafka",GetProfileKafka)
 

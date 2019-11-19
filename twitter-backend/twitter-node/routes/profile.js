@@ -5,6 +5,15 @@ var passport = require("passport");
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const kafka = require("../kafka/kafka/client");
+
+//Connection Without Pooling
+var db = require('../Database');
+var profileModel = db.Profile;
+
+//Connection with Mongo Pool
+// var dbPool = require('../DatabasePool');
+// var profileModelPool = dbPool.Profile;
+
 const saltRounds = 10;
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -87,8 +96,22 @@ router.post('/updateProfile',  function (req, res, next) {
    });
 });
 
+//Profile with Redis
 router.post('/getProfile',  function (req, res, next) {
     kafka.make_request('get_profile',req.body, function(error,results){
+       if (error) {
+           console.log("error in results ");
+           res.status(200).send(error)
+       }
+       else {
+           res.status(200).send(results);
+       };
+   });
+});
+
+//Profile with Kafka
+router.post('/getProfileKafka',  function (req, res, next) {
+    kafka.make_request('getProfileKafka',req.body, function(error,results){
        if (error) {
            console.log("error in results ");
            res.status(200).send(error)
@@ -110,4 +133,35 @@ router.post('/deleteProfile',  function (req, res, next) {
        };
    });
 });
+
+//Profile Base W/o redis/Kafka/MongoosePool
+router.post('/getProfileDirect',  function (req, res, next) {
+    profileModel.find({ userHandle: req.body.userHandle },
+        function (error, results) {
+            if (error) {
+                console.log("error in results ",error);
+                res.status(200).send(error)
+            }
+            else {
+                console.log(" getProfileDirect result ",results);
+                res.status(200).send(results);
+            };
+        });
+});
+
+
+//Profile with MongoPool
+// router.post('/getProfilePool',  function (req, res, next) {
+//     profileModelPool.find({ userHandle: req.body.userHandle },
+//         function (error, results) {
+//             if (error) {
+//                 console.log("error in results ",error);
+//                 res.status(200).send(error)
+//             }
+//             else {
+//                 console.log(" getProfileDirect result ",results);
+//                 res.status(200).send(results);
+//             };
+//         });
+// });
 module.exports = router;
