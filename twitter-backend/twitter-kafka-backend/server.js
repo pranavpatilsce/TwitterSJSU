@@ -1,6 +1,10 @@
 var connection =  new require('./kafka/Connection');
+
+
+
 //topics files
 var Database=require('./Database');
+var RedisClient = require('./Redis')
 var AddProfile = require('./services/AddProfile.js');
 var SignInProfile=require('./services/SignInProfile');
 var UpdateProfile= require('./services/UpdateProfile');
