@@ -76,11 +76,11 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>Home</Button>
+          <Button href="/">Home</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>Profile</Button>
+          <Button>Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
@@ -92,7 +92,7 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>Profile</Button>
+          <Button href="/profile">Profile</Button>
         </div>
 
         <div className="Button-Padding">
@@ -105,3 +105,4 @@ class Navigation extends React.Component {
 }
 
 export default Navigation;
+
