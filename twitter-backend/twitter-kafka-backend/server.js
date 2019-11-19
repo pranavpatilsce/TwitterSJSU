@@ -1,7 +1,12 @@
 var connection =  new require('./kafka/Connection');
 //topics files
 var Database=require('./Database');
-var addPofile = require('./services/AddProfile');
+var AddProfile = require('./services/AddProfile.js');
+var SignInProfile=require('./services/SignInProfile');
+var UpdateProfile= require('./services/UpdateProfile');
+var GetProfile= require('./services/GetProfile');
+var DeleteProfile=require('./services/DeleteProfile');
+var UploadImage= require('./services/UploadImage');
 
 // Messages
 var CreateChat = require('./services/CreateChat.js');
@@ -58,7 +63,12 @@ function handleTopicRequest(topic_name,fname){
 // first argument is topic name
 // second argument is a function that will handle this topic request
 
-handleTopicRequest("add_profile",addPofile);  
+handleTopicRequest("add_profile",AddProfile)
+handleTopicRequest("signInProfile",SignInProfile)
+handleTopicRequest("update_profile",UpdateProfile)
+handleTopicRequest("get_profile",GetProfile)
+handleTopicRequest("delete_profile",DeleteProfile)
+handleTopicRequest("uploadImage",UploadImage)
 handleTopicRequest("create_chat",CreateChat);
 handleTopicRequest("get_chat",GetChat);
 handleTopicRequest("add_message_to_chat",AddMessageToChat);
@@ -74,6 +84,4 @@ handleTopicRequest("likeTweet",likeTweet)
 handleTopicRequest("replyTweet",replyTweet) 
 handleTopicRequest("retweetTweet",retweetTweet) 
 handleTopicRequest("addFollowers",addFollowers) 
-
-
 
