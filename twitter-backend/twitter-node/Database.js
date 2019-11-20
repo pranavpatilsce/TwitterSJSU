@@ -21,7 +21,8 @@ var profileSchema = new mongoose.Schema({
 	following:Array,
 	bookmarkedTweets:Array,
 	chats:Array,
-	likedTweets: Array
+	likedTweets: Array,
+	userHandle: String
 
 })
 var profileModel = mongoose.model('profile', profileSchema);
