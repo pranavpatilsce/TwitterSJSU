@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-const connectionString='mongodb+srv://root:root@cluster0-9j3qi.mongodb.net/twitter?retryWrites=true&w=majority'
+const connectionString='mongodb+srv://root:root@cluster0-9j3qi.mongodb.net/twittertest?retryWrites=true&w=majority'
 mongoose.connect(connectionString,{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true} );
 // Email, Pwd, Name, Bio, Location, Website,
 //  BirthDate, ProfileImage, CoverImage, Tweets(Array), Followers(Array),
