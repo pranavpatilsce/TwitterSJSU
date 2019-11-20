@@ -62,6 +62,10 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname+'/uploads'));
 
+app.get('/ping', function(req,res){
+    res.writeHead(200);
+    res.end("Health Check Passed!");
+})
 
 app.use('/profile', profileRouter);
 app.use('/messages', messagesRouter);
