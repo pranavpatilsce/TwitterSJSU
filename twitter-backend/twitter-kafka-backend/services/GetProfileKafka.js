@@ -2,6 +2,7 @@ var db = require('../Database');
 var profileModel = db.Profile;
 
 function handle_request(msg, callback) {
+    console.log('Inside getprofilekafka #######################################################')
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     profileModel.find({ userHandle: msg.userHandle },
         function (error, results) {
