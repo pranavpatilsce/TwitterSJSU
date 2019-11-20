@@ -21,7 +21,8 @@ console.log('Matches is',matches);
         replies:[],
         likes:0,
         tweetHash:matches,
-        likedBy:[]
+        likedBy:[],
+        type:"Original"
 
     }}}, {upsert: true}, function(err, docs){
         if (err) {

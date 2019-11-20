@@ -20,7 +20,9 @@ var profileSchema = new mongoose.Schema({
 	followers:Array,
 	following:Array,
 	bookmarkedTweets:Array,
-	chats:Array
+	chats:Array,
+	likedTweets: Array
+
 })
 var profileModel = mongoose.model('profile', profileSchema);
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,4 +65,5 @@ module.exports = {
   Chat: chat,
   Message :message,
   TweetHash:tweetHashModel
+
 }

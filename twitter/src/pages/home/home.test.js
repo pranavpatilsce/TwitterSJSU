@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './home';
@@ -75,3 +76,4 @@ describe('Home page loaded well', () => {
 //   ReactDOM.render(<Home />, div);
 //   ReactDOM.unmountComponentAtNode(div);
 // });
+
