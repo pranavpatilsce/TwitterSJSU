@@ -21,6 +21,7 @@
     "mongodb-autoincrement": "^1.0.1",
     "mongoose": "^5.7.7",
     "multer": "^1.3.0",
+    "mysql": "^2.17.1",
     "nodemailer": "^4.6.4",
     "nodemon": "^1.19.4",
     "npm": "^6.12.1",
