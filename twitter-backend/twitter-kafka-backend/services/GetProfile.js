@@ -17,9 +17,10 @@ function handle_request(msg, callback) {
        if (profileInfo) {
    
            //return res.json({ source: 'cache', data: JSON.parse(photos) })
-                       console.log(profileInfo);
+                       console.log('Data Returned from Redis GetProfile!!!!!!',profileInfo);
                        callback(null,profileInfo);
        } else {
+        console.log('Data Not found in  Redis GetProfile!!!!!!');
         profileModel.find({ userHandle: msg.userHandle },
             function (error, results) {
                 if (error) {
