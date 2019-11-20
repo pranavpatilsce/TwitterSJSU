@@ -9,6 +9,7 @@ client.on('error', (err) => {
     console.log("Error " + err)
 });
 
+client.setex('user:profile', 3600, {"name":"twitteruser0","email":"twitter@1230"});
 
 module.exports = {
     Client:client
