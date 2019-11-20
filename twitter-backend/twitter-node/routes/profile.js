@@ -164,7 +164,7 @@ router.post('/getProfileRedis',  function (req, res, next) {
     
             //return res.json({ source: 'cache', data: JSON.parse(photos) })
                         console.log('Data Returned from Redis GetProfile@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',profile);
-                        callback(null,profile);
+                        res.status(200).send(profile);
         } else {
             console.log('Data Not found in  Redis GetProfile--------------------------------------------------------------------------------------');
             profileModel.find({ email: req.body.email },
