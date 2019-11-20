@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 const connectionString='mongodb+srv://root:root@cluster0-9j3qi.mongodb.net/twittertest?retryWrites=true&w=majority'
-mongoose.createConnection(connectionString,{ poolSize: 10, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(connectionString,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 .then(()=>console.log("Database connection success"))
 .catch(err=>{
 	console.error("Database connection error")
