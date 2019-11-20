@@ -136,11 +136,12 @@ router.post('/deleteProfile',  function (req, res, next) {
 
 //Profile Base W/o redis/Kafka/MongoosePool
 router.post('/getProfileDirect',  function (req, res, next) {
-    profileModel.find({ userHandle: req.body.userHandle },
+    console.log('inside get profile direct',req.body);
+    profileModel.find({ email: req.body.email },
         function (error, results) {
             if (error) {
                 console.log("error in results ",error);
-                res.status(200).send(error)
+                res.status(200).send(error);
             }
             else {
                 console.log(" getProfileDirect result ",results);
