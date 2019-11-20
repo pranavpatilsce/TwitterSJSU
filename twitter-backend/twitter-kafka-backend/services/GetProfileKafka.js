@@ -1,8 +1,6 @@
 var db = require('../Database');
 var profileModel = db.Profile;
-// const pool = require('../db');
-// var mongoose = require('mongoose');
-​
+
 function handle_request(msg, callback) {
     profileModel.find({ userHandle: msg.userHandle },
         function (error, results) {
@@ -15,6 +13,5 @@ function handle_request(msg, callback) {
                 callback(null, results);
             };
         });
-​
 };
 exports.handle_request = handle_request;

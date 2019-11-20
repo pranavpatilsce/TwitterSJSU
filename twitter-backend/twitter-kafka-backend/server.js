@@ -1,7 +1,5 @@
 var connection =  new require('./kafka/Connection');
 
-
-
 //topics files
 var Database=require('./Database');
 var RedisClient = require('./Redis')
@@ -11,7 +9,7 @@ var UpdateProfile= require('./services/UpdateProfile');
 var GetProfile= require('./services/GetProfile');
 var DeleteProfile=require('./services/DeleteProfile');
 var UploadImage= require('./services/UploadImage');
-var GetProfileKafka= require('./services/GetProfileKafka')
+var GetProfileKafka= require('./services/GetProfileKafka');
 
 // Messages
 var CreateChat = require('./services/CreateChat.js');
