@@ -19,10 +19,10 @@ function handle_request(msg, callback) {
        if (followers) {
    
            //return res.json({ source: 'cache', data: JSON.parse(photos) })
-                       console.log(followers);
+                       console.log('Data Returned from Redis GetFollowers!!!!!!',followers);
                        callback(null,followers);
        } else {
-    
+        console.log('Data Not found in  Redis GetFollowers!!!!!!');
         Profile.findById({_id:msg}, function(err, profile){
             if(err){
                 console.log("Error in Kafka Backend -> getFollowers");
