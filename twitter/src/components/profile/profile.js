@@ -192,24 +192,18 @@ class UserProfileHome extends React.Component {
     return(
 
       <div className="Profile">
-
         <div className="Profile-Navigation">
           <Navigation />
         </div>
 
-            <ProfileTopBar/>
-
-            <div>
-              <ProfileCard/>
-            </div>
-            <div>
-
-            </div>
-
+          <ProfileTopBar/>
+        
+        <div>
+          <ProfileCard/>
+        </div>
         <div className="Profile-RightSide">
           <RightSide />
         </div>
-
       </div>
     )
   }
