@@ -6,9 +6,16 @@ mongoose.connect(connectionString,{poolSize: 10, useNewUrlParser: true, useUnifi
 //  BirthDate, ProfileImage, CoverImage, Tweets(Array), Followers(Array),
 //  Following(Array), BookmarkedTweets (Array), Messages (Array)
   
-
-////// Profile Schema
 var profileSchema = new mongoose.Schema({
+	name: String,
+	birthDate: String,
+	email: String,
+	password: String,
+	bio: String,
+	location: String,
+	website: String,
+	profileImage:String,
+	coverImage:String,
 	tweets:Array,
 	followers:Array,
 	following:Array,
@@ -18,7 +25,9 @@ var profileSchema = new mongoose.Schema({
 	userHandle: String
 
 })
-/////Message Schema
+var profileModel = mongoose.model('profile', profileSchema);
+////////////////////////////////////////////////////////////////////////////////
+
 const messageSchema = new mongoose.Schema(
 	{
 		message: String,
@@ -30,23 +39,6 @@ const messageSchema = new mongoose.Schema(
 		time : { type : Date, default: Date.now }
 	}
 );
-//////Chat Schema
-const chatSchema = new mongoose.Schema(
-    {	
-		users:Array,
-        messages : [messageSchema]
-    },
-    {
-		collection : 'chats',
-		time : { type : Date, default: Date.now }
-    }
-);
-
-
-
-var profileModel = mongoose.model('profile', profileSchema);
-////////////////////////////////////////////////////////////////////////////////
-
 
 const chatSchema = new mongoose.Schema(
     {	
