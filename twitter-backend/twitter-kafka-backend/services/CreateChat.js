@@ -33,18 +33,18 @@ function handle_request(msg, callback) {
                 else{
                     console.log("Added the first message to the chat. DONE!!");
                     console.log("**********************");
-                    //callback(null, true);
+                    callback(null, updatedChat);
                     //saveChatInUserProfiles(updatedChat.users, updatedChat._id,()=>{});
-                    profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
-                        if(err){
-                            console.log("INSIDE ERROR OF PROFILE UPDATE - CREATE CHAT");
-                            callback(err,null);
-                        }
-                        else{
-                            console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
-                            callback(null, updatedChat);
-                        }
-                    })
+                    // profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
+                    //     if(err){
+                    //         console.log("INSIDE ERROR OF PROFILE UPDATE - CREATE CHAT");
+                    //         callback(err,null);
+                    //     }
+                    //     else{
+                    //         console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
+                    //         callback(null, updatedChat);
+                    //     }
+                    // })
                 }
             })
         }
