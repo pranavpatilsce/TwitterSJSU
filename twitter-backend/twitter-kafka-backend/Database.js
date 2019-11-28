@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-const connectionString='mongodb+srv://root:root@cluster0-9j3qi.mongodb.net/twittertest?retryWrites=true&w=majority'
+const connectionString='mongodb+srv://root:root@cluster1-9j3qi.mongodb.net/twittertest?retryWrites=true&w=majority'
 mongoose.connect(connectionString,{poolSize: 10,  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 .then(()=>console.log("Database connection success"))
 .catch(err=>{

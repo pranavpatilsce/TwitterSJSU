@@ -53,8 +53,8 @@ function handle_request(msg, callback) {
                     }
                         });
 
-                  // Save the  API response in Redis store,  data expire time in 3600 seconds, it means one hour
-                client.setex(getProfile, 3600,JSON.stringify(results))
+                //   // Save the  API response in Redis store,  data expire time in 3600 seconds, it means one hour
+                // client.setex(getProfile, 3600,JSON.stringify(results))
                 callback(null, results);
             };
         });
