@@ -40,8 +40,8 @@ function handle_request(msg, callback) {
             Profile.find({_id:{$in:followers}}, function(err, allFollowers){
                 if(err){callback(err,null);}
                 else{
-                // Save the  API response in Redis store,  data expire time in 3600 seconds, it means one hour
-                client.setex(getFollowers, 3600, allFollowers)
+                // // Save the  API response in Redis store,  data expire time in 3600 seconds, it means one hour
+                // client.setex(getFollowers, 3600, allFollowers)
                     console.log(allFollowers);
                     callback(null,allFollowers);
                 }
