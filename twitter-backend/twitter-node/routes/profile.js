@@ -5,7 +5,7 @@ var passport = require("passport");
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const kafka = require("../kafka/kafka/client");
-
+const redis = require('../Redis.js');
 //Connection Without Pooling
 var db = require('../Database');
 var profileModel = db.Profile;
@@ -150,6 +150,41 @@ router.post('/getProfileDirect',  function (req, res, next) {
         });
 });
 
+const client = redis.Client;
+
+//Profile Base W/o redis/Kafka/MongoosePool
+router.post('/getProfileRedis',  function (req, res, next) {
+    console.log('inside get profile redis',req.body);
+    const getProfile = 'user:profile';
+      // Try fetching the result from Redis first in case we have it cached
+      return client.get(getProfile, (err, profile) => {
+    
+        // If that key exists in Redis store
+        if (profile) {
+    
+            //return res.json({ source: 'cache', data: JSON.parse(photos) })
+                        console.log('Data Returned from Redis GetProfile@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',profile);
+                        res.status(200).send(profile);
+        } else {
+            console.log('Data Not found in  Redis GetProfile--------------------------------------------------------------------------------------');
+            profileModel.find({ email: req.body.email },
+                function (error, results) {
+                    if (error) {
+                        console.log("error in results ",error);
+                        res.status(200).send(error);
+                    }
+                    else {
+                        client.setex(getProfile, 3600, results)
+                        console.log(" getProfileDirect result ",results);
+                        res.status(200).send(results);
+                    };
+                });
+
+
+        }  })
+
+  
+});
 
 //Profile with MongoPool
 // router.post('/getProfilePool',  function (req, res, next) {
