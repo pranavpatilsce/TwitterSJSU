@@ -197,7 +197,7 @@ class UserProfileHome extends React.Component {
         </div>
 
           <ProfileTopBar/>
-        
+
         <div>
           <ProfileCard/>
         </div>
