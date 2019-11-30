@@ -1,0 +1,98 @@
+.Home {
+  width: 100%;
+  overflow: hidden;
+  background-color: #15202B;
+}
+
+.Home-Navigation{
+  position: fixed;
+  background-color: #15202B;
+  width: 25%;
+  float: left;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Home-RightSide{
+  position: fixed;
+  background-color: #15202B;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  float: right;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Home-Home{
+  float: none;
+  overflow: auto;
+  background-color: #15202B;
+}
+
+.Home-Home-Card {
+  padding-left: 25%;
+  padding-top: 6%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+  background-color: #15202B;
+
+}
+/* .App-logo {
+  height: 40vmin;
+} */
+
+.App-header {
+  background-color: #15202B;
+  width: 50%;
+  float: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.ProfileBar {
+  overflow: hidden;
+  background-color: #15202B;
+  position: fixed;
+  top: 0;
+  width: 50%;
+  z-index: 1;
+  left: 400px;
+}
+
+.BarTitle {
+  width: 85%;
+  float: left;
+  color: white;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+}
+.BarTitle:hover {
+  width: 85%;
+  float: left;
+  color: white;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  border: 1px;
+}
