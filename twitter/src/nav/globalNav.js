@@ -4,7 +4,7 @@ import { Media } from 'reactstrap';
 //import logo from '../../svg/logo.svg';
 import './globalNav.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from 'axios'
 import Bird from '../svg/twitterBird.svg';
 import Pranav from '../svg/Pranav.jpeg';
 import ImageUploader from '../svg/imageUpload.svg';
@@ -25,7 +25,19 @@ const ModalExample = (props) => {
       alert('works');
     }
   }
-
+  const tweetBodyChangeHandler=(e)=>{
+    console.log(e.target.value)
+  }
+  const sendTweet=()=>{
+    let data = '';
+      let token=localStorage.getItem('bearer-token');
+      axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+      axios.get('http://10.0.0.94:3001/', {params:{}, mode:'no-cors'})
+        .then((response) => {
+            console.log('response ok',response)
+        })
+        .catch(()=>{console.log('error')})
+  }
   return (
     <div>
       <Button color="secondary" onClick={toggle}>Tweet</Button>
@@ -37,7 +49,7 @@ const ModalExample = (props) => {
                 <img src={Pranav}/>
             </div>
             <div className="tweet-body">
-                <Input className="tweet-body-text" type="textarea" maxlength="280" placeholder="What's happening?" onKeyDown={searchHandler}></Input>
+                <Input className="tweet-body-text" type="textarea" onChange={tweetBodyChangeHandler.bind(this)} maxlength="280" placeholder="What's happening?" onKeyDown={searchHandler}></Input>
             </div>
           </div>
         </ModalBody>
@@ -49,7 +61,7 @@ const ModalExample = (props) => {
             </label>
             <input id="file-input" type="file" onChange={Navigation.onImageHandler}/>
           </div>
-          <Button color="primary" onClick={toggle}>Tweet</Button>{' '}
+          <Button color="primary" onClick={sendTweet.bind(this)}>Tweet</Button>{' '}
           {/*<Button color="secondary" onClick={toggle}>Cancel</Button>*/}
         </ModalFooter>
       </Modal>
@@ -76,7 +88,7 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button href="/">Home</Button>
+          <Button href="/home">Home</Button>
         </div>
 
         <div className="Button-Padding">

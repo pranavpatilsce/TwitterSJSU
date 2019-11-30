@@ -9,7 +9,6 @@
   background-color: #15202B;
   width: 25%;
   float: left;
-  //border-radius: 2px;
   border-style: solid;
   border-width: thin;
   border-color: gray;
@@ -47,13 +46,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content:flex-start;
+  background-color: #15202B;
+
 }
 /* .App-logo {
   height: 40vmin;
 } */
 
 .App-header {
-  //background-color: #282c34;
   background-color: #15202B;
   width: 50%;
   float: left;
