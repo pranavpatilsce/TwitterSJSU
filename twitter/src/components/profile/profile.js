@@ -9,15 +9,20 @@ import Wallpaper from '../../svg/wallpaper.jpeg';
 
 import Tweet from '../../pages/home/userTweet.js';
 import BackButton from '../../svg/backProfile.png';
-
+import like from '../../svg/like.jpeg';
+import retweet from '../../svg/retweet.jpeg';
+import comment from '../../svg/comment.jpeg';
+//import option from '../../svg/option.jpeg';
+import bookmark from '../../svg/bookmark.jpeg';
 import Location from '../../svg/location.png';
 import Calendar from '../../svg/calendar.png';
 import Birthday from '../../svg/birthday.jpeg';
-
+import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+let userTweets=null;
 
 class NoMedia extends React.Component {
   render(){
@@ -89,7 +94,7 @@ const Tabs = (props) => {
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <div className="Profile-Profile-Card">
-              <Tweet/>
+              {userTweets}
           </div>
         </TabPane>
         <TabPane tabId="2">
@@ -127,7 +132,47 @@ class ProfileTopBar extends React.Component {
 
 class ProfileCard extends React.Component {
 
-
+constructor(props)
+{
+  super(props)
+  let data = '';
+  let token=localStorage.getItem('bearer-token');
+  axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+  axios.get('http://10.0.0.94:3001/', {params:{}, mode:'no-cors'})
+    .then((response) => {
+        console.log('response ok',response)
+        let otherTweets=[]
+        userTweets=otherTweets.map((twt, index) =>
+                <div className="tweetCard-indi">
+                  <div className="Tweet-Image">
+                    <br/>
+                    <img className="image" src={twt.image}/>
+                  </div>
+                  <div className="Tweet-Body">
+                    <br/>
+                    <div className="Tweet-Body-Content">
+                      <h5 className="Tweet-Body-Name">{twt.name}</h5>
+                      <p className="Tweet-Body-Handle">{twt.handle}</p>
+                      <p className="Tweet-Body-Date">{twt.date}</p>
+                    </div>
+                    <div>
+                      <p className="Tweet-Body-Text">{twt.tweet}</p>
+                    </div>
+                    <div className="Tweet-Body-Panel">
+                      <button className="Tweet-Body-Panel-Comment" ><img src={comment}/></button>
+                      <button className="Tweet-Body-Panel-ReTweet" ><img src={retweet}/></button>
+                      <button className="Tweet-Body-Panel-Like" ><img src={like}/></button>
+                      <button className="Tweet-Body-Panel-Bookmark" ><img src={bookmark}/></button>
+                      <br/>
+                      <br/>
+                      <br/>
+                    </div>
+                  </div>
+                </div>
+            )
+    })
+    .catch(()=>{console.log('error')})
+}
   render(){
     return(
       <div className="ProfileCard-Parent">
@@ -197,7 +242,7 @@ class UserProfileHome extends React.Component {
         </div>
 
           <ProfileTopBar/>
-        
+
         <div>
           <ProfileCard/>
         </div>
