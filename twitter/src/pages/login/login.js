@@ -74,9 +74,10 @@ class LogIn extends React.Component {
           <h5 className="LogIn-RightSide-Wording">Join Twitter today.</h5>
           <div className="LogIn-RightSide-Button">
             <Button className="LogIn-RightSide-SignUp" href="/signup">Sign up</Button>
+            {/*
             <div className="LogIn-RightSide-LogIn-Padding">
               <Button className="LogIn-RightSide-LogIn">Log in</Button>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

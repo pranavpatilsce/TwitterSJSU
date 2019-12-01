@@ -92,15 +92,15 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>Bookmarks</Button>
+          <Button href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>Messages</Button>
+          <Button href="/messages">Messages</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>List</Button>
+          <Button href="/list">List</Button>
         </div>
 
         <div className="Button-Padding">
