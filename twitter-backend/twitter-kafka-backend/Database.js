@@ -28,7 +28,8 @@ var profileSchema = new mongoose.Schema({
 	likedTweets: Array,
 	userHandle: String,
 	lists:Array,
-	subscription:Array
+	subscriptions:Array,
+	memberships:Array
 
 })
 var profileModel = mongoose.model('profile', profileSchema);

@@ -40,6 +40,12 @@ var CreateList= require('./services/CreateList');
 var GetList= require('./services/GetList');
 var GetListTweets= require('./services/GetListTweets');
 
+//Memberships
+var GetMemberships= require('./services/GetMemberships');
+
+var SetSubscriber= require('./services/SetSubscriber')
+var GetSubscriptions= require('./services/GetSubscriptions')
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -100,5 +106,7 @@ handleTopicRequest("loadTweet",LoadTweet)
 handleTopicRequest("createList",CreateList)
 handleTopicRequest("getList",GetList)
 handleTopicRequest("getListTweets",GetListTweets)
-
+handleTopicRequest("getMemberships",GetMemberships)
+handleTopicRequest("setSubscriber",SetSubscriber)
+handleTopicRequest("getSubscriptions",GetSubscriptions)
 
