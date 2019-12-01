@@ -26,7 +26,9 @@ var profileSchema = new mongoose.Schema({
 	bookmarkedTweets:Array,
 	chats:Array,
 	likedTweets: Array,
-	userHandle: String
+	userHandle: String,
+	lists:Array,
+	subscription:Array
 
 })
 var profileModel = mongoose.model('profile', profileSchema);
@@ -65,10 +67,22 @@ var tweetHashSchema = new mongoose.Schema({
 })
 var tweetHashModel = mongoose.model('tweethash', tweetHashSchema);
 
+////////////////////////////////////////////////////////////////////////////////
+const listSchema = new mongoose.Schema(
+	{
+		listId: mongoose.Schema.Types.ObjectId,
+		listName: String,
+		description: String,
+		members : Array
+	}
+);
+const list = mongoose.model('list', listSchema);
+
 module.exports = {
   Profile:profileModel,
   Chat: chat,
   Message :message,
-  TweetHash:tweetHashModel
+  TweetHash:tweetHashModel,
+  List:list
 
 }

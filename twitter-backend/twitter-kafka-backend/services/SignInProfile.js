@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 function handle_request(msg, callback) {
     console.log('Inside signin!!!')
-    profile.find({$or:[{ email: msg.email }, {userHandle: msg.userHandle}]}, function (error, results) {
+    profile.find({ email: msg.email }, function (error, results) {
         if (error) {
             console.log("error in results : error returned from database");
             throw error;

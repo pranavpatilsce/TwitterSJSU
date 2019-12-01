@@ -35,6 +35,11 @@ var retweetTweet = require('./services/Retweet')
 var addFollowers = require('./services/AddFollowers')
 var LoadTweet = require('./services/LoadTweet.js');
 
+//List
+var CreateList= require('./services/CreateList');
+var GetList= require('./services/GetList');
+var GetListTweets= require('./services/GetListTweets');
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -92,5 +97,8 @@ handleTopicRequest("addFollowers",addFollowers)
 handleTopicRequest("getProfileKafka",GetProfileKafka)  
 handleTopicRequest("get_all_tweets",GetAllTweets)
 handleTopicRequest("loadTweet",LoadTweet) 
+handleTopicRequest("createList",CreateList)
+handleTopicRequest("getList",GetList)
+handleTopicRequest("getListTweets",GetListTweets)
 
 
