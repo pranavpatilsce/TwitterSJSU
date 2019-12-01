@@ -12,6 +12,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import UserProfile from './components/profile/profile.js';
 import Analysis from './pages/dashboard/Analysis';
+import LoadTweet from './pages/home/loadTweet';
+import TweetLoadHome from './pages/home/tweetLoadHome';
+import BookmarkPage from './components/bookmarks/bookmarkPage.js';
+import ListPage from './components/lists/listPage.js';
+import ViewListTweetsPage from './components/lists/viewListTweetsPage.js';
 //TODO: Add redux for isLoggedIn or not state
 
 class Routes extends React.Component {
@@ -27,6 +32,10 @@ class Routes extends React.Component {
         <Route exact path='/list' component={UserProfile} />
         <Route exact path='/home' component={Home} />
         <Route exact path='/dashboard' component={Analysis} />
+        <Route exact path='/loadTweet' component={TweetLoadHome} />
+        <Route exact path='/bookmarkPage' component={BookmarkPage} />
+       <Route exact path='/listPage' component={ListPage} />
+       <Route exact path='/viewListTweetsPage' component={ViewListTweetsPage} />
       </Switch>
     </Router>
     )

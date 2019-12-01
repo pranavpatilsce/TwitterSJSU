@@ -95,7 +95,7 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>Bookmarks</Button>
+        <Button href='/bookmarkPage'>Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
@@ -103,7 +103,7 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>List</Button>
+        <Button href='/listPage'>Lists</Button>
         </div>
 
         <div className="Button-Padding">

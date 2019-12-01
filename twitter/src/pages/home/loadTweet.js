@@ -8,7 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
-import {Redirect} from 'react-router';
+import Pranav from '../../svg/Pranav.jpeg';
+import Kalyani from '../../svg/Kalyani.jpeg';
+import Mukesh from '../../svg/Mukesh.jpeg';
+import Kartik from '../../svg/Kartik.png';
 
 import like from '../../svg/like.jpeg';
 import retweet from '../../svg/retweet.jpeg';
@@ -70,21 +73,20 @@ bookmarktweet={
   icon: "now-ui-icons ui-1_bell-53",
   autoDismiss: 3
 }
-class Tweet extends React.Component{
+class LoadTweet extends React.Component{
 
     constructor(props) {
       super(props);
-      this.state = {
-        reDirect:""
-      }
+
       let data = '5de03cd0b5ad6906843d79d2';
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.get('http://localhost:3001/profile/getAllTweets/'+localStorage.getItem('id'), {params:{}, mode:'no-cors'})
+
+      axios.post('http://localhost:3001/users/tweet/loadTweet',{tweetId:localStorage.getItem('tweetloadid')})
         .then((response) => {
             // alert('success')
-            console.log('response othertweets',response.data)
-            otherTweets=response.data;
+            console.log('response load Tweet ID',response.data)
+            otherTweets=response.data[0].tweets;
             this.setState({})
         })
         .catch(()=>{console.log('error')})
@@ -96,15 +98,7 @@ class Tweet extends React.Component{
   }
 
   loadTweet = (tid)=>{
-    localStorage.setItem('tweetloadid',tid)
-    let reDirect= <Redirect to={{
-      pathname: '/loadTweet'
-  }}
-  />
-  
-  this.setState({
-  reDirect:reDirect
-  })
+    console.log('here in the tweet id',tid)
   }
   
   showAddReply(id){
@@ -203,7 +197,6 @@ class Tweet extends React.Component{
         
         <div className = "tweetCard">
            <NotificationAlert ref="notify" /> 
-           {this.state.reDirect}
             {otherTweets.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">
@@ -242,4 +235,4 @@ class Tweet extends React.Component{
     }
   }
 
-export default Tweet;
+export default LoadTweet;
