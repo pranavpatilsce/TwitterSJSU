@@ -22,7 +22,9 @@ var profileSchema = new mongoose.Schema({
 	bookmarkedTweets:Array,
 	chats:Array,
 	likedTweets: Array,
-	userHandle: String
+	userHandle: String,
+	lists:Array,
+	subscription:Array
 
 })
 var profileModel = mongoose.model('profile', profileSchema);

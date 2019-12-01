@@ -14,6 +14,7 @@ var profileRouter = require('./routes/profile');
 var messagesRouter = require('./routes/messages.js');
 var userRouter= require('./routes/users');
 var dashboardRouter = require('./routes/dashboard.js');
+var list=require('./routes/list')
 
 var passportJWT = require("passport-jwt");
 
@@ -71,6 +72,7 @@ app.use('/profile', profileRouter);
 app.use('/messages', messagesRouter);
 app.use('/users', userRouter);
 app.use('/dashboard',dashboardRouter);
+app.use('/list',list);
 
 
 

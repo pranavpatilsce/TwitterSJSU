@@ -10,10 +10,6 @@ const kafka = require("../kafka/kafka/client");
 var db = require('../Database');
 var profileModel = db.Profile;
 
-//Connection with Mongo Pool
-// var dbPool = require('../DatabasePool');
-// var profileModelPool = dbPool.Profile;
-
 const saltRounds = 10;
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -76,9 +72,9 @@ router.post('/signInProfile', function (req, res, next) {
             output = "SuccessFull Login";
             profile = results[0];
 
-            // const token = jwt.sign({ _id: results[0]._id }, "cmpe273");
+            const token = jwt.sign({ _id: results[0]._id }, "cmpe273");
             res.setHeader("Access-Control-Expose-Headers", "Authorization");
-            // res.header('Authorization', "token " + token)
+            res.header('Authorization', "token " + token)
             res.send(profile);
         }
     });
@@ -186,18 +182,4 @@ router.post('/getProfileDirect',  function (req, res, next) {
   
 // });
 
-//Profile with MongoPool
-// router.post('/getProfilePool',  function (req, res, next) {
-//     profileModelPool.find({ userHandle: req.body.userHandle },
-//         function (error, results) {
-//             if (error) {
-//                 console.log("error in results ",error);
-//                 res.status(200).send(error)
-//             }
-//             else {
-//                 console.log(" getProfileDirect result ",results);
-//                 res.status(200).send(results);
-//             };
-//         });
-// });
 module.exports = router;
