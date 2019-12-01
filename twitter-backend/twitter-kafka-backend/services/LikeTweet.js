@@ -7,12 +7,12 @@ function handle_request(msg, callback) {
     console.log("Inside like tweet msg----", msg)
 
 
-    profileModel.updateOne({tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) }} },
+    profileModel.updateOne({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
         {
             $inc: {
                 "tweets.$.likes": 1
             },
-            $push:{
+            $push: {
                 "tweets.$.likedBy": msg.likedBy
             }
         },
@@ -24,38 +24,38 @@ function handle_request(msg, callback) {
             }
 
 
-            else{
-                
-profileModel.find({tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) }} },
-{tweets:{ $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) }},_id:0},
+            else {
 
-function(err, tweet){
-if(err)
-{
-    console.log('error-->');
-callback(err, "Error");
-}
+                profileModel.find({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
+                    { tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } }, _id: 0 },
 
-else{
-console.log('Tweet liked is',tweet[0].tweets[0])
+                    function (err, tweet) {
+                        if (err) {
+                            console.log('error-->');
+                            callback(err, "Error");
+                        }
 
-profileModel.update({_id:msg.id}, { $push: { likedTweets:tweet[0].tweets[0]}}, {upsert: true}, function(err, docs){
-    if (err) {
-      console.log('error-->');
-      callback(err,"Error");
-  }
-  else{
-    callback(null, {success:true});
-  }
-    });
+                        else {
+                            console.log('Tweet liked is', tweet[0].tweets[0])
 
-
-}
-}
+                            profileModel.update({ _id: msg.id }, { $push: { likedTweets: tweet[0].tweets[0] } }, { upsert: true }, function (err, docs) {
+                                if (err) {
+                                    console.log('error-->');
+                                    callback(err, "Error");
+                                }
+                                else {
+                                    callback(null, { success: true });
+                                }
+                            });
 
 
-)
-            }   
+                        }
+                    }
+
+
+                )
+            }
         }
-    )};
+    )
+};
 exports.handle_request = handle_request;

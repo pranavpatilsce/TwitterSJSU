@@ -22,7 +22,8 @@ console.log('Matches is',matches);
         tweetHash:matches,
         likedBy:[],
         type:"Retweet",
-        originalTweetOwner:msg.orignalHandle
+        originalTweetOwner:msg.orignalHandle,
+        name:msg.name
 
     }}}, {upsert: true}, function(err, docs){
         if (err) {

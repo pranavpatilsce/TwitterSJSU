@@ -6,10 +6,12 @@ import Login from './pages/login/login.js';
 //import SignUp from './pages/signup/signup.js';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import TopTenLiked from './pages/dashboard/topTenLiked'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import UserProfile from './components/profile/profile.js';
+import Analysis from './pages/dashboard/Analysis';
 //TODO: Add redux for isLoggedIn or not state
 
 class Routes extends React.Component {
@@ -24,6 +26,7 @@ class Routes extends React.Component {
         <Route exact path='/messages' component={UserProfile} />
         <Route exact path='/list' component={UserProfile} />
         <Route exact path='/home' component={Home} />
+        <Route exact path='/dashboard' component={Analysis} />
       </Switch>
     </Router>
     )

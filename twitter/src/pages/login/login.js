@@ -37,6 +37,7 @@ class LogIn extends React.Component {
           {
             // alert("Login Success!");
             //set local storage
+            console.log('Success!!!',response.data)
             localStorage.setItem('name',response.data.name)
             localStorage.setItem('email',response.data.email)
             localStorage.setItem('id',response.data._id)
