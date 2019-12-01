@@ -35,6 +35,8 @@ var addFollowers = require('./services/AddFollowers')
 
 //List
 var CreateList= require('./services/CreateList');
+var GetList= require('./services/GetList');
+var GetListTweets= require('./services/GetListTweets');
 
 
 function handleTopicRequest(topic_name,fname){ 
@@ -92,4 +94,6 @@ handleTopicRequest("retweetTweet",retweetTweet)
 handleTopicRequest("addFollowers",addFollowers) 
 handleTopicRequest("getProfileKafka",GetProfileKafka)
 handleTopicRequest("createList",CreateList)
+handleTopicRequest("getList",GetList)
+handleTopicRequest("getListTweets",GetListTweets)
 

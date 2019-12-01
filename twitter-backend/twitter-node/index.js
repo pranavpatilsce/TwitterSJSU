@@ -47,7 +47,7 @@ mongoose.connect(uri, {useNewUrlParser: true})
 app.use(cookieParser());
 
 //use cors to allow cross origin resource sharing
-app.use(cors({ origin: 'http://3.18.112.47:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 //use express session to maintain session data
 app.use(session({
