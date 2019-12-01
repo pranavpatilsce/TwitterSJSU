@@ -26,9 +26,11 @@ function handle_request(msg, callback) {
           profileModel.updateMany(
               {userHandle:{$in:msg.members}},
               {$push:{
-                  subscription:{
+                  memberships:{
                       listId:lId,
-                      subscribe:false
+                      listName: msg.listName,
+                      description: msg.description,
+                      members:msg.members
             }}},function(err,doc){ 
                 if (err) {
                 console.log('error-->');
