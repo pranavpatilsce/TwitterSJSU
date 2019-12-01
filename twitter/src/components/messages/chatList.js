@@ -43,23 +43,23 @@ class MessageCard extends React.Component{
       //   .catch(()=>{console.log('error')})
       return(
         <div className = "MessagesCard">
-          {this.props.messages.map(message => {
+          {this.props.messagesList.map(messageList => {
             return(
-                <div key={message.messageId}>
+                <div key={messageList.messageId}>
                   <div className="Messages-Card-indi">
                     <div className="Messages-Image">
                       <br/>
-                      <img className="Messagesimage" src={Pranav}/>
+                      <img className="Messagesimage" src={messageList.image}/>
                     </div>
                     <div className="Messages-Card-Body">
                       <br/>
                       <div className="Messages-Card-Body-Content">
-                        <h5 className="Messages-Card-Body-Name">{message.name}</h5>
-                        <p className="Messages-Card-Body-Handle">{message.userHandle}</p>
-                        <p className="Messages-Card-Body-Date">{message.date}</p>
+                        <h5 className="Messages-Card-Body-Name">{messageList.name}</h5>
+                        <p className="Messages-Card-Body-Handle">{messageList.userHandle}</p>
+                        <p className="Messages-Card-Body-Date">{messageList.date}</p>
                       </div>
                       <div>
-                        <p className="Messages-Card-Body-Text">{message.text}</p>
+                        <p className="Messages-Card-Body-Text">{messageList.text}</p>
                       </div>
                       <br/>
                     </div>

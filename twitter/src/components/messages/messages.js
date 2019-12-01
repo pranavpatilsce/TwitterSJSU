@@ -16,7 +16,7 @@ import Kartik from '../../svg/Kartik.png';
 
 const otherTweets = [
   {
-    messageId: "12345",
+    chatId: "12345",
     text: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
@@ -24,7 +24,7 @@ const otherTweets = [
     userHandle: "@handle",
     image: Mukesh
   },{
-    messageId: "123456",
+    chatId: "123456",
     text: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
@@ -32,7 +32,7 @@ const otherTweets = [
     userHandle: "@handle2",
     image: Kalyani
   },{
-    messageId: "123457",
+    chatId: "123457",
     text: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
@@ -47,7 +47,7 @@ class Messages extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: otherTweets,
+      messagesList: otherTweets,
     };
   }
 
@@ -65,12 +65,12 @@ class Messages extends React.Component {
       </div>
       <div className="Messages-Messages">
         <div className="Messages-Messages-Card">
-          <MessageCard messages={this.state.messages}/>
+          <MessageCard messagesList={this.state.messagesList}/>
         </div>
       </div>
 
       <div className="Messages-RightSide">
-          <MessageBox dataFromParentForChat={this.state.message}/>
+          <MessageBox messagesList={this.state.messagesList}/>
       </div>
     </div>
   )

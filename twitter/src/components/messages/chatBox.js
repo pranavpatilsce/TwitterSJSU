@@ -15,22 +15,69 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
+
+class SendMessageForm extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+      }
+
+      handleChange(e) {
+        this.setState({
+          message: e.target.value
+        })
+      }
+
+      handleSubmit(e) {
+        e.preventDefault()
+        this.props.sendMessage(this.state.message)
+        this.setState({
+          message: ''
+        })
+      }
+
+      render() {
+        return (
+          <form
+            onSubmit={this.handleSubmit}
+            className="send-message-form">
+            <input
+              onChange={this.handleChange}
+              value={this.state.message}
+              placeholder="Type your message and hit ENTER"
+              type="text" />
+          </form>
+        )
+    }
+}
+
 class MessageBox extends React.Component{
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      messageId: this.props.dataFromParentForChat,
-      name: this.props.dataFromParentForChat,
-      userHandle: this.props.dataFromParentForChat,
-      date: this.props.dataFromParentForChat,
-    };
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messageId: this.props.dataFromParentForChat,
+  //     name: this.props.dataFromParentForChat,
+  //     userHandle: this.props.dataFromParentForChat,
+  //     date: this.props.dataFromParentForChat,
+  //   };
+  // }
 
   render(){
     return(
       <div className="chat-div">
-        <div>Data from card is:</div>
+        {this.props.messagesList.map(message => {
+          return(
+            <div className="chatMessagesReceive">
+              <p>{message.text}</p>
+            </div>
+          )
+        })}
+        <SendMessageForm />
       </div>
     )
   }
