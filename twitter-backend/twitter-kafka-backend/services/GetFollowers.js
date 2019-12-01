@@ -35,7 +35,7 @@ function handle_request(msg, callback) {
             console.log("INSIDE GETFOLLOWERS KAFKA BACKEND");
             //callback(null, profile);
             let followers = profile.followers;
-            console.log("kokokokokokokokokokoko");
+            // console.log("kokokokokokokokokokoko");
             console.log(followers);
             Profile.find({_id:{$in:followers}}, function(err, allFollowers){
                 if(err){callback(err,null);}

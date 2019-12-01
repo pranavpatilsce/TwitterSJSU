@@ -92,6 +92,22 @@ router.post('/updateProfile',  function (req, res, next) {
    });
 });
 
+// Get User Home Tweet Data
+router.get('/getAllTweets/:userId',  function (req, res, next) {
+    let userId = req.params.userId;
+    console.log("Inside getAllTweets User ID is: ",userId);
+    kafka.make_request('get_all_tweets',userId, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /getAllTweets results ");
+            res.status(201).send(error)
+        }
+        else {
+            // res.writeHead(200);
+            res.send(kafkaResult);
+        }
+    });
+});
+
 //Profile with Redis
 router.post('/getProfile',  function (req, res, next) {
     kafka.make_request('get_profile',req.body, function(error,results){

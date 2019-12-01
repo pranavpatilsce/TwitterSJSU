@@ -10,6 +10,7 @@ var GetProfile= require('./services/GetProfile');
 var DeleteProfile=require('./services/DeleteProfile');
 var UploadImage= require('./services/UploadImage');
 var GetProfileKafka= require('./services/GetProfileKafka');
+var GetAllTweets = require('./services/GetAllTweets');
 
 // Messages
 var CreateChat = require('./services/CreateChat.js');
@@ -32,6 +33,7 @@ var likeTweet = require('./services/LikeTweet')
 var replyTweet = require('./services/ReplyTweet')
 var retweetTweet = require('./services/Retweet')
 var addFollowers = require('./services/AddFollowers')
+var LoadTweet = require('./services/LoadTweet.js');
 
 //List
 var CreateList= require('./services/CreateList');
@@ -92,8 +94,11 @@ handleTopicRequest("likeTweet",likeTweet)
 handleTopicRequest("replyTweet",replyTweet) 
 handleTopicRequest("retweetTweet",retweetTweet) 
 handleTopicRequest("addFollowers",addFollowers) 
-handleTopicRequest("getProfileKafka",GetProfileKafka)
+handleTopicRequest("getProfileKafka",GetProfileKafka)  
+handleTopicRequest("get_all_tweets",GetAllTweets)
+handleTopicRequest("loadTweet",LoadTweet) 
 handleTopicRequest("createList",CreateList)
 handleTopicRequest("getList",GetList)
 handleTopicRequest("getListTweets",GetListTweets)
+
 

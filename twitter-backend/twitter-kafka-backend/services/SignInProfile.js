@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 // var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
+    console.log('Inside signin!!!')
     profile.find({ email: msg.email }, function (error, results) {
         if (error) {
             console.log("error in results : error returned from database");

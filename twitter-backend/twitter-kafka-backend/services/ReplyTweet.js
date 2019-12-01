@@ -10,7 +10,7 @@ let replyObj = {
     userHandle:msg.userHandle,
     reply:msg.reply
 }
-profileModel.updateOne({ _id: msg.id, tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) }} },
+profileModel.updateOne({tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) }} },
 {
    
     $push:{
