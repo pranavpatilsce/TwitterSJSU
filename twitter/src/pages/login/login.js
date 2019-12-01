@@ -28,7 +28,7 @@ class LogIn extends React.Component {
       .then((response) => {
           console.log('response ok',response)
           console.log("Status Code : ", response);
-          if (response.status === 200 && response.data!="error") 
+          if (response.status === 200 && response.data!="error")
           {
             //set local storage
           }
@@ -44,13 +44,13 @@ class LogIn extends React.Component {
         }
       )
   }
-   
+
   render(){
     if(localStorage.getItem('user'))
       redirectVar=<Redirect to='/home'/>
     else
       redirectVar=<Redirect to='/'/>
-  return (    
+  return (
     <div className="Login">
       {redirectVar}
       <img className="Login-Navigation" src={logo}/>
@@ -73,7 +73,7 @@ class LogIn extends React.Component {
           <h1 className="LogIn-RightSide-Wording">the world right now</h1>
           <h5 className="LogIn-RightSide-Wording">Join Twitter today.</h5>
           <div className="LogIn-RightSide-Button">
-            <Button className="LogIn-RightSide-SignUp">Sign up</Button>
+            <Button className="LogIn-RightSide-SignUp" href="/signup">Sign up</Button>
             <div className="LogIn-RightSide-LogIn-Padding">
               <Button className="LogIn-RightSide-LogIn">Log in</Button>
             </div>

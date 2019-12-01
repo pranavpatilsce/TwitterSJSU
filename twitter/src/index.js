@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './pages/home/home.js';
 import Login from './pages/login/login.js';
-//import SignUp from './pages/signup/signup.js';
+import SignUp from './pages/signup/signup.js';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,6 +24,7 @@ class Routes extends React.Component {
         <Route exact path='/messages' component={UserProfile} />
         <Route exact path='/list' component={UserProfile} />
         <Route exact path='/home' component={Home} />
+        <Route exact path='/signup' component={SignUp} />
       </Switch>
     </Router>
     )
