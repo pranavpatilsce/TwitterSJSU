@@ -16,6 +16,7 @@ var GetAllTweets = require('./services/GetAllTweets');
 var CreateChat = require('./services/CreateChat.js');
 var GetChat = require('./services/GetChat.js');
 var AddMessageToChat = require('./services/AddMessageToChat.js');
+var GetAllChats = require('./services/GetAllChats.js');
 
 //Dashboard
 var GetFollowers = require('./services/GetFollowers.js');
@@ -109,4 +110,4 @@ handleTopicRequest("getListTweets",GetListTweets)
 handleTopicRequest("getMemberships",GetMemberships)
 handleTopicRequest("setSubscriber",SetSubscriber)
 handleTopicRequest("getSubscriptions",GetSubscriptions)
-
+handleTopicRequest("get_all_chats",GetAllChats)

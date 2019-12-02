@@ -13,7 +13,7 @@ function handle_request(msg, callback) {
         }
         else if (results.length == 0) {
             output = "Incorrect userId";
-            res.status(200).send(output);
+           // res.status(200).send(output);
         } else {
             console.log('Body Content', msg.password);
             console.log(results[0].password);
