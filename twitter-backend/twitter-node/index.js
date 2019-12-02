@@ -12,7 +12,11 @@ const passport = require("passport");
 
 var profileRouter = require('./routes/profile');
 var messagesRouter = require('./routes/messages.js');
-var userRouter= require('./routes/users')
+var userRouter= require('./routes/users');
+var dashboardRouter = require('./routes/dashboard.js');
+var list=require('./routes/list')
+var member=require('./routes/member')
+
 var passportJWT = require("passport-jwt");
 
 const kafka = require('./kafka/kafka/client');
@@ -44,7 +48,7 @@ mongoose.connect(uri, {useNewUrlParser: true})
 app.use(cookieParser());
 
 //use cors to allow cross origin resource sharing
-app.use(cors({ origin: 'http://3.18.112.47:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 //use express session to maintain session data
 app.use(session({
@@ -60,10 +64,17 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname+'/uploads'));
 
+app.get('/ping', function(req,res){
+    res.writeHead(200);
+    res.end("Health Check Passed!");
+})
 
 app.use('/profile', profileRouter);
 app.use('/messages', messagesRouter);
 app.use('/users', userRouter);
+app.use('/dashboard',dashboardRouter);
+app.use('/list',list);
+app.use('/member',member);
 
 
 
@@ -138,3 +149,4 @@ app.get('/logout',(req,res) => {
 
 app.listen(3001);
 console.log("Server Listening on port 3001");
+// 

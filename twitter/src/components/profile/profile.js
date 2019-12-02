@@ -56,6 +56,7 @@ const Tabs = (props) => {
 
   return (
     <div>
+      {alert('tabs')}
       <Nav tabs className="ProfileTabsDiv">
         <NavItem  className="ProfileTabs">
           <NavLink
@@ -119,7 +120,7 @@ class ProfileTopBar extends React.Component {
     return(
       <div className = "ProfileBar">
         <div>
-          <Button className = "BarTitle"> <h3>Pranav Patil</h3></Button>
+          <Button className = "BarTitle"> <h3>{localStorage.getItem('name')}</h3></Button>
         </div>
         <div>
          <Button className = "BackButton"><img top width="69%" src={BackButton}/></Button>
@@ -129,47 +130,55 @@ class ProfileTopBar extends React.Component {
   }
 
 }
-
+let bio=null, ownTweets=null, bdate=null
 class ProfileCard extends React.Component {
 
 constructor(props)
 {
   super(props)
-  let data = '';
+  let data = {userHandle:localStorage.getItem('userHandle')};
   let token=localStorage.getItem('bearer-token');
+  // alert('asd')
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-  axios.get('http://10.0.0.94:3001/', {params:{}, mode:'no-cors'})
+  axios.post('/profile/getProfileKafka', data)
     .then((response) => {
-        console.log('response ok',response)
-        let otherTweets=[]
-        userTweets=otherTweets.map((twt, index) =>
-                <div className="tweetCard-indi">
-                  <div className="Tweet-Image">
-                    <br/>
-                    <img className="image" src={twt.image}/>
-                  </div>
-                  <div className="Tweet-Body">
-                    <br/>
-                    <div className="Tweet-Body-Content">
-                      <h5 className="Tweet-Body-Name">{twt.name}</h5>
-                      <p className="Tweet-Body-Handle">{twt.handle}</p>
-                      <p className="Tweet-Body-Date">{twt.date}</p>
-                    </div>
-                    <div>
-                      <p className="Tweet-Body-Text">{twt.tweet}</p>
-                    </div>
-                    <div className="Tweet-Body-Panel">
-                      <button className="Tweet-Body-Panel-Comment" ><img src={comment}/></button>
-                      <button className="Tweet-Body-Panel-ReTweet" ><img src={retweet}/></button>
-                      <button className="Tweet-Body-Panel-Like" ><img src={like}/></button>
-                      <button className="Tweet-Body-Panel-Bookmark" ><img src={bookmark}/></button>
-                      <br/>
-                      <br/>
-                      <br/>
-                    </div>
-                  </div>
-                </div>
+      bio=response.data.bio
+      ownTweets=response.data[0].tweets
+      bdate=response.data.bdate
+        console.log('response ok',response.data[0].tweets)
+        userTweets=ownTweets.map((twt, index) =>{
+          return(
+            <div className="tweetCard-indi">
+            <div className="Tweet-Image">
+              <br/>
+              <img className="image" src={twt.image}/>
+            </div>
+            <div className="Tweet-Body">
+              <br/>
+              <div className="Tweet-Body-Content">
+                <h5 className="Tweet-Body-Name">{localStorage.getItem('name')}</h5>
+                <p className="Tweet-Body-Handle">{localStorage.getItem('userHandle')}</p>
+                <p className="Tweet-Body-Date">{twt.date}</p>
+              </div>
+              <div>
+                <p className="Tweet-Body-Text">{twt.tweet}</p>
+              </div>
+              <div className="Tweet-Body-Panel">
+                <button className="Tweet-Body-Panel-Comment" ><img src={comment}/></button>
+                <button className="Tweet-Body-Panel-ReTweet" ><img src={retweet}/></button>
+                <button className="Tweet-Body-Panel-Like" ><img src={like}/></button>
+                <button className="Tweet-Body-Panel-Bookmark" ><img src={bookmark}/></button>
+                <br/>
+                <br/>
+                <br/>
+              </div>
+            </div>
+          </div>
+          )
+        }               
             )
+            console.log('usertw',userTweets)
+            this.setState({})
     })
     .catch(()=>{console.log('error')})
 }
@@ -187,21 +196,18 @@ constructor(props)
           </div>
           <div className = "overall">
               <div>
-                <h4 className = "ProfileName">Pranav Patil</h4>
-                <p className = "ProfileHandle">@pranavpatilsf</p>
+    <h4 className = "ProfileName">{localStorage.getItem('name')}</h4>
+                <p className = "ProfileHandle">{localStorage.getItem('userHandle')}</p>
               </div>
               <div className = "ProfileBio">
-                <p>CMPE 273 is not fun</p>
+                <p>{bio}</p>
               </div>
               <div className = "UserInfo">
                 <div className = "UserInfo-Location">
                   <p><img top width="17%" src={Location}/>SF Bay Area, CA</p>
                 </div>
                 <div className = "UserInfo-Birthday">
-                  <p><img top width="14%" src={Birthday}/>Born on 5 January 2000</p>
-                </div>
-                <div className = "UserInfo-Calendar">
-                  <p><img top width="16%" src={Calendar}/>Joined May 2013</p>
+                  <p><img top width="14%" src={Birthday}/>Born on {bdate}</p>
                 </div>
               </div>
 
@@ -211,7 +217,8 @@ constructor(props)
               </div>
           </div>
           <div>
-            <Tabs/>
+            {/* <Tabs/> */}
+            {userTweets}
           </div>
       </div>
     )

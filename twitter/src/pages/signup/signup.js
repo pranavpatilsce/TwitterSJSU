@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {Button} from 'reactstrap';
-import './signup.css'
-import axios from 'axios'
+import './signup.css';
+import axios from 'axios';
+import ReactDOM from 'react-dom';
+
 import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class SignUp extends React.Component{
@@ -35,8 +37,8 @@ class SignUp extends React.Component{
         password: this.state.password,
         checkbox: this.state.password
       };
-
-      axios.post(`http://10.0.0.94:3001/profile/addProfile`, { user })
+      
+      axios.post(`/profile/addProfile`, { user })
         .then(res => {
           console.log(res);
           console.log(res.data);
@@ -81,7 +83,7 @@ class SignUp extends React.Component{
               <Input type="checkbox" name="checkbox" onChange={this.handleChange}/>
               <Label>I understand terms and conditions.</Label>
             </FormGroup>*/}
-          <Button type="submit">Sign Up!</Button>
+          <Button type="submit" href="/">Sign Up!</Button>
           </Form>
       </div>
     )

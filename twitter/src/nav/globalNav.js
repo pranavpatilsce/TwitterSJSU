@@ -10,6 +10,7 @@ import Pranav from '../svg/Pranav.jpeg';
 import ImageUploader from '../svg/imageUpload.svg';
 
 
+let tweet=null
 const ModalExample = (props) => {
   const {
     buttonLabel,
@@ -26,15 +27,17 @@ const ModalExample = (props) => {
     }
   }
   const tweetBodyChangeHandler=(e)=>{
-    console.log(e.target.value)
+    console.log(e.target.value);
+    tweet=e.target.value;
   }
   const sendTweet=()=>{
-    let data = '';
+    let data = {tweet:tweet, id:localStorage.getItem('id'), name:localStorage.getItem('name'),orignalHandle:localStorage.getItem('userHandle')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.get('http://10.0.0.94:3001/', {params:{}, mode:'no-cors'})
+      axios.post('/users/tweet',data)
         .then((response) => {
             console.log('response ok',response)
+            window.location.reload()
         })
         .catch(()=>{console.log('error')})
   }
@@ -92,19 +95,24 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button>Bookmarks</Button>
+
+          <Button href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>Messages</Button>
+          <Button href="/messages">Messages</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>List</Button>
+          <Button href='/listPage'>Lists</Button>
         </div>
 
         <div className="Button-Padding">
           <Button href="/profile">Profile</Button>
+        </div>
+
+        <div className="Button-Padding">
+          <Button href="/dashboard">DashBoard</Button>
         </div>
 
         <div className="Button-Padding">

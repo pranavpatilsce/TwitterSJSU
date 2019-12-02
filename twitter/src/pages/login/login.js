@@ -24,17 +24,29 @@ class LogIn extends React.Component {
    loginUser=()=>{
     let data = {email:this.state.email,password:this.state.password};
     axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-    axios.get('http://10.0.0.94:3001/',data)
+    console.log('her ein the signin',data);
+    axios.post('/profile/signInProfile',data)
       .then((response) => {
-          console.log('response ok',response)
+          console.log('response ok',response.data)
           console.log("Status Code : ", response);
-          if (response.status === 200 && response.data!="error")
+          if(response.data=='credentials not Match')
           {
+            alert("Invalid credentials");
+          }
+          else if (response.data!='credentials not Match' && response.data!="error")
+          {
+            // alert("Login Success!");
             //set local storage
+            console.log('Success!!!',response.data)
+            localStorage.setItem('name',response.data.name)
+            localStorage.setItem('email',response.data.email)
+            localStorage.setItem('id',response.data._id)
+            localStorage.setItem('userHandle',response.data.userHandle)
+            localStorage.setItem('chats',response.data.chats)
           }
           else if(response.data=="error")
           {
-              alert("Invalid credentials");
+              alert("Server Error");
           }
           this.setState({});
       })
@@ -44,9 +56,8 @@ class LogIn extends React.Component {
         }
       )
   }
-
   render(){
-    if(localStorage.getItem('user'))
+    if(localStorage.getItem('email'))
       redirectVar=<Redirect to='/home'/>
     else
       redirectVar=<Redirect to='/'/>
@@ -73,7 +84,7 @@ class LogIn extends React.Component {
           <h1 className="LogIn-RightSide-Wording">the world right now</h1>
           <h5 className="LogIn-RightSide-Wording">Join Twitter today.</h5>
           <div className="LogIn-RightSide-Button">
-            <Button className="LogIn-RightSide-SignUp" href="/signup">Sign up</Button>
+            <Button className="LogIn-RightSide-SignUp">Sign up</Button>
             <div className="LogIn-RightSide-LogIn-Padding">
               <Button className="LogIn-RightSide-LogIn">Log in</Button>
             </div>

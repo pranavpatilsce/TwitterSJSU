@@ -15,6 +15,4 @@ function make_request(queue_name, msg_payload, callback){
 	});
 }
 
-
 exports.make_request = make_request;
-
