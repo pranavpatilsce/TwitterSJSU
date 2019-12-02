@@ -24,7 +24,7 @@ class TopTenLiked extends React.Component {
   componentWillMount(){
 
     axios.defaults.withCredentials = true;
-    axios.get('http://localhost:3001/dashboard/getTweets/'+localStorage.getItem('id'))
+    axios.get('/dashboard/getTweets/'+localStorage.getItem('id'))
     .then(response => {
 
         console.log('data loaded is -------------->',response.data)

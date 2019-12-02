@@ -58,7 +58,7 @@ class Messages extends React.Component {
       //chats: localStorage.getItem('chats')
       chats: "5de48e956528003d3887b7b3,5de491e4aff08e0c8cdab48e"
     }
-    axios.post('http://10.0.0.94:3001/messages/getAllChats', data)
+    axios.post('/messages/getAllChats', data)
       .then((response) => {
           console.log('response ok',response)
           console.log("All Chats:", response.data);

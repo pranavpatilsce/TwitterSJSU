@@ -34,7 +34,7 @@ const ModalExample = (props) => {
     let data = {tweet:tweet, id:localStorage.getItem('id'), name:localStorage.getItem('name'),orignalHandle:localStorage.getItem('userHandle')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/tweet',data)
+      axios.post('/users/tweet',data)
         .then((response) => {
             console.log('response ok',response)
             window.location.reload()

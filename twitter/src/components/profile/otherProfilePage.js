@@ -140,7 +140,7 @@ constructor(props)
   let token=localStorage.getItem('bearer-token');
   // alert('asd')
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-  axios.post('http://localhost:3001/profile/getProfileKafka', data)
+  axios.post('/profile/getProfileKafka', data)
     .then((response) => {
       bio=response.data.bio
       ownTweets=response.data[0].tweets

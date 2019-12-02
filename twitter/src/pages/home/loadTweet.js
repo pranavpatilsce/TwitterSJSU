@@ -82,7 +82,7 @@ class LoadTweet extends React.Component{
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
 
-      axios.post('http://localhost:3001/users/tweet/loadTweet',{tweetId:localStorage.getItem('tweetloadid')})
+      axios.post('/users/tweet/loadTweet',{tweetId:localStorage.getItem('tweetloadid')})
         .then((response) => {
             // alert('success')
             console.log('response load Tweet ID',response.data)
@@ -125,7 +125,7 @@ class LoadTweet extends React.Component{
       "userHandle":localStorage.getItem('userHandle'),
       "reply" : message,
     };
-    axios.post('http://localhost:3001/users/tweet/reply',data)
+    axios.post('/users/tweet/reply',data)
     .then(response => {
         console.log(JSON.stringify(response.data));
         if(response.status === 200){
@@ -146,7 +146,7 @@ class LoadTweet extends React.Component{
       let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet like data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/tweet/like',data)
+      axios.post('/users/tweet/like',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
@@ -163,7 +163,7 @@ class LoadTweet extends React.Component{
      // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet retweet data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/tweet/retweet',data)
+      axios.post('/users/tweet/retweet',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
@@ -180,7 +180,7 @@ class LoadTweet extends React.Component{
      // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet bookmarkTweet data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/bookmark',data)
+      axios.post('/users/bookmark',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)

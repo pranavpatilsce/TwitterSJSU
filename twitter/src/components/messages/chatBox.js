@@ -96,7 +96,7 @@ class SendMessageForm extends React.Component {
           "receiverId" : "5de2f6f76156b960fccd9e01",
         	"message" : this.state.message
         }
-        axios.post('http://10.0.0.94:3001/messages/addMessageToChat', data)
+        axios.post('/messages/addMessageToChat', data)
           .then((response) => {
               console.log('response ok',response)
               console.log("Status Code : ", response);

@@ -80,7 +80,7 @@ class Tweet extends React.Component{
       let data = '5de03cd0b5ad6906843d79d2';
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.get('http://localhost:3001/profile/getAllTweets/'+localStorage.getItem('id'), {params:{}, mode:'no-cors'})
+      axios.get('/profile/getAllTweets/'+localStorage.getItem('id'), {params:{}, mode:'no-cors'})
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
@@ -101,12 +101,12 @@ class Tweet extends React.Component{
       pathname: '/loadTweet'
   }}
   />
-  
+
   this.setState({
   reDirect:reDirect
   })
   }
-  
+
   showAddReply(id){
     //console.log(id);
     var rows = document.getElementsByName(id);
@@ -131,7 +131,7 @@ class Tweet extends React.Component{
       "userHandle":localStorage.getItem('userHandle'),
       "reply" : message,
     };
-    axios.post('http://localhost:3001/users/tweet/reply',data)
+    axios.post('/users/tweet/reply',data)
     .then(response => {
         console.log(JSON.stringify(response.data));
         if(response.status === 200){
@@ -143,7 +143,7 @@ class Tweet extends React.Component{
     })
     .catch(error=>{
         console.log("Error: "+JSON.stringify(error));
-        
+
     }
     );
 }
@@ -152,14 +152,14 @@ class Tweet extends React.Component{
       let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet like data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/tweet/like',data)
+      axios.post('/users/tweet/like',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
             otherTweets=response.data;
             this.refs.notify.notificationAlert(likeTweet);
             window.location.reload();
-           
+
         })
         .catch(()=>{console.log('error')})
     }
@@ -169,14 +169,14 @@ class Tweet extends React.Component{
      // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet retweet data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/tweet/retweet',data)
+      axios.post('/users/tweet/retweet',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
             otherTweets=response.data;
             this.refs.notify.notificationAlert(retweete);
            window.location.reload();
-           
+
         })
         .catch(()=>{console.log('error')})
     }
@@ -186,7 +186,7 @@ class Tweet extends React.Component{
      // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet bookmarkTweet data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://localhost:3001/users/bookmark',data)
+      axios.post('/users/bookmark',data)
         .then((response) => {
             // alert('success')
             console.log('response othertweets',response.data)
@@ -198,10 +198,10 @@ class Tweet extends React.Component{
     }
 
     render() {
-     
+
       return(
         <div className = "tweetCard">
-           <NotificationAlert ref="notify" /> 
+           <NotificationAlert ref="notify" />
            {this.state.reDirect}
             {otherTweets.map((twt, index) =>
                 <div className="tweetCard-indi">

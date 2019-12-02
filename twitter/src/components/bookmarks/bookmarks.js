@@ -33,7 +33,7 @@ class Bookmark extends React.Component{
       let data = {_id:localStorage.getItem('id')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.get('http://localhost:3001/dashboard/getBookmarkedTweets/'+localStorage.getItem('id'))
+      axios.get('/dashboard/getBookmarkedTweets/'+localStorage.getItem('id'))
         .then((response) => {
             // alert('success')
             console.log('response bookmark tweets',response.data)

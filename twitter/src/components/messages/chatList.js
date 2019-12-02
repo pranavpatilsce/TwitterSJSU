@@ -32,7 +32,7 @@ class MessageCard extends React.Component{
       // let data = '5de03cd0b5ad6906843d79d2';
       // let token=localStorage.getItem('bearer-token');
       // axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      // axios.get('http://10.0.0.94:3001/profile/getAllTweets/5de03cd0b5ad6906843d79d2', {params:{}, mode:'no-cors'})
+      // axios.get('/profile/getAllTweets/5de03cd0b5ad6906843d79d2', {params:{}, mode:'no-cors'})
       //   .then((response) => {
       //       console.log('response ok',response)
       //   })
