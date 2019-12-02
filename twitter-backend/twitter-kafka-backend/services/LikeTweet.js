@@ -4,49 +4,58 @@ var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
 
-console.log("Inside like tweet msg----", msg)
+    console.log("Inside like tweet msg----", msg)
 
-profileModel.updateOne({_id:msg._id,tweets:{$elemMatch:{tweetId: {$eq: mongoose.Types.ObjectId(msg.tweetId)}}}},
-{
-"$set":{
-    $inc:{"tweet.$.likes":1},
-    $push:{"tweets.$.likedBy":msg.likedBy}}},
-    {
-    tweets:{$elemMatch:{tweetId: {$eq: mongoose.Types.ObjectId(msg.tweetId)}}}}
-// profileModel.find({_id:msg._id,"tweets.tweetId": {$eq:mongoose.Types.ObjectId(msg.tweetId)}}
-,function(err, user) {
 
-    if(err)
-    {
-        console.log('error-->');
-        callback(err,"Error");
-    }
+    profileModel.updateOne({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
+        {
+            $inc: {
+                "tweets.$.likes": 1
+            },
+            $push: {
+                "tweets.$.likedBy": msg.likedBy
+            }
+        },
+        function (err, user) {
 
-    else{console.log('Result',user)
-        callback(null, {success:true});
-    }
+            if (err) {
+                console.log('error-->');
+                callback(err, "Error");
+            }
 
-})
 
-    // profileModel.update({_id:msg.id}, { $push: { tweets:  {
-    //     tweetId: new mongoose.Types.ObjectId(),
-    //     tweet: msg.tweet,
-    //     time: msg.time,
-    //     date: msg.date,
-    //     retweets: 0,
-    //     replies:[],
-    //     likes:0,
-    //     likesUsers:[],
-    //     tweetHash:matches
+            else {
 
-    // }}}, {upsert: true}, function(err, docs){
-    //     if (err) {
-    //       console.log('error-->');
-    //       callback(err,"Error");
-    //   }
-    //   else{
-    //     callback(null, {success:true});
-    //   }
-    //     });
+                profileModel.find({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
+                    { tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } }, _id: 0 },
+
+                    function (err, tweet) {
+                        if (err) {
+                            console.log('error-->');
+                            callback(err, "Error");
+                        }
+
+                        else {
+                            console.log('Tweet liked is', tweet[0].tweets[0])
+
+                            profileModel.update({ _id: msg.id }, { $push: { likedTweets: tweet[0].tweets[0] } }, { upsert: true }, function (err, docs) {
+                                if (err) {
+                                    console.log('error-->');
+                                    callback(err, "Error");
+                                }
+                                else {
+                                    callback(null, { success: true });
+                                }
+                            });
+
+
+                        }
+                    }
+
+
+                )
+            }
+        }
+    )
 };
 exports.handle_request = handle_request;

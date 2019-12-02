@@ -21,8 +21,12 @@ console.log('Matches is',matches);
         replies:[],
         likes:0,
         tweetHash:matches,
-        likedBy:[]
-
+        likedBy:[],
+        type:"Original",
+        image:msg.image,
+        name:msg.name,
+        userHandle:msg.userHandle,
+        views:0
     }}}, {upsert: true}, function(err, docs){
         if (err) {
           console.log('error-->');

@@ -37,7 +37,7 @@ class SignUp extends React.Component{
         password: this.state.password,
         checkbox: this.state.password
       };
-
+      
       axios.post(`http://10.0.0.94:3001/profile/addProfile`, { user })
         .then(res => {
           console.log(res);

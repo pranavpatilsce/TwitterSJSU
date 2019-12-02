@@ -1,7 +1,11 @@
 let mongoose = require('mongoose');
 
-const connectionString='mongodb+srv://root:root@cluster0-9j3qi.mongodb.net/twitter?retryWrites=true&w=majority'
-mongoose.connect(connectionString,{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true} );
+const connectionString='mongodb+srv://root:root@cluster1-9j3qi.mongodb.net/twittertest?retryWrites=true&w=majority'
+mongoose.connect(connectionString,{poolSize: 10,  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+.then(()=>console.log("Database connection success"))
+.catch(err=>{
+	console.error("Database connection error")
+})
 // Email, Pwd, Name, Bio, Location, Website,
 //  BirthDate, ProfileImage, CoverImage, Tweets(Array), Followers(Array),
 //  Following(Array), BookmarkedTweets (Array), Messages (Array)
@@ -20,7 +24,13 @@ var profileSchema = new mongoose.Schema({
 	followers:Array,
 	following:Array,
 	bookmarkedTweets:Array,
-	chats:Array
+	chats:Array,
+	likedTweets: Array,
+	userHandle: String,
+	lists:Array,
+	subscriptions:Array,
+	memberships:Array
+
 })
 var profileModel = mongoose.model('profile', profileSchema);
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +68,22 @@ var tweetHashSchema = new mongoose.Schema({
 })
 var tweetHashModel = mongoose.model('tweethash', tweetHashSchema);
 
+////////////////////////////////////////////////////////////////////////////////
+const listSchema = new mongoose.Schema(
+	{
+		listId: mongoose.Schema.Types.ObjectId,
+		listName: String,
+		description: String,
+		members : Array
+	}
+);
+const list = mongoose.model('list', listSchema);
+
 module.exports = {
   Profile:profileModel,
   Chat: chat,
   Message :message,
-  TweetHash:tweetHashModel
+  TweetHash:tweetHashModel,
+  List:list
+
 }
