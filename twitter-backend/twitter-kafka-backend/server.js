@@ -43,7 +43,7 @@ var GetListTweets= require('./services/GetListTweets');
 //Memberships
 var GetMemberships= require('./services/GetMemberships');
 
-var SetSubscriber= require('./services/SetSubscriber')
+var SetSubscriber= require('./services/SetSubscriptions')
 var GetSubscriptions= require('./services/GetSubscriptions')
 
 

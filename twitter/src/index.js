@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './pages/home/home.js';
 import Login from './pages/login/login.js';
-//import SignUp from './pages/signup/signup.js';
+import Signup from './pages/signup/signup.js';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TopTenLiked from './pages/dashboard/topTenLiked'
@@ -17,6 +17,8 @@ import TweetLoadHome from './pages/home/tweetLoadHome';
 import BookmarkPage from './components/bookmarks/bookmarkPage.js';
 import ListPage from './components/lists/listPage.js';
 import ViewListTweetsPage from './components/lists/viewListTweetsPage.js';
+import OtherProfilePage from './components/profile/otherProfilePage.js';
+
 //TODO: Add redux for isLoggedIn or not state
 
 class Routes extends React.Component {
@@ -36,6 +38,9 @@ class Routes extends React.Component {
         <Route exact path='/bookmarkPage' component={BookmarkPage} />
        <Route exact path='/listPage' component={ListPage} />
        <Route exact path='/viewListTweetsPage' component={ViewListTweetsPage} />
+       <Route exact path='/signup' component={Signup} />
+       <Route exact path='/otherProfilePage' component={OtherProfilePage} />
+
       </Switch>
     </Router>
     )

@@ -101,7 +101,7 @@ const CreateListModal = (props) => {
         console.log(data)
           let token=localStorage.getItem('bearer-token');
           axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-          axios.post('http://10.0.0.30:3001/list/createList',data)
+          axios.post('http://localhost:3001/list/createList',data)
             .then((response) => {
                 console.log('response ok',response)
                 if(response.data)
@@ -156,7 +156,7 @@ class List extends React.Component{
         console.log(members)
         let data={members:members}
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-        axios.post('http://10.0.0.30:3001/list/getListTweets',data)
+        axios.post('http://localhost:3001/list/getListTweets',data)
           .then((response) => {
               console.log('getlisttweets response',response.data)
               listTweets=response.data
@@ -171,7 +171,7 @@ class List extends React.Component{
       let data = {id:"5de03ca78752b30ca074122d"};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/list/getMemberships',data)
+      axios.post('http://localhost:3001/list/getMemberships',data)
         .then((response) => {
             // alert('success')
             console.log('response allMembersArr',response.data)
@@ -204,7 +204,7 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/list/getSubscriptions',data)
+      axios.post('http://localhost:3001/list/getSubscriptions',data)
         .then((response) => {
             // alert('success')
             console.log('response allSubscribedArr',response.data)
@@ -237,7 +237,7 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/list/getList',data)
+      axios.post('http://localhost:3001/list/getList',data)
         .then((response) => {
             // alert('success')
             console.log('response allListsArr',response.data)

@@ -58,9 +58,9 @@ class ViewListTweets extends React.Component{
                         <p className="Tweet-Body-Text">{ele.tweet}</p>
                       </div>
                       <div className="Tweet-Body-Panel">
-                        <button className="Tweet-Body-Panel-Comment" onClick={this.commentTweet}><img src={comment}/><span className="likeCount">{ele.replies.length}</span></button>
-                        <button className="Tweet-Body-Panel-ReTweet" onClick={this.retweetTweet}><img src={retweet}/><span className="likeCount">{ele.retweets}</span></button>
-                        <button className="Tweet-Body-Panel-Like" onClick={this.likeTweet}><img src={like}/><span className="likeCount">{ele.likes}</span></button>
+                        <button className="Tweet-Body-Panel-Comment" onClick={this.commentTweet}><img src={comment}/><span id="likec" className="likeCount">{ele.replies.length}</span></button>
+                        <button className="Tweet-Body-Panel-ReTweet" onClick={this.retweetTweet}><img src={retweet}/><span id="likec" className="likeCount">{ele.retweets}</span></button>
+                        <button className="Tweet-Body-Panel-Like" onClick={this.likeTweet}><img src={like}/><span id="likec" className="likeCount">{ele.likes}</span></button>
                         <button className="Tweet-Body-Panel-Bookmark" onClick={this.bookmarkTweet}><img src={bookmark}/></button>
                         <br/>
                         <br/>

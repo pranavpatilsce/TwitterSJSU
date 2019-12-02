@@ -11,8 +11,9 @@ let searchHandler="", redirectFlag=false, redirectVar=null
 class RightSide extends React.Component {
  searchHandler = (e) => {
    if (e.key === 'Enter') {
-     alert(searchHandler);
-     let redirectFlag=true;
+    redirectFlag=true;
+     localStorage.setItem('otherUserHandle',searchHandler)
+     this.setState({})
    }
  }
  searchTextHandler=(e)=>{
@@ -21,7 +22,7 @@ class RightSide extends React.Component {
  render(){
    if(redirectFlag)
    {
-     // redirectVar=<Redirect to="/otherProfile"/>
+     redirectVar=<Redirect to="/otherProfilePage"/>
      redirectFlag=false;
    }
    return(
