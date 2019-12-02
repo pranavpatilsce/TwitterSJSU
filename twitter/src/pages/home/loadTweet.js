@@ -214,14 +214,20 @@ class LoadTweet extends React.Component{
                       <p className="Tweet-Body-Text">{twt.tweet}</p>
                     </div>
                     <div className="Tweet-Body-Panel">
-                    <button className="Tweet-Body-Panel-Comment" onClick = {this.showAddReply.bind(this,twt.tweetId)}><img src={comment}/></button>
+                    <button className="Tweet-Body-Panel-Comment" onClick = {this.showAddReply.bind(this,twt.tweetId)}><span style={{color:"white"}}>{twt.replies.length}</span><img src={comment}/></button>
                       <button className="Tweet-Body-Panel-ReTweet" onClick={()=>this.retweetTweet(twt)}><img src={retweet}/></button>
                       <button className="Tweet-Body-Panel-Like" onClick={()=>this.likeTweet(twt.tweetId)}><span color="white" id="likec">{twt.likes}</span><img src={like}/></button>
                       <button className="Tweet-Body-Panel-Bookmark" onClick={()=>this.bookmarkTweet(twt.tweetId)}><img src={bookmark}/></button>
-                      <button className="btn btn-primary" onClick={()=>this.loadTweet(twt.tweetId)}>View Tweet</button>
+                      {/* <button className="btn btn-primary" onClick={()=>this.loadTweet(twt.tweetId)}>View Tweet</button> */}
                       <br/>
                       <br/>
                       <br/>
+                    </div>
+                    <div>
+                    {twt.replies.map((reply, index) =>
+                    
+                    <div style={{border:"1px solid white"}}><p style={{color:"pink"}}>{reply.userHandle}</p><p  style={{color:"white"}}>{reply.reply}</p><br/><br/></div>
+                    )}
                     </div>
                     <div style = {{display:"none"}} name = {twt.tweetId}>
                       <textarea rows="4" cols="50" placeholder = "Reply to this tweet......" id = {twt.tweetId} name ="tweetReply" /> <br/>

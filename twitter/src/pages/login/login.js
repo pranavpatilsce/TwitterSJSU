@@ -42,6 +42,7 @@ class LogIn extends React.Component {
             localStorage.setItem('email',response.data.email)
             localStorage.setItem('id',response.data._id)
             localStorage.setItem('userHandle',response.data.userHandle)
+            localStorage.setItem('chats',response.data.chats)
           }
           else if(response.data=="error")
           {
