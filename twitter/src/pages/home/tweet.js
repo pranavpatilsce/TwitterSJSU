@@ -19,7 +19,6 @@ import bookmark from '../../svg/bookmark.jpeg';
 import NotificationAlert from 'react-notification-alert';
 import "react-notification-alert/dist/animate.css";
 
-import like from '../../svg/like.jpeg';
 import retweet from '../../svg/retweet.jpeg';
 import comment from '../../svg/comment.jpeg';
 //import option from '../../svg/option.jpeg';
