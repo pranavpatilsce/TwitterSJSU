@@ -6,10 +6,6 @@ import './chatList.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navigation from '../../nav/globalNav.js';
-import MessageBox from './chatBox.js';
-
-import Pranav from '../../svg/Pranav.jpeg';
-
 
 import {
   Card, CardImg, CardText, CardBody,
@@ -46,7 +42,7 @@ class MessageCard extends React.Component{
           {this.props.messagesList.map(messageList => {
             return(
                 <div key={messageList.messageId}>
-                  <div className="Messages-Card-indi">
+                  <Button className="Messages-Card-indi">
                     <div className="Messages-Image">
                       <br/>
                       <img className="Messagesimage" src={messageList.image}/>
@@ -58,12 +54,9 @@ class MessageCard extends React.Component{
                         <p className="Messages-Card-Body-Handle">{messageList.userHandle}</p>
                         <p className="Messages-Card-Body-Date">{messageList.date}</p>
                       </div>
-                      <div>
-                        <p className="Messages-Card-Body-Text">{messageList.text}</p>
-                      </div>
                       <br/>
                     </div>
-                  </div>
+                  </Button>
                 </div>
               )
           })}

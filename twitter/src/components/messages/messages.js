@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from 'reactstrap';
 import logo from '../../svg/logo.svg';
+import axios from 'axios';
 import './messages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
@@ -51,6 +52,30 @@ class Messages extends React.Component {
     };
   }
 
+  componentDidMount(){
+
+    let data = {
+      //chats: localStorage.getItem('chats')
+      chats: "5de48e956528003d3887b7b3,5de491e4aff08e0c8cdab48e"
+    }
+    axios.post('http://10.0.0.94:3001/messages/getAllChats', data)
+      .then((response) => {
+          console.log('response ok',response)
+          console.log("All Chats:", response.data);
+          if(response.data=="error")
+          {
+              alert("Invalid credentials");
+          }
+          this.setState({messagesList: response.data});
+      })
+      .catch (response => {
+          alert("Invalid");
+          this.setState({});
+        }
+      )
+
+  }
+
   render(){
   return (
     <div className="Messages">
@@ -60,17 +85,20 @@ class Messages extends React.Component {
       </div>
       <div className="MessagesBar">
         <div>
-          <Button className = "MessagesBarTitle"><h3>Messages</h3></Button>
+          <Button className="MessagesBarTitle"><h3>Messages</h3></Button>
         </div>
       </div>
-      <div className="Messages-Messages">
-        <div className="Messages-Messages-Card">
+      <div type="button" className="Messages-Messages">
+        <div type="button" className="Messages-Messages-Card">
           <MessageCard messagesList={this.state.messagesList}/>
         </div>
       </div>
-
       <div className="Messages-RightSide">
+          {/*<div className="Messages-RightSide-PreLoad">
+
+          </div>*/}
           <MessageBox messagesList={this.state.messagesList}/>
+          {/*<MessageBox messages={this.state.messages}/>*/}
       </div>
     </div>
   )

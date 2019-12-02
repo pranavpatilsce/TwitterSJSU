@@ -7,6 +7,7 @@ import SignUp from './pages/signup/signup.js';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Messages from './components/messages/messages.js';
+import MessageBox from './components/messages/chatBox.js';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -26,19 +27,17 @@ class Routes extends React.Component {
         <Route exact path='/list' component={UserProfile} />
         <Route exact path='/home' component={Home} />
         <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/chat' component={MessageBox} />
       </Switch>
     </Router>
     )
   }
-
 }
 
 ReactDOM.render(
   <Routes />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
-
-
 
 
 // If you want your app to work offline and load faster, you can change
