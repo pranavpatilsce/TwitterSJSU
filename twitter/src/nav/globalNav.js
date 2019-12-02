@@ -27,7 +27,7 @@ const ModalExample = (props) => {
     }
   }
   const tweetBodyChangeHandler=(e)=>{
-    console.log(e.target.value)
+    console.log(e.target.value);
     tweet=e.target.value;
   }
   const sendTweet=()=>{
@@ -95,15 +95,16 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-        <Button href='/bookmarkPage'>Bookmarks</Button>
+
+          <Button href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button>Messages</Button>
+          <Button href="/messages">Messages</Button>
         </div>
 
         <div className="Button-Padding">
-        <Button href='/listPage'>Lists</Button>
+          <Button href='/listPage'>Lists</Button>
         </div>
 
         <div className="Button-Padding">

@@ -1,0 +1,114 @@
+.Messages {
+  width: 100%;
+  overflow: hidden;
+  background-color: #15202B;
+}
+
+.Messages-Navigation{
+  position: fixed;
+  background-color: #15202B;
+  width: 25%;
+  float: left;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+}
+
+.Messages-RightSide{
+  position: fixed;
+  background-color: #15202B;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  float: left;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-right: 1px;
+  border-top: 1px;
+  border-bottom: 1px;
+  display: block;
+}
+
+.Messages-RightSide-PreLoad{
+  background-color: #15202B;
+  min-height: 100vh;
+  width: 100%;
+  float: none;
+  color: white;
+  display: block;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.Messages-Messages{
+  float: left;
+  width: 100%;
+  overflow: auto;
+  background-color: #15202B;
+}
+
+.Messages-Messages-Card {
+  padding-left: 25%;
+  padding-top: 0%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+  background-color: #15202B;
+
+}
+/* .App-logo {
+  height: 40vmin;
+} */
+
+.App-header {
+  background-color: #15202B;
+  width: 50%;
+  float: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+.MessagesBar {
+  background-color: #15202B;
+  float: left;
+  width: 60%;
+  overflow: auto;
+  padding-left: 25%;
+}
+
+.MessagesBarTitle {
+  color: white;
+  width: 100%;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  border: 1px;
+  padding-left: 40px;
+}
+.MessagesBarTitle:hover {
+  color: white;
+  width: 100%;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  padding-left: 40px;
+  text-align: left;
+  border: 1px;
+}

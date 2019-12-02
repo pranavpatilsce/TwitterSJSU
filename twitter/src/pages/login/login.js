@@ -56,13 +56,12 @@ class LogIn extends React.Component {
         }
       )
   }
-   
   render(){
     if(localStorage.getItem('email'))
       redirectVar=<Redirect to='/home'/>
     else
       redirectVar=<Redirect to='/'/>
-  return (    
+  return (
     <div className="Login">
       {redirectVar}
       <img className="Login-Navigation" src={logo}/>
