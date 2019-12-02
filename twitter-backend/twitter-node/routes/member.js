@@ -43,3 +43,5 @@ router.post('/setSubscriptions',  function (req, res, next) {
         };
     });
 });
+
+module.exports = router;

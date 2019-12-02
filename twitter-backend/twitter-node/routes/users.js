@@ -91,8 +91,23 @@ router.post('/tweet/retweet',  function (req, res, next) {
 //Add Followers
 //Retweet Tweet
 router.post('/addFollowers',  function (req, res, next) {
-    console.log('Inside add Followers kafka.');
+    console.log('Inside add Followers');
      kafka.make_request('addFollowers',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send({response:true});
+        };
+    });
+});
+
+//Unfollow
+//Retweet Tweet
+router.post('/unfollow',  function (req, res, next) {
+    console.log('Inside unfollow');
+     kafka.make_request('unfollow',req.body, function(error,results){
         if (error) {
             console.log("error in results ");
             res.status(200).send(error)
