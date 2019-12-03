@@ -18,36 +18,36 @@ function handle_request(msg, callback) {
 
     // })
 
-    profileModel.updateOne({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
-        {
-            $inc: {
-                "tweets.$.views": 1
-            }
-        },
-        function (err, user) {
+    // profileModel.updateOne({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
+    //     {
+    //         $inc: {
+    //             "tweets.$.views": 1
+    //         }
+    //     },
+    //     function (err, user) {
 
-            if (err) {
-                console.log('error-->');
-                callback(err, "Error");
-            }
+    //         if (err) {
+    //             console.log('error-->');
+    //             callback(err, "Error");
+    //         }
 
 
-            else {
+    //         else {
 
-                console.log(user);
-                profileModel.find({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },{_id: 0, 'tweets.$': 1}
-                , function(err, tweets){
-                    if(err){
-                        console.log("Error in Kafka Backend -> getAllTweets");
-                        callback(err, null);
-                    }else{
-                        console.log("INSIDE Load  tweetsssssssssssssssssssss------------------------------->",tweets)
-                        callback(null, tweets);  
-                    }
-                });
-            }
-        }
-    )
+    //             console.log(user);
+    //             profileModel.find({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },{_id: 0, 'tweets.$': 1}
+    //             , function(err, tweets){
+    //                 if(err){
+    //                     console.log("Error in Kafka Backend -> getAllTweets");
+    //                     callback(err, null);
+    //                 }else{
+    //                     console.log("INSIDE Load  tweetsssssssssssssssssssss------------------------------->",tweets)
+    //                     callback(null, tweets);  
+    //                 }
+    //             });
+    //         }
+    //     }
+    // )
 
 };
 exports.handle_request = handle_request;
