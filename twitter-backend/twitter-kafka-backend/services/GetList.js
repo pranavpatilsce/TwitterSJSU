@@ -12,7 +12,7 @@ function handle_request(msg, callback) {
           callback(err,"Error");
       }
       else{
-        console.log("kafka getList result ",results[0]);
+        console.log("kafka getList result ",results);
         callback(null, results[0]);
       }
     });
