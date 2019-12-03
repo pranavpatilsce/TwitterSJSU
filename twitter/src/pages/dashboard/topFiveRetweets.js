@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Doughnut, Pie, Polar, Radar, Scatter} from 'react-chartjs-2';
 import axios from 'axios';
 
 let response_data = [
@@ -25,18 +25,18 @@ class TopFiveRetweets extends React.Component {
     axios.defaults.withCredentials = true;
     axios.get('/dashboard/getTweets/'+localStorage.getItem('id'))
     .then(response => {
-
         console.log(response.data)
         response_data = response.data;
-
         response_data.sort((a, b) => (a.retweets < b.retweets) ? 1 : -1)
+        response_data = (response_data.length > 5) ? response_data.slice(0,5) : response_data;
+        let data = []  
+        let bc = []
 
         for(let tweet of response_data){
-            labels.push(tweet.tweet);
-        }
-        let data = []
-        for(let tweet of response_data){
-            data.push(tweet.retweets);
+          data.push(tweet.retweets);
+          labels.push(tweet.tweet);
+          let c= "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+          bc.push(c)
         }
     
         this.setState({
@@ -44,9 +44,9 @@ class TopFiveRetweets extends React.Component {
                 labels : labels,
                 datasets : [
                     {
-                        label : "Retweets",
-                        data: data,
-                        backgroundColor : 'rgb(29, 161, 242)'
+                      label : "Retweets",
+                      data: data,
+                      backgroundColor : bc
                     }
                 ]
             }
@@ -66,7 +66,7 @@ class TopFiveRetweets extends React.Component {
     return(
 		<div>
 			<div className="chart">
-				<Bar
+				<Pie
 					data={this.state.chartData}
 					options={
 					{
@@ -77,12 +77,11 @@ class TopFiveRetweets extends React.Component {
 						},
 						legend:{
 							display:true,
-							position:'left'
+							position:'bottom'
 						}
 					}
 				}
 				/>
-
 			</div>
 
 

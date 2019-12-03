@@ -17,9 +17,8 @@ function handle_request(msg, callback) {
             let bookmarkedTweetsIds = [];
             for(let bookmark of bookmarkedTweets ){
                 bookmarkedTweetsIds.push(mongoose.Types.ObjectId(bookmark));
-            
-        }
-        console.log('Bookmarked twwed IDS are ----------->',bookmarkedTweetsIds)
+            }
+            console.log('Bookmarked twwed IDS are ----------->',bookmarkedTweetsIds)
 
             Profile.find({tweets:{elemMatch:{tweetId:{ $in: bookmarkedTweetsIds}}}},{_id: 0, 'tweets.$': 1}
             , function(err, tweets){

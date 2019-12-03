@@ -228,16 +228,17 @@ class LoadTweet extends React.Component{
                       <br/>
                       <br/>
                     </div>
+                    <div style = {{display:"none"}} name = {twt.tweetId}>
+                      <textarea rows="4" cols="50" placeholder = "Reply to this tweet......" id = {twt.tweetId} name ="tweetReply" /> <br/>
+                      <button onClick = {this.addReply} value = {twt.tweetId}>Send</button>
+                    </div>
                     <div>
                     {twt.replies.map((reply, index) =>
                     
                     <div style={{border:"1px solid white"}}><p style={{color:"pink"}}>{reply.userHandle}</p><p  style={{color:"white"}}>{reply.reply}</p><br/><br/></div>
                     )}
                     </div>
-                    <div style = {{display:"none"}} name = {twt.tweetId}>
-                      <textarea rows="4" cols="50" placeholder = "Reply to this tweet......" id = {twt.tweetId} name ="tweetReply" /> <br/>
-                      <button onClick = {this.addReply} value = {twt.tweetId}>Send</button>
-                    </div>
+                    
                   </div>
                 </div>
             )}
