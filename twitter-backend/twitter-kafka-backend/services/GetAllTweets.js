@@ -30,7 +30,7 @@ function handle_request(msg, callback) {
                     console.log("INSIDE getAllTweets KAFKA BACKEND get all profiles",profileAll);
 
                     for(let profile of profileAll ){
-                        tweets.push(profile.tweets);
+                        tweets.push(...profile.tweets);
                     
                 }
     
