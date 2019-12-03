@@ -247,6 +247,7 @@ class Tweet extends React.Component {
                 <h5 className="Tweet-Body-Name">{twt.name}</h5>
                 <p className="Tweet-Body-Handle">{twt.userHandle}</p>
                 <p className="Tweet-Body-Date">{twt.date}</p>
+                <p className="Tweet-Body-Date">{twt.time}</p>
               </div>
               <div>
                 <p className="Tweet-Body-Text">{twt.tweet}</p>

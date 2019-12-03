@@ -130,7 +130,7 @@ class ProfileTopBar extends React.Component {
   }
 
 }
-let bio=null, ownTweets=null, bdate=null
+let bio=null, ownTweets=null, bdate=null, location=null,followers=0,following=0
 class ProfileCard extends React.Component {
 
 constructor(props)
@@ -142,10 +142,13 @@ constructor(props)
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
   axios.post('/profile/getProfileKafka', data)
     .then((response) => {
-      bio=response.data.bio
+      bio=response.data[0].bio
       ownTweets=response.data[0].tweets
-      bdate=response.data.bdate
-        console.log('response ok',response.data[0].tweets)
+      bdate=response.data[0].birthDate
+      location = response.data[0].location
+      followers=response.data[0].followers.length
+      following=response.data[0].following.length
+        console.log('response ok',response.data[0])
         userTweets=ownTweets.map((twt, index) =>{
           return(
             <div className="tweetCard-indi">
@@ -156,18 +159,18 @@ constructor(props)
             <div className="Tweet-Body">
               <br/>
               <div className="Tweet-Body-Content">
-                <h5 className="Tweet-Body-Name">{localStorage.getItem('name')}</h5>
-                <p className="Tweet-Body-Handle">{localStorage.getItem('userHandle')}</p>
+                <h5 className="Tweet-Body-Name">{twt.name}</h5>
+                <p className="Tweet-Body-Handle">{twt.userHandle}</p>
                 <p className="Tweet-Body-Date">{twt.date}</p>
               </div>
               <div>
                 <p className="Tweet-Body-Text">{twt.tweet}</p>
               </div>
               <div className="Tweet-Body-Panel">
-                <button className="Tweet-Body-Panel-Comment" ><img src={comment}/></button>
+                <button className="Tweet-Body-Panel-Comment" ><span style={{color:"white"}}>{twt.replies.length}</span><img src={comment}/></button>
                 <button className="Tweet-Body-Panel-ReTweet" ><img src={retweet}/></button>
-                <button className="Tweet-Body-Panel-Like" ><img src={like}/></button>
-                <button className="Tweet-Body-Panel-Bookmark" ><img src={bookmark}/></button>
+                <button className="Tweet-Body-Panel-Like" ><span style={{color:"white"}}>{twt.likes}</span><img src={like}/></button>
+                {/* <button className="Tweet-Body-Panel-Bookmark" ><img src={bookmark}/></button> */}
                 <br/>
                 <br/>
                 <br/>
@@ -204,7 +207,7 @@ constructor(props)
               </div>
               <div className = "UserInfo">
                 <div className = "UserInfo-Location">
-                  <p><img top width="17%" src={Location}/>SF Bay Area, CA</p>
+    <p><img top width="17%" src={Location}/>{location}</p>
                 </div>
                 <div className = "UserInfo-Birthday">
                   <p><img top width="14%" src={Birthday}/>Born on {bdate}</p>
@@ -212,8 +215,8 @@ constructor(props)
               </div>
 
               <div>
-                <a className = "profileFollowers" href='#'>566 Following</a>{'  '}
-                <a className = "profileFollowers" href='#'>63 Followers</a>
+    <a className = "profileFollowers" href='#'>{following} Following</a>{'  '}
+    <a className = "profileFollowers" href='#'>{followers} Followers</a>
               </div>
           </div>
           <div>
