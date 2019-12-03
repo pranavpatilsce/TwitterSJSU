@@ -4,18 +4,21 @@ var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
 
-console.log("Inside retweet tweet msg----", msg)
+console.log("Inside retweet tweet msg--------------------------------------------------------------------------------------------", msg)
 let sentence = msg.tweet;
 let re = /(?:^|\W)#(\w+)(?!\w)/g, match, matches = [];
 while (match = re.exec(sentence)) {
   matches.push('#'+match[1]);
 }
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
 console.log('Matches is',matches);
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
         tweetId: new mongoose.Types.ObjectId(),
         tweet: msg.tweet,
-        time: msg.time,
-        date: msg.date,
+        time: time,
+        date: date,
         retweets: 0,
         replies:[],
         likes:0,
@@ -23,7 +26,8 @@ console.log('Matches is',matches);
         likedBy:[],
         type:"Retweet",
         originalTweetOwner:msg.orignalHandle,
-        name:msg.name
+        name:msg.name,
+        userHandle:msg.userHandle
 
     }}}, {upsert: true}, function(err, docs){
         if (err) {
@@ -31,8 +35,22 @@ console.log('Matches is',matches);
           callback(err,"Error");
       }
       else{
+        profileModel.updateOne({ tweets: { $elemMatch: { tweetId: mongoose.Types.ObjectId(msg.tweetId) } } },
+        {
+            $inc: {
+                "tweets.$.retweets": 1
+            }
+        },function(err, docs){
+          if (err) {
+            console.log('error-->');
+            callback(err,"Error");
+        }
+        else{
         callback(null, {success:true});
-      }
+        }
+    });
+  }
+    
         });
 
 };
