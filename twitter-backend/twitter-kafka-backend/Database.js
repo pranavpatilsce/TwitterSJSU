@@ -50,6 +50,7 @@ const messageSchema = new mongoose.Schema(
 const chatSchema = new mongoose.Schema(
     {	
 		users:Array,
+		userHandles : Array,
         messages : [messageSchema]
     },
     {

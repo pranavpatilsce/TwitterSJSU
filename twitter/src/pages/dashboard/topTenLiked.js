@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Doughnut} from 'react-chartjs-2';
 import axios from 'axios';
 
 let response_data = [
@@ -26,18 +26,18 @@ class TopTenLiked extends React.Component {
     axios.defaults.withCredentials = true;
     axios.get('/dashboard/getTweets/'+localStorage.getItem('id'))
     .then(response => {
-
         console.log('data loaded is -------------->',response.data)
         response_data = response.data;
-
         response_data.sort((a, b) => (a.likes < b.likes) ? 1 : -1)
-
-        for(let tweet of response_data){
-            labels.push(tweet.tweet);
-        }
+        response_data = (response_data.length > 10) ? response_data.slice(0,10) : response_data;
         let data = []
+        let bc = []
+
         for(let tweet of response_data){
             data.push(tweet.likes);
+            labels.push(tweet.tweet);
+            let c= "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+            bc.push(c)
         }
     
         this.setState({
@@ -47,25 +47,12 @@ class TopTenLiked extends React.Component {
                     {
                         label : "Likes",
                         data: data,
-                        backgroundColor : 'rgb(29, 161, 242)'
+                        backgroundColor : bc
                     }
                 ]
             }
         })
         console.log(data);
-    
-        this.setState({
-            chartData : {
-                labels : labels,
-                datasets : [
-                    {
-                        label : "Likes",
-                        data: data,
-                        backgroundColor : 'rgb(29, 161, 242)'
-                    }
-                ]
-            }
-        });
     })
     .catch(error=>{
         console.log("Error: "+JSON.stringify(error));
@@ -78,7 +65,7 @@ class TopTenLiked extends React.Component {
     return(
 		<div>
 			<div className="chart">
-				<Bar
+				<Doughnut
 					data={this.state.chartData}
 					options={
 					{
@@ -89,7 +76,7 @@ class TopTenLiked extends React.Component {
 						},
 						legend:{
 							display:true,
-							position:'left'
+							position:'bottom'
 						}
 					}
 				}

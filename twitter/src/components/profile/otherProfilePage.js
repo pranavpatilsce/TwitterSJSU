@@ -135,13 +135,49 @@ class ProfileCard extends React.Component {
 
 constructor(props)
 {
+ 
   super(props)
-  let data = {userHandle:localStorage.getItem('userHandle')};
+  this.state={
+    profiledata:{}
+  }
+
+}
+
+follow = (tobefollowdid)=>{
+
+  let data={initiateId:localStorage.getItem("id"),tobeFollowedID:tobefollowdid}
+  axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+  axios.post('/users/addFollowers', data)
+    .then((response) => {
+      console.log('Success follow operation, going to reload !!!',response.data)
+      window.location.reload();
+    })
+    .catch(()=>{console.log('error')})
+
+
+}
+
+unfollow = (tobeunfollowdid)=>{
+  let data={id:localStorage.getItem("id"),unfollowId:tobeunfollowdid}
+  axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+  axios.post('/users/unfollow', data)
+    .then((response) => {
+      console.log('Success unfollow operation, going to reload !!!',response.data)
+      window.location.reload();
+    })
+    .catch(()=>{console.log('error')})
+
+}
+
+componentWillMount=()=>{
+  console.log('User handle loaded!!!!',localStorage.getItem('otherUserHandle'))
+  let data = {userHandle:localStorage.getItem('otherUserHandle')};
   let token=localStorage.getItem('bearer-token');
   // alert('asd')
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
   axios.post('/profile/getProfileKafka', data)
     .then((response) => {
+      console.log('response is getprofile !!!',response.data)
       bio=response.data.bio
       ownTweets=response.data[0].tweets
       bdate=response.data.bdate
@@ -177,12 +213,25 @@ constructor(props)
           )
         }               
             )
-            console.log('usertw',userTweets)
+            console.log('usertweeetssssssssssssssssssssssssssssssssss------------------>',userTweets)
+            this.setState({profiledata:response.data})
             this.setState({})
     })
     .catch(()=>{console.log('error')})
 }
+
   render(){
+    console.log('This profiledata state is!!!!!!!!!!!!!!!!!!!!!!!!!!!',this.state.profiledata)
+    if(this.state.profiledata[0]!=undefined)
+    {
+      if(this.state.profiledata[0].followers.includes(localStorage.getItem('id')))
+      {
+        document.getElementById("follo").disabled = true;
+      }
+      else{
+        document.getElementById("unfollo").disabled = true;
+      }
+    }
     return(
       <div className="ProfileCard-Parent">
           <div className="ProfileCard-Wallpaper">
@@ -196,24 +245,28 @@ constructor(props)
           </div>
           <div className = "overall">
               <div>
-    <h4 className = "ProfileName">{localStorage.getItem('name')}</h4>
-                <p className = "ProfileHandle">{localStorage.getItem('userHandle')}</p>
+    <h4 className = "ProfileName">{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].name}</h4>
+                <p className = "ProfileHandle">{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].userHandle}</p>
               </div>
               <div className = "ProfileBio">
-                <p>{bio}</p>
+                <p>{this.state.profiledata.bio}</p>
               </div>
               <div className = "UserInfo">
                 <div className = "UserInfo-Location">
-                  <p><img top width="17%" src={Location}/>SF Bay Area, CA</p>
+                  <p><img top width="17%" src={Location}/>{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].location}</p>
                 </div>
                 <div className = "UserInfo-Birthday">
-                  <p><img top width="14%" src={Birthday}/>Born on {bdate}</p>
+                  <p><img top width="14%" src={Birthday}/>Born on {this.state.profiledata[0]==undefined?"":this.state.profiledata[0].birthDate}</p>
                 </div>
               </div>
-
               <div>
-                <a className = "profileFollowers" href='#'>566 Following</a>{'  '}
-                <a className = "profileFollowers" href='#'>63 Followers</a>
+               
+                <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].following.length} Following</a>{'  '}
+                <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].followers.length} Followers</a>
+                <span> </span> <button className="btn btn-primary" id="follo" onClick={()=>{this.follow(this.state.profiledata[0]._id)}} >Follow</button><span> </span>
+                <button className="btn btn-primary" id="unfollo" onClick={()=>{this.unfollow(this.state.profiledata[0]._id)}}>UnFollow</button><span> </span>
+                <button className="btn btn-primary">View List</button><span> </span>
+                <button className="btn btn-primary">Message</button><span> </span>
               </div>
           </div>
           <div>

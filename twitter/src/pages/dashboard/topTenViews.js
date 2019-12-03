@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Doughnut, Line, Pie, Polar, Scatter, Radar, HorizontalBar} from 'react-chartjs-2';
 import axios from 'axios';
 
 let response_data = [
@@ -28,17 +28,20 @@ class TopTenViews extends React.Component {
     .then(response => {
 
         console.log(response.data)
-        response_data = response.data;
+		response_data = response.data;
+		
+		
 
-        response_data.sort((a, b) => (a.views < b.views) ? 1 : -1)
+		response_data.sort((a, b) => ((a.views < b.views) )? 1 : -1);
+		response_data = (response_data.length > 10) ? response_data.slice(0,10) : response_data;
 
-        for(let tweet of response_data){
-			labels.push(tweet.tweet);
-			//tweet.views = 3
-		}
+        let bc = []
 		let data = []
 		for(let tweet of response_data){
 			data.push(tweet.views);
+			labels.push(tweet.tweet);
+			let c= "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+          	bc.push(c)
 		}
 	
 		this.setState({
@@ -48,25 +51,13 @@ class TopTenViews extends React.Component {
 					{
 						label : "Views",
 						data: data,
-						backgroundColor : 'rgb(29, 161, 242)'
+						backgroundColor : bc
 					}
 				]
 			}
 		})
 		console.log(data);
     
-        this.setState({
-            chartData : {
-                labels : labels,
-                datasets : [
-                    {
-                        label : "Likes",
-                        data: data,
-                        backgroundColor : 'rgb(29, 161, 242)'
-                    }
-                ]
-            }
-        });
     })
     .catch(error=>{
         console.log("Error: "+JSON.stringify(error));
@@ -82,7 +73,7 @@ class TopTenViews extends React.Component {
     return(
 		<div>
 			<div className="chart">
-				<Bar
+				<HorizontalBar
 					data={this.state.chartData}
 					options={
 					{
@@ -93,7 +84,7 @@ class TopTenViews extends React.Component {
 						},
 						legend:{
 							display:true,
-							position:'left'
+							position:'bottom'
 						}
 					}
 				}
