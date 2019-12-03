@@ -81,6 +81,13 @@ class Navigation extends React.Component {
     })
   }
 
+  logoutHandler = () =>{
+    localStorage.clear();
+    
+  }
+
+
+
   render(){
 
     return(
@@ -119,6 +126,9 @@ class Navigation extends React.Component {
           <ModalExample />
         </div>
 
+        <div className="Button-Padding">
+          <Button href="/" onClick = {this.logoutHandler.bind(this)}>Logout</Button>
+        </div>
       </div>
     )
   }
