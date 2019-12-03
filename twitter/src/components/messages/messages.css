@@ -22,7 +22,7 @@
   background-color: #15202B;
   bottom: 0;
   right: 0;
-  width: 45%;
+  width: 35%;
   float: left;
   border-style: solid;
   border-width: thin;
@@ -87,7 +87,7 @@
 .MessagesBar {
   background-color: #15202B;
   float: left;
-  width: 55%;
+  width: 65%;
   overflow: auto;
   padding-left: 250px;
   border-width: thin;

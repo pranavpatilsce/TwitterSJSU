@@ -18,7 +18,7 @@ import Kartik from '../../svg/Kartik.png';
 const otherTweets = [
   {
     chatId: "12345",
-    text: "CMPE273 tweet",
+    message: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
     name: "Mukesh Mogal",
@@ -26,7 +26,7 @@ const otherTweets = [
     image: Mukesh
   },{
     chatId: "123456",
-    text: "CMPE273 tweet",
+    message: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
     name: "Kalyani Deshmukh",
@@ -34,7 +34,7 @@ const otherTweets = [
     image: Kalyani
   },{
     chatId: "123457",
-    text: "CMPE273 tweet",
+    message: "CMPE273 tweet",
     time: "02:16:57",
     date: "Jul 23 2005",
     name: "Kartik Ulmarkar",
@@ -43,63 +43,37 @@ const otherTweets = [
   }
 ];
 
-let globalSomething = [];
+const globalSomething = [];
 
 class MessageCard extends React.Component{
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     messageId: this.props.dataFromParent,
-  //     name: this.props.dataFromParent,
-  //     userHandle: this.props.dataFromParent,
-  //     date: this.props.dataFromParent,
-  //   };
-  // }
-
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     messageId: this.props.dataFromParent,
-  //     name: this.props.dataFromParent,
-  //     userHandle: this.props.dataFromParent,
-  //     date: this.props.dataFromParent,
-  //   };
-  // }
-
   render() {
 
-      //
-      // let data = '5de03cd0b5ad6906843d79d2';
-      // let token=localStorage.getItem('bearer-token');
-      // axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      // axios.get('/profile/getAllTweets/5de03cd0b5ad6906843d79d2', {params:{}, mode:'no-cors'})
-      //   .then((response) => {
-      //       console.log('response ok',response)
-      //   })
-      //   .catch(()=>{console.log('error')})
       return(
         <div className = "MessagesCard">
-          {globalSomething.map(messageList => {
-            return(
-                <Button href="/chat" className="Messages-Card-indi">
-                <div key={messageList._id}>
+          {/* {globalSomething.map(message => {
+            return(*/}
+                <div className="Messages-Card-indi"> {/*href="/chat"*/}
+                <div>
                     <div className="Messages-Image">
                       <br/>
+                      {/*<img className="Messagesimage" src={_id.image}/>*/}
                     </div>
                     <div className="Messages-Card-Body">
                       <br/>
                       <div className="Messages-Card-Body-Content">
-                        <h5 className="Messages-Card-Body-Name">{messageList.name}</h5>
-                        <p className="Messages-Card-Body-Handle">{messageList.userHandle}</p>
-                        <p className="Messages-Card-Body-Date">{messageList.date}</p>
+                        <Button color="success"><p>Read Msgs</p></Button>
+                        <h5 className="Messages-Card-Body-Name"></h5>
+                        <p className="Messages-Card-Body-Handle">{/*{_id.userHandle}*/}</p>
+                        <p className="Messages-Card-Body-Date">{/*{messageList.date}*/}</p>
+                        <Button color="danger"><p>Message</p></Button>
                       </div>
                       <br/>
                     </div>
                 </div>
-                </Button>
-              )
-          })}
+                </div>
+            {/*  )
+           })} */}
         </div>
       )
     }
@@ -107,14 +81,13 @@ class MessageCard extends React.Component{
 
 class Messages extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-  //     this.state = {
-  //
-  //     };
-  // }
+  constructor(props) {
+    super(props)
+      this.state = {
+        messagesList: globalSomething
+      };
 
-
+  }
 
   componentWillMount(){
     let data = {
@@ -125,25 +98,22 @@ class Messages extends React.Component {
       .then((response) => {
           console.log('response ok',response)
           console.log("All Chats:", response.data);
-          if(response.data=="error")
-          {
-              alert("Invalid credentials");
-          }
           localStorage.setItem('messagesList', response.data)
           //
           //console.log("messagesList", this.state.messagesList);
+          console.log('state set');
+          globalSomething = response.data;
+          this.setState({});
       })
       .then(response => {
-          console.log('state set');
-          // this.setState({
-          //   messagesList: response.data
-          // });
-          globalSomething = response.data;
+          this.setState({
+             messagesList: [response.data]
+          });
+
       })
       .catch(response => {
           alert("Invalid");
-        }
-      )
+      })
   }
 
   render(){
@@ -160,18 +130,15 @@ class Messages extends React.Component {
       </div>
       <div type="button" className="Messages-Messages">
         <div type="button" className="Messages-Messages-Card">
-          <MessageCard/>
+          <MessageCard/> {/*messagesList={this.state.messagesList}*/}
         </div>
       </div>
-      {/*
-        <div className="Messages-RightSide">
-          {/*<div className="Messages-RightSide-PreLoad">
-
+      <div className="Messages-RightSide">
+          <div className="Messages-RightSide-PreLoad">
+            {/*<MessageBox messagesList={this.state.messagesList}/>*/}
           </div>
-          <MessageBox messagesList={this.state.messagesList}/>
-          {/*<MessageBox messages={this.state.messages}/>
       </div>
-      */}
+
     </div>
   )
   }
