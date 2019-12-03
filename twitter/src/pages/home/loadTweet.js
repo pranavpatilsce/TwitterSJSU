@@ -142,8 +142,13 @@ class LoadTweet extends React.Component{
     );
 }
 
-    likeTweet = (tweetid)=>{
-      let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
+    likeTweet = (twt)=>{
+      if(twt.likedBy.includes(localStorage.getItem('userHandle')))
+      {
+        alert("Tweet Already Liked!!")
+        return
+      }
+      let data = {tweetId:twt.tweetId,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
       console.log('Tweet like data is:',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
       axios.post('/users/tweet/like',data)
@@ -216,7 +221,7 @@ class LoadTweet extends React.Component{
                     <div className="Tweet-Body-Panel">
                     <button className="Tweet-Body-Panel-Comment" onClick = {this.showAddReply.bind(this,twt.tweetId)}><span style={{color:"white"}}>{twt.replies.length}</span><img src={comment}/></button>
                       <button className="Tweet-Body-Panel-ReTweet" onClick={()=>this.retweetTweet(twt)}><img src={retweet}/></button>
-                      <button className="Tweet-Body-Panel-Like" onClick={()=>this.likeTweet(twt.tweetId)}><span color="white" id="likec">{twt.likes}</span><img src={like}/></button>
+                      <button className="Tweet-Body-Panel-Like" onClick={()=>this.likeTweet(twt)}><span color="white" id="likec">{twt.likes}</span><img src={like}/></button>
                       <button className="Tweet-Body-Panel-Bookmark" onClick={()=>this.bookmarkTweet(twt.tweetId)}><img src={bookmark}/></button>
                       {/* <button className="btn btn-primary" onClick={()=>this.loadTweet(twt.tweetId)}>View Tweet</button> */}
                       <br/>
