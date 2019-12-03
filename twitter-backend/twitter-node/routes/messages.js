@@ -7,11 +7,31 @@ router.post('/createChat',  function (req, res, next) {
     let chatData = {
         senderId : req.body.senderId,
         receiverId : req.body.receiverId,
+        senderHandle : req.body.senderHandle,
+        receiverHandle : req.body.receiverHandle,
         message : req.body.message
     }
     kafka.make_request('create_chat',chatData, function(error,kafkaResult){
         if (error) {
             console.log("error in /createChat results ");
+            res.status(201).send(error)
+        }
+        else {
+            res.writeHead(200);
+            res.end(JSON.stringify(kafkaResult));
+        }
+    });
+});
+
+//Get all chats
+router.post('/getAllChats', function (req, res, next) {
+    
+    let chats = req.body.chats;
+    console.log("Inside /getAllChats. : ");
+
+    kafka.make_request('get_all_chats',chats, function(error,kafkaResult){
+        if (error) {
+            console.log("error in /getAllChats results ");
             res.status(201).send(error)
         }
         else {
