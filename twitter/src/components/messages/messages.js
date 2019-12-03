@@ -6,8 +6,8 @@ import './messages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
-import MessageBox from './chatBox.js';
-import MessageCard from './chatList.js';
+//import MessageBox from './chatBox.js';
+//import MessageCard from './chatList.js';
 import './chatList.css';
 
 import Pranav from '../../svg/Pranav.jpeg';
@@ -43,17 +43,80 @@ const otherTweets = [
   }
 ];
 
+let globalSomething = [];
+
+class MessageCard extends React.Component{
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messageId: this.props.dataFromParent,
+  //     name: this.props.dataFromParent,
+  //     userHandle: this.props.dataFromParent,
+  //     date: this.props.dataFromParent,
+  //   };
+  // }
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messageId: this.props.dataFromParent,
+  //     name: this.props.dataFromParent,
+  //     userHandle: this.props.dataFromParent,
+  //     date: this.props.dataFromParent,
+  //   };
+  // }
+
+  render() {
+
+      //
+      // let data = '5de03cd0b5ad6906843d79d2';
+      // let token=localStorage.getItem('bearer-token');
+      // axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+      // axios.get('/profile/getAllTweets/5de03cd0b5ad6906843d79d2', {params:{}, mode:'no-cors'})
+      //   .then((response) => {
+      //       console.log('response ok',response)
+      //   })
+      //   .catch(()=>{console.log('error')})
+      return(
+        <div className = "MessagesCard">
+          {globalSomething.map(messageList => {
+            return(
+                <Button href="/chat" className="Messages-Card-indi">
+                <div key={messageList._id}>
+                    <div className="Messages-Image">
+                      <br/>
+                    </div>
+                    <div className="Messages-Card-Body">
+                      <br/>
+                      <div className="Messages-Card-Body-Content">
+                        <h5 className="Messages-Card-Body-Name">{messageList.name}</h5>
+                        <p className="Messages-Card-Body-Handle">{messageList.userHandle}</p>
+                        <p className="Messages-Card-Body-Date">{messageList.date}</p>
+                      </div>
+                      <br/>
+                    </div>
+                </div>
+                </Button>
+              )
+          })}
+        </div>
+      )
+    }
+}
+
 class Messages extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      messagesList: otherTweets,
-    };
-  }
+  // constructor(props) {
+  //   super(props)
+  //     this.state = {
+  //
+  //     };
+  // }
 
-  componentDidMount(){
 
+
+  componentWillMount(){
     let data = {
       //chats: localStorage.getItem('chats')
       chats: "5de48e956528003d3887b7b3,5de491e4aff08e0c8cdab48e"
@@ -66,14 +129,21 @@ class Messages extends React.Component {
           {
               alert("Invalid credentials");
           }
-          this.setState({messagesList: response.data});
+          localStorage.setItem('messagesList', response.data)
+          //
+          //console.log("messagesList", this.state.messagesList);
       })
-      .catch (response => {
+      .then(response => {
+          console.log('state set');
+          // this.setState({
+          //   messagesList: response.data
+          // });
+          globalSomething = response.data;
+      })
+      .catch(response => {
           alert("Invalid");
-          this.setState({});
         }
       )
-
   }
 
   render(){
@@ -90,16 +160,18 @@ class Messages extends React.Component {
       </div>
       <div type="button" className="Messages-Messages">
         <div type="button" className="Messages-Messages-Card">
-          <MessageCard messagesList={this.state.messagesList}/>
+          <MessageCard/>
         </div>
       </div>
-      <div className="Messages-RightSide">
+      {/*
+        <div className="Messages-RightSide">
           {/*<div className="Messages-RightSide-PreLoad">
 
-          </div>*/}
+          </div>
           <MessageBox messagesList={this.state.messagesList}/>
-          {/*<MessageBox messages={this.state.messages}/>*/}
+          {/*<MessageBox messages={this.state.messages}/>
       </div>
+      */}
     </div>
   )
   }

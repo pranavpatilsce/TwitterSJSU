@@ -26,6 +26,16 @@ class MessageCard extends React.Component{
   //   };
   // }
 
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messageId: this.props.dataFromParent,
+  //     name: this.props.dataFromParent,
+  //     userHandle: this.props.dataFromParent,
+  //     date: this.props.dataFromParent,
+  //   };
+  // }
+
   render() {
 
       //
@@ -41,8 +51,8 @@ class MessageCard extends React.Component{
         <div className = "MessagesCard">
           {this.props.messagesList.map(messageList => {
             return(
+                <Button href="/chat" className="Messages-Card-indi">
                 <div key={messageList.messageId}>
-                  <Button className="Messages-Card-indi">
                     <div className="Messages-Image">
                       <br/>
                       <img className="Messagesimage" src={messageList.image}/>
@@ -56,8 +66,8 @@ class MessageCard extends React.Component{
                       </div>
                       <br/>
                     </div>
-                  </Button>
                 </div>
+                </Button>
               )
           })}
         </div>
