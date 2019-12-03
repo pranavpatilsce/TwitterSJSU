@@ -91,18 +91,24 @@ class Messages extends React.Component {
 
   componentWillMount(){
     let data = {
-      //chats: localStorage.getItem('chats')
-      chats: "5de48e956528003d3887b7b3,5de491e4aff08e0c8cdab48e"
+      chats: localStorage.getItem('chats')
+      // chats: "5de48e956528003d3887b7b3,5de491e4aff08e0c8cdab48e"
     }
+    axios.defaults.withCredentials=true
     axios.post('/messages/getAllChats', data)
       .then((response) => {
           console.log('response ok',response)
           console.log("All Chats:", response.data);
-          localStorage.setItem('messagesList', response.data)
-          //
-          //console.log("messagesList", this.state.messagesList);
-          console.log('state set');
-          globalSomething = response.data;
+
+          if(response.data=="error")
+          {
+              alert("Invalid credentials");
+          }
+
+          this.setState({messagesList: response.data});
+      })
+      .catch (response => {
+          alert("Invalid");
           this.setState({});
       })
       .then(response => {

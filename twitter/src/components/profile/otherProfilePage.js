@@ -18,8 +18,9 @@ import Location from '../../svg/location.png';
 import Calendar from '../../svg/calendar.png';
 import Birthday from '../../svg/birthday.jpeg';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import classnames from 'classnames';
+import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 let userTweets=null;
@@ -177,8 +178,9 @@ componentWillMount=()=>{
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
   axios.post('/profile/getProfileKafka', data)
     .then((response) => {
-      console.log('response is getprofile !!!',response.data)
+      console.log('response is getprofile !!!',response.data[0]['_id'])
       bio=response.data.bio
+      localStorage.setItem('otherUserId',response.data[0]['_id'])
       ownTweets=response.data[0].tweets
       bdate=response.data.bdate
         console.log('response ok',response.data[0].tweets)
@@ -266,7 +268,7 @@ componentWillMount=()=>{
                 <span> </span> <button className="btn btn-primary" id="follo" onClick={()=>{this.follow(this.state.profiledata[0]._id)}} >Follow</button><span> </span>
                 <button className="btn btn-primary" id="unfollo" onClick={()=>{this.unfollow(this.state.profiledata[0]._id)}}>UnFollow</button><span> </span>
                 <button className="btn btn-primary">View List</button><span> </span>
-                <button className="btn btn-primary">Message</button><span> </span>
+                <CreateChatModal/>
               </div>
           </div>
           <div>
@@ -278,7 +280,60 @@ componentWillMount=()=>{
   }
 
 }
+const CreateChatModal = (props) => {
+  const {
+    buttonLabel,
+    className
+  } = props;
 
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+const sendMessage=()=>{
+  let data={
+    "senderId" : localStorage.getItem('id'),
+    "receiverId" : localStorage.getItem('otherUserId'),
+    "message": document.getElementById('sendChatMessage').value,
+    "senderHandle" :localStorage.getItem('userHandle'),
+    "receiverHandle" :localStorage.getItem('otherUserHandle')
+  }
+  axios.defaults.withCredentials=true
+  axios.post('/messages/createChat',data)
+  .then((response)=>{
+    console.log('create cht resp',response.data)
+    if(localStorage.getItem('chats')==null)
+      localStorage.setItem('chats',response.data._id)
+    else
+      localStorage.setItem('chats',localStorage.getItem('chats')+","+response.data._id)
+    window.location.reload()
+  })
+  .catch((err)=>{
+    console.log('err create chat',err)
+  })
+}
+  return (
+    <span>
+      <Button color="primary" onClick={toggle}>Message</Button>
+      <Modal isOpen={modal} toggle={toggle} className={className}>
+        {/* <ModalHeader toggle={toggle}>Message</ModalHeader> */}
+        <ModalBody>
+        <Form>
+      <FormGroup row>
+        <Label for="exampleEmail" sm={2}>Message</Label>
+        <Col sm={10}>
+          <Input type="email" name="email" id="sendChatMessage" placeholder="send a message"  />
+        </Col>
+      </FormGroup>
+      </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={sendMessage}>Send</Button>
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+    </span>
+  );
+}
 class ProfileTabs extends React.Component {
 
   render(){
