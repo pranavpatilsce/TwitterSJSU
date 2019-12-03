@@ -43,6 +43,7 @@ function handle_request(msg, callback) {
     //                 }else{
     //                     console.log("INSIDE Load  tweetsssssssssssssssssssss------------------------------->",tweets)
     //                     callback(null, tweets);  
+    callback(null,true);
     //                 }
     //             });
     //         }
