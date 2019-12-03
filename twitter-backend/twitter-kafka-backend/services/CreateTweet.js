@@ -11,12 +11,15 @@ let re = /(?:^|\W)#(\w+)(?!\w)/g, match, matches = [];
 while (match = re.exec(sentence)) {
   matches.push('#'+match[1]);
 }
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
 console.log('Matches is',matches);
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
         tweetId: new mongoose.Types.ObjectId(),
         tweet: msg.tweet,
-        time: msg.time,
-        date: msg.date,
+        time: time,
+        date: date,
         retweets: 0,
         replies:[],
         likes:0,

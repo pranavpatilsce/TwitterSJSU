@@ -25,6 +25,7 @@ var GetBookmarkedTweets = require('./services/GetBookmarkedTweets.js');
 var GetTweets = require('./services/GetTweets.js');         
 var GetRetweets = require('./services/GetRetweets.js');     
 var GetLikedTweets = require('./services/GetLikedTweets.js');    
+var Unfollow= require('./services/Unfollow');
 
 
 //Tweet
@@ -35,6 +36,7 @@ var replyTweet = require('./services/ReplyTweet')
 var retweetTweet = require('./services/Retweet')
 var addFollowers = require('./services/AddFollowers')
 var LoadTweet = require('./services/LoadTweet.js');
+var DeleteTweet= require('./services/DeleteTweet')
 
 //List
 var CreateList= require('./services/CreateList');
@@ -44,7 +46,8 @@ var GetListTweets= require('./services/GetListTweets');
 //Memberships
 var GetMemberships= require('./services/GetMemberships');
 
-var SetSubscriber= require('./services/SetSubscriptions')
+
+var SetSubscriptions= require('./services/SetSubscriptions')
 var GetSubscriptions= require('./services/GetSubscriptions')
 
 
@@ -108,6 +111,8 @@ handleTopicRequest("createList",CreateList)
 handleTopicRequest("getList",GetList)
 handleTopicRequest("getListTweets",GetListTweets)
 handleTopicRequest("getMemberships",GetMemberships)
-handleTopicRequest("setSubscriber",SetSubscriber)
+handleTopicRequest("setSubscriptions",SetSubscriptions)
 handleTopicRequest("getSubscriptions",GetSubscriptions)
 handleTopicRequest("get_all_chats",GetAllChats)
+handleTopicRequest("unfollow",Unfollow)
+handleTopicRequest("deleteTweet",DeleteTweet)
