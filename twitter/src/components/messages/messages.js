@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
+
+
 import logo from '../../svg/logo.svg';
 import axios from 'axios';
 import './messages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
-//import MessageBox from './chatBox.js';
+import MessageBox from './chatBox.js';
 //import MessageCard from './chatList.js';
 import './chatList.css';
 
@@ -14,7 +16,6 @@ import Pranav from '../../svg/Pranav.jpeg';
 import Kalyani from '../../svg/Kalyani.jpeg';
 import Mukesh from '../../svg/Mukesh.jpeg';
 import Kartik from '../../svg/Kartik.png';
-
 
 const SendMessageModal = (props) => {
   const {
@@ -98,6 +99,7 @@ const sendMessage=()=>{
       </Form>
         </ModalBody>
         <ModalFooter>
+          <ReceiveModal/>
           <Button color="primary" onClick={sendMessage}>Send</Button>
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
@@ -106,7 +108,69 @@ const sendMessage=()=>{
   );
 }
 
+
+const ReceiveModal = (props) => {
+  const {
+    buttonLabel,
+    className
+  } = props;
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  return (
+    <div>
+      <Button color="danger" onClick={toggle}>View Chat</Button>
+      <Modal isOpen={modal} toggle={toggle} className={className}>
+        {/*<ModalHeader toggle={toggle}>Modal title</ModalHeader> */}
+        <ModalBody>
+
+        </ModalBody>
+        <ModalFooter>
+          <SendMessageModal/>
+          <Button color="primary" onClick={toggle}></Button>{' '}
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
+}
+
+
 class MessageCard extends React.Component{
+
+  constructor(props){
+    super(props)
+    //this.getChat = this.getChat.bind(this);
+    this.state = {
+      gettingchat: [],
+    }
+  }
+
+  getChat(chatId){
+    console.log('here');
+    axios.defaults.withCredentials=true
+    axios.get(`/messages/getChat/${chatId}`)
+      .then((response) => {
+          //console.log('response ok',response)
+          console.log("All Chats:", response.data);
+
+          if(response.data=="error")
+          {
+              alert("Invalid credentials");
+          }
+
+          this.setState({gettingchat: response.data}, ()=>{
+            console.log(this.state.gettingchat);
+          });
+
+      })
+      .catch (response => {
+          alert("Invalid");
+          this.setState({});
+      })
+  }
 
   render() {
       console.log(this.props.chatList);
@@ -130,7 +194,7 @@ class MessageCard extends React.Component{
                           chat.userHandles[0] == localStorage.getItem('userHandle')? chat.userHandles[1]: chat.userHandles[0]
                         }</p>
                         <p className="Messages-Card-Body-Date">{/*{messageList.date}*/}</p>
-                        <Button color="danger"><p>View Chat</p></Button>
+                        <ReceiveModal color="danger" chatLaunch={chat} onClick={()=>{this.getChat(chat._id)}}/>
                       </div>
                       <br/>
                     </div>
@@ -143,14 +207,39 @@ class MessageCard extends React.Component{
     }
 }
 
+class MessageList extends React.Component {
+
+    constructor(props){
+      super(props)
+
+    }
+
+    render() {
+        return (
+          <div>
+
+            {/*<ul className="message-list">
+                  {this.props.chat.map(message => {
+                      return (
+                        <li className="message">
+                          <div>{message.message}</div> {/* this was sender id
+                        </li>
+                      )
+                  })}
+              </ul>*/}
+          </div>
+       )
+    }
+}
+
 class Messages extends React.Component {
 
   constructor(props) {
     super(props)
       this.state = {
-        chatList: []
+        chatList: [],
+        chat: []
       };
-
   }
 
   componentWillMount(){
@@ -181,6 +270,17 @@ class Messages extends React.Component {
   }
 
   render(){
+    let a;
+    if(this.state.chat.length == 0 || this.state.chat == undefined){
+      a = <div></div>;
+    }else{
+      a = <div className="Messages-RightSide">
+            <div className="chat-div">
+              <MessageList chat={this.state.chat} />
+              {/*<SendMessageForm sendMessage={this.sendMessage} />*/}
+            </div>
+          </div>
+    }
   return (
     <div className="Messages">
 
@@ -194,12 +294,19 @@ class Messages extends React.Component {
       </div>
       <div type="button" className="Messages-Messages">
         <div type="button" className="Messages-Messages-Card">
-          <MessageCard chatList={this.state.chatList}/>
+          <MessageCard chatList={this.state.chatList} chat={this.state.chat}/>
         </div>
       </div>
-      <div className="Messages-RightSide">
+      {/*
+      <div type="button" className="Messages-RightSide">
           <div className="Messages-RightSide-PreLoad">
-            {/*<MessageBox messagesList={this.state.messagesList}/>*/}
+            <MessageBox/>
+          </div>
+      </div>*/}
+      <div className="Messages-RightSide">
+          <div className="chat-div">
+            <MessageList  />
+            {/*<SendMessageForm sendMessage={this.sendMessage} />*/}
           </div>
       </div>
 

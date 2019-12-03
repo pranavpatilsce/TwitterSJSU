@@ -22,14 +22,14 @@ const receivedId = "689d9ddd"
 
 class MessageBox extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      messagesList: this.props.messagesList,
-      //messages: []
-    };
-    //this.sendMessage = this.sendMessage.bind(this)
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messagesList: this.props.messagesList,
+  //     //messages: []
+  //   };
+  //   //this.sendMessage = this.sendMessage.bind(this)
+  // }
 
   // sendMessage(text) {
   //     this.state.sendMessage({
@@ -43,8 +43,8 @@ class MessageBox extends React.Component {
           <div className="Messages-RightSide">
             <div className="chat-div">
               <Title />
-              <MessageList messagesList={this.state.messagesList} />
-              <SendMessageForm sendMessage={this.sendMessage} />
+              <MessageList messagesList={'Hi'} />
+              {/*<SendMessageForm sendMessage={this.sendMessage} />*/}
             </div>
           </div>
         );
@@ -55,14 +55,13 @@ class MessageList extends React.Component {
     render() {
         return (
           <ul className="message-list">
-                {this.props.messagesList.map((message, index) => {
+                {/*{this.props.messagesList.map((message, index) => {*/}
                     return (
-                      <li  key={message.chatId} className="message">
-                        <div>{message.name}</div> {/* this was sender id*/}
-                        <div>{message.text}</div>
+                      <li className="message">
+                        <div>{this.props.messagesList}</div> {/* this was sender id*/}
                       </li>
                     )
-                })}
+            {/*    })} */}
             </ul>
        )
     }
