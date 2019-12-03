@@ -12,7 +12,7 @@ while (match = re.exec(sentence)) {
   matches.push('#'+match[1]);
 }
 var today = new Date();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var time = today.getHours() + ":" + today.getMinutes() 
 var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
 console.log('Matches is',matches);
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
