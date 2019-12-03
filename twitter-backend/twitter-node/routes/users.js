@@ -118,5 +118,20 @@ router.post('/unfollow',  function (req, res, next) {
     });
 });
 
+//Delete
+//Delete Tweet
+router.post('/deleteTweet',  function (req, res, next) {
+    console.log('Inside deleteTweet');
+     kafka.make_request('deleteTweet',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send({response:true});
+        };
+    });
+});
+
 
 module.exports = router;

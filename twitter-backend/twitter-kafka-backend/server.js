@@ -35,6 +35,7 @@ var replyTweet = require('./services/ReplyTweet')
 var retweetTweet = require('./services/Retweet')
 var addFollowers = require('./services/AddFollowers')
 var LoadTweet = require('./services/LoadTweet.js');
+var DeleteTweet= require('./services/DeleteTweet')
 
 //List
 var CreateList= require('./services/CreateList');
@@ -111,4 +112,5 @@ handleTopicRequest("getMemberships",GetMemberships)
 handleTopicRequest("setSubscriptions",SetSubscriptions)
 handleTopicRequest("getSubscriptions",GetSubscriptions)
 handleTopicRequest("unfollow",Unfollow)
+handleTopicRequest("deleteTweet",DeleteTweet)
 
