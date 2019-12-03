@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
 
-console.log("Inside retweet tweet msg----", msg)
+console.log("Inside retweet tweet msg--------------------------------------------------------------------------------------------", msg)
 let sentence = msg.tweet;
 let re = /(?:^|\W)#(\w+)(?!\w)/g, match, matches = [];
 while (match = re.exec(sentence)) {
