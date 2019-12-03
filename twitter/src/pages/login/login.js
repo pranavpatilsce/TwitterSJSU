@@ -25,7 +25,7 @@ class LogIn extends React.Component {
     let data = {email:this.state.email,password:this.state.password};
     axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
     console.log('her ein the signin',data);
-    axios.post('http://localhost:3001/profile/signInProfile',data)
+    axios.post('/profile/signInProfile',data)
       .then((response) => {
           console.log('response ok',response.data)
           console.log("Status Code : ", response);
@@ -33,7 +33,7 @@ class LogIn extends React.Component {
           {
             alert("Invalid credentials");
           }
-          else if (response.data!='credentials not Match' && response.data!="error") 
+          else if (response.data!='credentials not Match' && response.data!="error")
           {
             // alert("Login Success!");
             //set local storage
@@ -42,6 +42,7 @@ class LogIn extends React.Component {
             localStorage.setItem('email',response.data.email)
             localStorage.setItem('id',response.data._id)
             localStorage.setItem('userHandle',response.data.userHandle)
+            localStorage.setItem('chats',response.data.chats)
           }
           else if(response.data=="error")
           {
@@ -55,13 +56,12 @@ class LogIn extends React.Component {
         }
       )
   }
-   
   render(){
     if(localStorage.getItem('email'))
       redirectVar=<Redirect to='/home'/>
     else
       redirectVar=<Redirect to='/'/>
-  return (    
+  return (
     <div className="Login">
       {redirectVar}
       <img className="Login-Navigation" src={logo}/>

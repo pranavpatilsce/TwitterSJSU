@@ -20,3 +20,12 @@ replyTweet
 retweetTweet
 addFollowers
 getProfileKafka
+get_all_chats
+getSubscriptions
+setSubscriber
+getMemberships
+getListTweets
+getList
+createList
+loadTweet
+get_all_tweets
