@@ -28,7 +28,7 @@ function handle_request(msg, callback) {
         bio: msg.bio,
         location: msg.location,
         userHandle: msg.userHandle,
-        profileImage: msg.profileImage,
+        image: 'default.png',
         coverImage: msg.coverImage,
         tweets: msg.tweets,
         followers: msg.followers,
