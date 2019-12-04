@@ -87,13 +87,13 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Col >
                 <FormGroup>
                   <Label>Name</Label>
-                  <Input type="text" placeholder="Enter Twitter Account Name" name="name" onChange={this.handleChange}/>
+                  <Input type="text" required placeholder="Enter account Name" name="name" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
               <Col >
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
+                  <Input type="email" required placeholder="Enter email" name="email" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -101,13 +101,13 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Col >
                 <FormGroup>
                 <Label>Birth Date</Label>
-                <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
+                <Input type="text" required placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
               <Col >
                 <FormGroup>
                 <Label>Address</Label>
-                <Input type="textarea " placeholder="Enter Address" name="location" onChange={this.handleChange}/>
+                <Input type="textarea " required placeholder="Enter location" name="location" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -115,7 +115,7 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Col >
                 <FormGroup >
                   <Label>User Handle</Label>
-                  <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
+                  <Input type="text" required placeholder="Add your Twitter @handle" name="userHandle" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -132,7 +132,8 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Input type="checkbox" name="checkbox" onChange={this.handleChange}/>
               <Label>I understand terms and conditions.</Label>
             </FormGroup>*/}
-          <Button type="submit">Sign Up!</Button>
+          <Button type="submit" class>Sign Up!</Button>
+          <Button href="/">Go to login</Button>
         </Form>
       </div>
     )
