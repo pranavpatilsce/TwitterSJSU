@@ -7,8 +7,9 @@ import Navigation from '../../nav/globalNav.js';
 import RightSide from '../search/search.js';
 import ShowUserLists from './showUserLists';
 import '../../pages/home/tweet.css';
+import {Redirect} from 'react-router'
 
-
+let redirectVar=null
 class ProfileTopBar extends React.Component {
 
   render(){
@@ -23,9 +24,13 @@ class ProfileTopBar extends React.Component {
 }
 
 function showUserListPage() {
+  if(!localStorage.getItem('email')){
+    redirectVar = <Redirect to= "/"/>
+}
   return (
-    <div className="Home">
 
+    <div className="Home">
+{redirectVar}
       <div className="Home-Navigation">
         <Navigation />
       </div>

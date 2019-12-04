@@ -25,7 +25,7 @@ import {
   CardTitle, CardSubtitle, NavLink, Nav, NavItem, TabContent, TabPane
 } from 'reactstrap';
 
-let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null;
+let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null, redirectVar=null;
   
 let redirectToViewFlag=false, redirectToView=null, allListTweets=null, displayTweets=[];
 
@@ -75,8 +75,12 @@ class ViewListTweets extends React.Component{
       this.setState({})
     }
     render() {
+      if(!localStorage.getItem('email')){
+        redirectVar = <Redirect to= "/"/>
+    }
       return(
         <div className = "tweetCard">
+          {redirectVar}
           {displayTweets}
         </div>
       );

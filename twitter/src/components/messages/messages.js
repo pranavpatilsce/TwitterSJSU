@@ -12,10 +12,6 @@ import MessageBox from './chatBox.js';
 //import MessageCard from './chatList.js';
 import './chatList.css';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
 
 const SendMessageModal = (props) => {
   const {
@@ -46,7 +42,7 @@ const sendMessage=()=>{
 
         if(response.data!="error")
         {
-            alert("Message sent");
+            window.location.reload()
         }
 
         if(response.data=="error")
@@ -99,7 +95,7 @@ const sendMessage=()=>{
       </Form>
         </ModalBody>
         <ModalFooter>
-          <ReceiveModal/>
+          {/* <ReceiveModal/> */}
           <Button color="primary" onClick={sendMessage}>Send</Button>
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
@@ -110,24 +106,40 @@ const sendMessage=()=>{
 
 
 const ReceiveModal = (props) => {
-  const {
-    buttonLabel,
-    className
-  } = props;
+
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
-  console.log(props.gettingchat);
-
+  console.log('props-->',props);
+  let chatArr=props['gettingchat']
+  let handles=props['handles']
+  let divToggle='';
+  let dispChat
+  if(chatArr!=undefined){
+   dispChat=chatArr.map((item)=>{
+    console.log('item',item['senderId'])
+    console.log('loc',localStorage.getItem('id'))
+    divToggle=(item['senderId']==localStorage.getItem('id')?divToggle='right':divToggle='left')
+    console.log('divToggle',divToggle)
+    return(
+      <div>
+        {/* <div className={divToggle}><i>{item['time']}</i> |</div> */}
+        <div className={divToggle}>{item['message']}</div>
+        <hr/>
+        <br/>
+      </div>
+    )
+  })
+}
   return (
     <div>
       <Button color="danger" onClick={toggle}>View Chat</Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+      <Modal isOpen={modal} toggle={toggle} >
+        {/* <ModalHeader toggle={toggle}>{handles[0]} | {handles[1]}</ModalHeader> */}
         <ModalBody>
-
+          {dispChat}
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>Cancel</Button>
@@ -178,6 +190,7 @@ class MessageCard extends React.Component{
       return(
         <div className = "MessagesCard">
           {this.props.chatList.map(chat => {
+            console.log('=>',chat)
             return(
                 <div className="Messages-Card-indi"> {/*href="/chat"*/}
                 <div>
@@ -194,7 +207,7 @@ class MessageCard extends React.Component{
                           chat.userHandles[0] == localStorage.getItem('userHandle')? chat.userHandles[1]: chat.userHandles[0]
                         }</p>
                         <p className="Messages-Card-Body-Date">{/*{messageList.date}*/}</p>
-                        <ReceiveModal color="danger" gettingchat={this.state.gettingchat} onClick={()=>{this.getChat(chat._id)}}/>
+                        <ReceiveModal color="danger" gettingchat={chat['messages']} handles={chat['userHandles']}/>
                       </div>
                       <br/>
                     </div>

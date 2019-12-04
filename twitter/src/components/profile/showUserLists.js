@@ -8,10 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
 
 import like from '../../svg/like.jpeg';
 import retweet from '../../svg/retweet.jpeg';
@@ -26,7 +22,7 @@ import {
 } from 'reactstrap';
 
 let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null, subscribedLists=null, memberLists=null;
-let redirectToViewFlag=false, redirectToView=null, listTweets=null;
+let redirectToViewFlag=false, redirectToView=null, listTweets=null, redirectVar=null;
 class ShowUserLists extends React.Component{
 
     subscribeList=(members, listId)=>{
@@ -86,8 +82,12 @@ class ShowUserLists extends React.Component{
     }
 
     render() {
+      if(!localStorage.getItem('email')){
+        redirectVar = <Redirect to= "/"/>
+    }
       return(
         <div className = "tweetCard">
+          {redirectVar}
             {redirectToView}
             {ownedLists}
         </div>
