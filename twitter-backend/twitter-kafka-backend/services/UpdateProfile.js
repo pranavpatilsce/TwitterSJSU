@@ -5,7 +5,7 @@ const pool = require('../db');
 
 function handle_request(msg, callback) {
     console.log("request Kafka msg ",msg)
-    profileModel.updateOne({ _id: msg._id },
+    profileModel.findOneAndUpdate({ _id: msg._id },
         {
             $set: {
                 name: msg.name,
@@ -25,30 +25,30 @@ function handle_request(msg, callback) {
                 console.log("Kafka Update Profile result ",results);
                 
                 
-                let pass = `UPDATE userprofile
-                SET
-                location = '${msg.location}',
-                email = '${msg.email}',
-                birthdate='${msg.birthDate}',
-                name = '${msg.name}',
-                bio = '${msg.bio}',
-                userhandle = '${msg.userHandle}',
-            WHERE mongo_id = '${msg._id}'`;
-    let output = "Not Updated";
-    pool.query(pass, function (error, result) {
-        if (error) {
-            console.log("error in results ");
-            throw error;
-        }
-        else {
-            //console.log('Body Content', req.body.password);
-            console.log("sql update done",result);
-            // output = pool.query(`Select * from buyer where buyerId='${req.body.buyerId}'`, (update,result) => {
-                // buyer = JSON.stringify(result[0]);
-                // res.cookie('buyer', buyer, { encode: String });
-                // res.status(200).send(result[0]);
-        }
-            });
+    //             let pass = `UPDATE userprofile
+    //             SET
+    //             location = '${msg.location}',
+    //             email = '${msg.email}',
+    //             birthdate='${msg.birthDate}',
+    //             name = '${msg.name}',
+    //             bio = '${msg.bio}',
+    //             userhandle = '${msg.userHandle}',
+    //         WHERE mongo_id = '${msg._id}'`;
+    // let output = "Not Updated";
+    // pool.query(pass, function (error, result) {
+    //     if (error) {
+    //         console.log("error in results ");
+    //         throw error;
+    //     }
+    //     else {
+    //         //console.log('Body Content', req.body.password);
+    //         console.log("sql update done",result);
+    //         // output = pool.query(`Select * from buyer where buyerId='${req.body.buyerId}'`, (update,result) => {
+    //             // buyer = JSON.stringify(result[0]);
+    //             // res.cookie('buyer', buyer, { encode: String });
+    //             // res.status(200).send(result[0]);
+    //     }
+    //         });
         
     // });
 

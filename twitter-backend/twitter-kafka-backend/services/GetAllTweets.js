@@ -5,7 +5,6 @@ const mongoose=require('mongoose')
 function handle_request(msg, callback) {
     console.log("**********************");
     console.log("Inside getAllTweets kafka backend, msg: ", msg);
-    
     Profile.findById({_id:msg}, function(err, profile){
         if(err){
             console.log("Error in Kafka Backend -> getAllTweets");
