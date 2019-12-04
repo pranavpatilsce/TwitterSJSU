@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import axios from 'axios';
 import logo from '../../svg/logo.svg';
 import './home.css';
+import './tweet.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navigation from '../../nav/globalNav.js';
@@ -93,7 +94,7 @@ class Tweet extends React.Component {
         else{
           otherTweets = []
         }
-        
+
         this.setState({})
       })
       .catch(() => { console.log('error') })
@@ -247,7 +248,7 @@ class Tweet extends React.Component {
       <div className="tweetCard-indi">
         <div className="Tweet-Image">
           <br />
-          <img className="image" src={imageServer+'tweetImages/' + twt.image} />
+          {/*<img className="TImage" src={imageServer+'tweetImages/' + twt.image} />*/}
         </div>
         <div className="Tweet-Body">
           <br />
@@ -260,6 +261,7 @@ class Tweet extends React.Component {
           </div>
           <div>
             <p className="Tweet-Body-Text">{twt.tweet}</p>
+            <div className="Tweet-Body-Image"><img src={imageServer+'tweetImages/' + twt.image}/></div>
           </div>
           <div className="Tweet-Body-Panel">
             <button className="Tweet-Body-Panel-Comment" onClick={this.showAddReply.bind(this, twt.tweetId)}><img src={comment} /></button>
@@ -280,7 +282,7 @@ class Tweet extends React.Component {
         </div>
       </div>)
     }
-   
+
     let redirectVar=null
     if(!localStorage.getItem('email')){
       redirectVar = <Redirect to= "/"/>
@@ -292,7 +294,7 @@ class Tweet extends React.Component {
         {this.state.reDirect}
       {dispTweets}
       </div>
-      
+
     )
   }
 }

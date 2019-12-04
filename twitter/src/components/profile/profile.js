@@ -177,13 +177,13 @@ class ProfileEditForm extends React.Component{
     file =  e.target.files[0]
   }
 
-  
+
 
     handleSubmit = event => {
       event.preventDefault();
-     
+
       const formData = new FormData()
-  
+
       let data = {
         _id:localStorage.getItem('id'),
         name: this.state.name==''?localStorage.getItem('name'):this.state.name,
@@ -203,7 +203,7 @@ class ProfileEditForm extends React.Component{
       formData.append('image',this.state.image==''?localStorage.getItem('image'):'')
       formData.append('_id',localStorage.getItem('id'))
       formData.append('profileImage',file)
-      
+
 
       console.log('data',formData)
       //axios.post(`/profile/updateProfile/${this.state.id}`, user)
@@ -252,13 +252,13 @@ class ProfileEditForm extends React.Component{
               <Label>Bio</Label>
               <Input type="text" placeholder="Enter bio" name="bio" onChange={this.bioHandleChange.bind(this)}/>
             </FormGroup>
-            
+
             <FormGroup>
               <Label>Profile Image</Label>
               {/* <input id="file-input" type="file" onChange={onImageHandler}/> */}
               <Input type="file-input" type="file" onChange={this.bioHandleChange.bind(this)}/>
-            </FormGroup>    
-            
+            </FormGroup>
+
             <Button type="submit" color="success">Submit</Button>
           </Form>
       </div>
@@ -329,7 +329,7 @@ constructor(props)
             <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br/>
-              <img className="image" src={imageServer+'profileImages/'+twt.image}/>
+              <img className="ProfileOFImage" src={imageServer+'profileImages/'+twt.image}/>
             </div>
             <div className="Tweet-Body">
               <br/>

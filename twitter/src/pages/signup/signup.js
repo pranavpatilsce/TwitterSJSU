@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import NotificationAlert from 'react-notification-alert';
 import "react-notification-alert/dist/animate.css";
 
+import signupbird from "../../svg/signinbird.png";
+
 import birdimg from '../../svg/signinbird.png';
 
 import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -79,6 +81,7 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
       return(
         <div className = "SignUpDiv">
          <NotificationAlert ref="notify" />
+          <img src={birdimg} />
           <Form onSubmit={this.handleSubmit}>
             <Row form>
               <Col >

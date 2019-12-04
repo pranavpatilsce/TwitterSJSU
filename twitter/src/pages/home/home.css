@@ -104,3 +104,10 @@ body{
 #likec{
   color: white;
 }
+
+.TImage{
+  border-radius: 50%;
+  border-style: solid;
+  height: 69px;
+  width: 69px;
+}

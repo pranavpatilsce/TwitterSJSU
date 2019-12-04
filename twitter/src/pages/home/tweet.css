@@ -22,6 +22,13 @@
   border-style: solid; */
 }
 
+.image{
+  border-radius: 50%;
+  border-style: solid;
+  height: 200px;
+  width: 200px;
+}
+
 .imageUpload {
   margin-left: 12px;
   border-radius: 50%;
@@ -74,6 +81,13 @@
 
 .Tweet-Body-Text{
   color: white;
+}
+
+.Tweet-Body-Image{
+  border-radius: 50%;
+  border-style: solid;
+  height: 50px;
+  width: 50px;
 }
 
 .Tweet-Body-Panel{
