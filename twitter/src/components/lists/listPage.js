@@ -7,6 +7,7 @@ import Navigation from '../../nav/globalNav.js';
 import RightSide from '../search/search.js';
 import Lists from './lists';
 import '../../pages/home/tweet.css';
+import {Redirect} from 'react-router'
 
 import './lists.css';
 
@@ -24,11 +25,15 @@ class ProfileTopBar extends React.Component {
   }
 }
 */}
+let redirectVar = null;
 
 function ListPage() {
+  if(!localStorage.getItem('email')){
+    redirectVar = <Redirect to= "/"/>
+}
   return (
     <div className="Home">
-
+      {redirectVar}
       <div className="Home-Navigation">
         <Navigation />
       </div>

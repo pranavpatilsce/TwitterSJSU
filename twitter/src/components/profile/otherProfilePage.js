@@ -24,7 +24,7 @@ import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Redirect} from 'react-router';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-let userTweets=null, redirectToViewListFlag=false, redirectToViewList=null;
+let userTweets=null, redirectToViewListFlag=false, redirectToViewList=null, redirectVar=null;
 
 class NoMedia extends React.Component {
   render(){
@@ -359,9 +359,12 @@ class ProfileTabs extends React.Component {
 class otherProfilePage extends React.Component {
 
   render(){
+    if(!localStorage.getItem('email')){
+      redirectVar = <Redirect to= "/"/>
+  }
     return(
-
       <div className="Profile">
+        {redirectVar}
         <div className="Profile-Navigation">
           <Navigation />
         </div>

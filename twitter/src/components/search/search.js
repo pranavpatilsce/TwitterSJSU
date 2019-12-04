@@ -32,6 +32,9 @@ class RightSide extends React.Component {
    searchHandler=e.target.value
  }
  render(){
+  if(!localStorage.getItem('email')){
+    redirectVar = <Redirect to= "/"/>
+}
    if(redirectFlag)
    {
      if(searchTweet)

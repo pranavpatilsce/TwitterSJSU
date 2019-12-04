@@ -7,7 +7,7 @@ let response_data = [
 
 let labels = []
 
-class NumberOfTweets extends React.Component {
+class NumberOfViews extends React.Component {
 
   constructor(props){
 	super(props);
@@ -38,39 +38,43 @@ class NumberOfTweets extends React.Component {
         let today = new Date();
 
         for(let tweet of response_data){
-           // console.log(tweet);
-            let tweetDate = tweet.date.split('-');
-            
-            if(tweetDate[2] == today.getFullYear()){
-                lastYear++;
-                if(tweetDate[0] == (today.getMonth() + 1)){
-                    lastMonth++;
-                    if(tweetDate[1] == today.getDate()){
-                        lastDay++;
+
+            let viewDates = tweet.viewDate;
+            console.log(viewDates);
+            for(let date of viewDates){
+                let tweetDate = date.split('-');
+                
+                if(tweetDate[2] == today.getFullYear()){
+                    lastYear++;
+                    if(tweetDate[0] == (today.getMonth() + 1)){
+                        lastMonth++;
+                        if(tweetDate[1] == today.getDate()){
+                            lastDay++;
+                        }
                     }
                 }
             }
         }
-
+        console.log("Uppar");
         let data =[lastDay, lastMonth, lastYear];
         let labels = ["Last Day", "Last Month", "Last Year"];
         for(let i = 0; i <3; i++){
             bc.push("#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16)));
         }
-    
+        console.log("Neeche");
         this.setState({
             chartData : {
                 labels : labels,
                 datasets : [
                     {
-                        label : "Tweet Count",
+                        label : "View Count",
                         data: data,
                         backgroundColor : bc
                     }
                 ]
             }
         })
-       // console.log(data);
+        console.log(data);
     })
     .catch(error=>{
         console.log("Error: "+JSON.stringify(error));
@@ -83,13 +87,13 @@ class NumberOfTweets extends React.Component {
     return(
 		<div>
 			<div className="chart">
-				<Bar
+				<Polar
 					data={this.state.chartData}
 					options={
 					{
 						title:{
 							display:true,
-							text:`Tweets per Day / Month / Year`,
+							text:`Profile Views per Day / Month / Year`,
 							fontSize:25
 						},
 						legend:{
@@ -116,4 +120,4 @@ class NumberOfTweets extends React.Component {
   }
 }
 
-export default NumberOfTweets;
+export default NumberOfViews;

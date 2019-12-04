@@ -14,6 +14,8 @@ import {Redirect} from 'react-router';
 let tweet=null
 let reDirect = ""
 let file = null
+let redirectVar = null;
+
 const ModalExample = (props) => {
   const {
     buttonLabel,
@@ -104,13 +106,13 @@ class Navigation extends React.Component {
 
   render(){
 
-    let redirectVar = null;
-    if(!localStorage.getItem('userHandle')){
+    if(!localStorage.getItem('email')){
         redirectVar = <Redirect to= "/"/>
     }
 
     return(
       <div>
+        {redirectVar}
         {reDirect}
       <div className="App-header">
 

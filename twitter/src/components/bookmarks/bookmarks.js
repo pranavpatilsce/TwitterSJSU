@@ -10,13 +10,13 @@ import retweet from '../../svg/retweet.jpeg';
 import comment from '../../svg/comment.jpeg';
 //import option from '../../svg/option.jpeg';
 import bookmark from '../../svg/bookmark.jpeg';
-
+import {Redirect} from 'react-router'
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
-let otherTweets=[];
+let otherTweets=[], redirectVar=null;
 
 class Bookmark extends React.Component{
 
@@ -36,9 +36,12 @@ class Bookmark extends React.Component{
     }
 
     render() {
-     
+      if(!localStorage.getItem('email')){
+        redirectVar = <Redirect to= "/"/>
+    }
       return(
         <div className = "tweetCard">
+          {redirectVar}
             {otherTweets.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">

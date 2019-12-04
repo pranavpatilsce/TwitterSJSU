@@ -213,12 +213,13 @@ deleteTweet = (twt) => {
 
     render() {
       let redirectVar = null;
-      if(!localStorage.getItem('userHandle')){
+      if(!localStorage.getItem('email')){
           redirectVar = <Redirect to= "/"/>
       }
       return(
       
         <div className = "tweetCard">
+          {redirectVar}
            <NotificationAlert ref="notify" /> 
             {otherTweets.map((twt, index) =>
                 <div className="tweetCard-indi">

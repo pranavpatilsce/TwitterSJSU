@@ -20,7 +20,7 @@ import {
   CardTitle, CardSubtitle, NavLink, Nav, NavItem, TabContent, TabPane
 } from 'reactstrap';
 
-let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null, subscribedLists=null, memberLists=null;
+let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null, subscribedLists=null, memberLists=null, redirectVar=null;
 
 const Tabs = (props) => {
     const [activeTab, setActiveTab] = useState('1');
@@ -279,8 +279,12 @@ class List extends React.Component{
         console.log('broo', JSON.stringify(listTweets))
         redirectToViewFlag=false;
      }
+     if(!localStorage.getItem('email')){
+      redirectVar = <Redirect to= "/"/>
+  }
       return(
         <div className = "tweetCard">
+          {redirectVar}
             {redirectToView}
             <CreateListModal/>
             <Tabs/>

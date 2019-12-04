@@ -20,7 +20,7 @@ import Birthday from '../../svg/birthday.jpeg';
 import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
-
+import {Redirect} from 'react-router';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 let userTweets = null;
 let followers = null;
@@ -28,6 +28,7 @@ let following = null;
 let liked = null;
 let bookmarked = null;
 let retweeted = null;
+let redirectVar=null;
 
 class NoMedia extends React.Component {
     render() {
@@ -463,9 +464,13 @@ class ProfileTabs extends React.Component {
 class dashboardProfile extends React.Component {
 
     render() {
+        if(!localStorage.getItem('email')){
+            redirectVar = <Redirect to= "/"/>
+        }
         return (
 
             <div className="Profile">
+                {redirectVar}
                 <div className="Profile-Navigation">
                     <Navigation />
                 </div>
