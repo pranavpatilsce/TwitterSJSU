@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import NotificationAlert from 'react-notification-alert';
 import "react-notification-alert/dist/animate.css";
 
+import birdimg from '../../svg/signinbird.png';
+
 import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
 let options = {};
@@ -45,7 +47,7 @@ class SignUp extends React.Component{
       this.setState({
         [name]: value
       });
-  
+
       console.log('State status', this.state)
     }
 
@@ -75,17 +77,17 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
     render(){
 
       return(
-        <div>
-           <NotificationAlert ref="notify" />
+        <div className = "SignUpDiv">
+         <NotificationAlert ref="notify" />
           <Form onSubmit={this.handleSubmit}>
             <Row form>
-              <Col md={6}>
+              <Col >
                 <FormGroup>
                   <Label>Name</Label>
                   <Input type="text" placeholder="Enter Twitter Account Name" name="name" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
-              <Col md={6}>
+              <Col >
                 <FormGroup>
                   <Label>Email</Label>
                   <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
@@ -93,36 +95,42 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               </Col>
             </Row>
             <Row form>
-              <Col md={6}>
-            <FormGroup>
-              <Label>Birth Date</Label>
-              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
-            </FormGroup>
-            </Col>
-              <Col md={6}>
-              <FormGroup>
-              <Label>Address</Label>
-              <Input type="textarea " placeholder="Enter Address" name="location" onChange={this.handleChange}/>
-            </FormGroup>
+              <Col >
+                <FormGroup>
+                <Label>Birth Date</Label>
+                <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
+                </FormGroup>
               </Col>
-              </Row>
-            <FormGroup>
-              <Label>User Handle</Label>
-              <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
-            </FormGroup>
-            <Col md={6}>
-              <FormGroup>
-                <Label>Password</Label>
-                <Input type="password" placeholder="Password" name="password" onChange={this.handleChange}/>
-              </FormGroup>
-            </Col>
+              <Col >
+                <FormGroup>
+                <Label>Address</Label>
+                <Input type="textarea " placeholder="Enter Address" name="location" onChange={this.handleChange}/>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col >
+                <FormGroup >
+                  <Label>User Handle</Label>
+                  <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col >
+                <FormGroup>
+                  <Label>Password</Label>
+                  <Input type="password" placeholder="Password" name="password" onChange={this.handleChange}/>
+                </FormGroup>
+              </Col>
+            </Row>
             {/*
             <FormGroup check>
               <Input type="checkbox" name="checkbox" onChange={this.handleChange}/>
               <Label>I understand terms and conditions.</Label>
             </FormGroup>*/}
           <Button type="submit">Sign Up!</Button>
-          </Form>
+        </Form>
       </div>
     )
   }

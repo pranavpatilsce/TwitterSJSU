@@ -290,7 +290,7 @@ class Tweet extends React.Component {
         {redirectVar}
         <NotificationAlert ref="notify" />
         {this.state.reDirect}
-    {dispTweets}
+      {dispTweets}
       </div>
       
     )

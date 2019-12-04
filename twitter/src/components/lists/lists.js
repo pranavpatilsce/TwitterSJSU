@@ -9,6 +9,10 @@ import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
 import classnames from 'classnames';
+import './lists.css';
+
+import listcreate from '../../svg/listcreate.png';
+
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap';
 import {Redirect} from 'react-router'
 import {
@@ -20,11 +24,11 @@ let allListsArr=[], dispTweets,listName, listDesc, listMembers, ownedLists=null,
 
 const Tabs = (props) => {
     const [activeTab, setActiveTab] = useState('1');
-  
+
     const toggle = tab => {
       if(activeTab !== tab) setActiveTab(tab);
     }
-  
+
     return (
       <div>
         <Nav tabs className="ProfileTabsDiv">
@@ -32,6 +36,7 @@ const Tabs = (props) => {
             <NavLink
               className={classnames({ active: activeTab === '1' })}
               onClick={() => { toggle('1'); }}
+              className="ProfileLink"
             >
               Owned
             </NavLink>
@@ -40,6 +45,7 @@ const Tabs = (props) => {
             <NavLink
               className={classnames({ active: activeTab === '2' })}
               onClick={() => { toggle('2'); }}
+              className="ProfileLink"
             >
               Subscribed
             </NavLink>
@@ -48,12 +54,13 @@ const Tabs = (props) => {
             <NavLink
                 className={classnames({ active: activeTab === '3' })}
                 onClick={() => { toggle('3'); }}
+                className="ProfileLink"
               >
               Member
             </NavLink>
           </NavItem>
         </Nav>
-  
+
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
             <div className = "">
@@ -74,17 +81,17 @@ const Tabs = (props) => {
       </div>
     );
   }
-  
+
 const CreateListModal = (props) => {
     const {
         buttonLabel,
         className
       } = props;
-    
+
       const [modal, setModal] = useState(false);
-    
+
       const toggle = () => setModal(!modal);
-    
+
       const createList=()=>{
           let mem=listMembers.replace(/ /g,'').split(',')
           // alert(mem)
@@ -112,7 +119,7 @@ const CreateListModal = (props) => {
      }
       return (
         <div>
-          <Button color="secondary" onClick={toggle}>Create List</Button>
+          <Button className = "ListCreateButton" color="link" onClick={toggle}><img src={listcreate}/></Button>
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader className="Tweet-Modal-Header" toggle={toggle}>Create List</ModalHeader>
             <ModalBody className="Tweet-Modal-Body">
@@ -268,7 +275,7 @@ class List extends React.Component{
      if(redirectToViewFlag)
      {
         redirectToView=<Redirect to={{pathname:'/viewListTweetsPage',
-        state:{listTweets:listTweets}}}/> 
+        state:{listTweets:listTweets}}}/>
         console.log('broo', JSON.stringify(listTweets))
         redirectToViewFlag=false;
      }

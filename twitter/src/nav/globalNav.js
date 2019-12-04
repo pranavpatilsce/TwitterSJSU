@@ -33,7 +33,7 @@ const ModalExample = (props) => {
   }
 
   const onImageHandler = event => {
-   
+
     file =  event.target.files[0]
     console.log('Files is------------------> ',file)
   }
@@ -64,7 +64,7 @@ const ModalExample = (props) => {
   }
   return (
     <div>
-      <Button color="secondary" onClick={toggle}>Tweet</Button>
+      <Button className="TweetNavButton" onClick={toggle}>Tweet</Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader className="Tweet-Modal-Header" toggle={toggle}></ModalHeader>
         <ModalBody className="Tweet-Modal-Body">
@@ -121,28 +121,28 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button className="NavButton NavButton2" href="/home">Home</Button>
+          <Button className="NavButton NavButton3" href="/home">Home</Button>
         </div>
 
         <div className="Button-Padding">
 
-          <Button className="NavButton NavButton2" href="/bookmarks">Bookmarks</Button>
+          <Button className="NavButton NavButton3" href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button href="/messages">Messages</Button>
+          <Button className="NavButton NavButton3" href="/messages">Messages</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button href='/listPage'>Lists</Button>
+          <Button className="NavButton NavButton3" href='/listPage'>Lists</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button href="/profile">Profile</Button>
+          <Button className="NavButton NavButton3" href="/profile">Profile</Button>
         </div>
 
         <div className="Button-Padding">
-          <Button href="/dashboard">DashBoard</Button>
+          <Button className="NavButton NavButton3" href="/dashboard">DashBoard</Button>
         </div>
 
         <div className="Button-Padding">
@@ -150,7 +150,7 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button href="/" onClick = {this.logoutHandler.bind(this)}>Logout</Button>
+          <Button className="NavButton NavButton3" href="/" onClick = {this.logoutHandler.bind(this)}>Logout</Button>
         </div>
       </div>
       </div>
