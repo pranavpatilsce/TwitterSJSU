@@ -12,10 +12,7 @@ import MessageBox from './chatBox.js';
 //import MessageCard from './chatList.js';
 import './chatList.css';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
+
 
 const SendMessageModal = (props) => {
   const {

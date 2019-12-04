@@ -37,7 +37,7 @@ class SignUp extends React.Component{
         password: this.state.password
       };
 
-      axios.post(`/profile/addProfile`, { user })
+      axios.post('/profile/addProfile', { user })
         .then(res => {
           console.log(res);
           console.log(res.data);
