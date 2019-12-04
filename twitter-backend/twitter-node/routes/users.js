@@ -40,7 +40,7 @@ router.post('/tweet', upload.single('tweetimg'), function (req, res, next) {
     //     profileImg: url + '/public/tweetImages' + req.file.filename
     // });
 
-    let data = {tweet: req.body.tweet, id: req.body.id, name: req.body.name,userHandle: req.body.userHandle,image:req.file.filename};
+    let data = {tweet: req.body.tweet, id: req.body.id, name: req.body.name,userHandle: req.body.userHandle,image:req.file!=undefined?req.file.filename:""};
     console.log('Tweet going for creation!!',data)
      kafka.make_request('tweet',data, function(error,results){
         if (error) {
