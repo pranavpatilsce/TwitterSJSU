@@ -85,7 +85,15 @@ class Tweet extends React.Component {
       .then((response) => {
         // alert('success')
         console.log('response othertweets', response.data)
-        otherTweets = response.data;
+        if(response.data!=undefined)
+        {
+          otherTweets = response.data;
+        }
+
+        else{
+          otherTweets = []
+        }
+        
         this.setState({})
       })
       .catch(() => { console.log('error') })
@@ -231,6 +239,48 @@ class Tweet extends React.Component {
     //     document.getElementById("unfollo").disabled = true;
     //   }
     // }
+    let dispTweets=null
+    console.log('otwe',otherTweets)
+    if(otherTweets!=[])
+    {
+      dispTweets=otherTweets.map((twt, index) =>
+      <div className="tweetCard-indi">
+        <div className="Tweet-Image">
+          <br />
+          <img className="image" src={imageServer+'tweetImages/' + twt.image} />
+        </div>
+        <div className="Tweet-Body">
+          <br />
+          {twt.type == 'Retweet' ? <div><span class="label label-info" style={{ color: "white" }}><b><i>Retweeted</i></b></span></div> : <div></div>}
+          <div className="Tweet-Body-Content">
+            <h5 className="Tweet-Body-Name">{twt.name}</h5>
+            <p className="Tweet-Body-Handle">{twt.userHandle}</p>
+            <p className="Tweet-Body-Date">{twt.date}</p>
+            <p className="Tweet-Body-Date">{twt.time}</p>
+          </div>
+          <div>
+            <p className="Tweet-Body-Text">{twt.tweet}</p>
+          </div>
+          <div className="Tweet-Body-Panel">
+            <button className="Tweet-Body-Panel-Comment" onClick={this.showAddReply.bind(this, twt.tweetId)}><img src={comment} /></button>
+            <button className="Tweet-Body-Panel-ReTweet" onClick={() => this.retweetTweet(twt)}><img src={retweet} /></button>
+            <button className="Tweet-Body-Panel-Like" id="likeview" onClick={() => this.likeTweet(twt)}><span color="white" id="likec">{twt.likes}</span><img src={like} /></button>
+            <button className="Tweet-Body-Panel-Bookmark" onClick={() => this.bookmarkTweet(twt)}><img src={bookmark} /></button>
+            <button className="btn btn-primary" onClick={() => this.loadTweet(twt.tweetId)}>View Tweet</button> <span> </span> <span> </span>
+            {twt.userHandle == localStorage.getItem('userHandle') ? <button className="btn btn-danger" onClick={() => this.deleteTweet(twt.tweetId)}><i class="fa fa-trash"></i></button> : <div></div>}
+
+            <br />
+            <br />
+            <br />
+          </div>
+          <div style={{ display: "none" }} name={twt.tweetId}>
+            <textarea rows="4" cols="50" placeholder="Reply to this tweet......" id={twt.tweetId} name="tweetReply" /> <br />
+            <button onClick={this.addReply} value={twt.tweetId}>Send</button>
+          </div>
+        </div>
+      </div>)
+    }
+   
     let redirectVar=null
     if(!localStorage.getItem('email')){
       redirectVar = <Redirect to= "/"/>
@@ -240,46 +290,12 @@ class Tweet extends React.Component {
         {redirectVar}
         <NotificationAlert ref="notify" />
         {this.state.reDirect}
-        {otherTweets.map((twt, index) =>
-          <div className="tweetCard-indi">
-            <div className="Tweet-Image">
-              <br />
-              <img className="imageUpload" src={imageServer+'tweetImages/' + twt.image} />
-            </div>
-            <div className="Tweet-Body">
-              <br />
-              {twt.type == 'Retweet' ? <div><span class="label label-info" style={{ color: "white" }}><b><i>Retweeted</i></b></span></div> : <div></div>}
-              <div className="Tweet-Body-Content">
-                <h5 className="Tweet-Body-Name">{twt.name}</h5>
-                <p className="Tweet-Body-Handle">{twt.userHandle}</p>
-                <p className="Tweet-Body-Date">{twt.date}</p>
-                <p className="Tweet-Body-Date">{twt.time}</p>
-              </div>
-              <div>
-                <p className="Tweet-Body-Text">{twt.tweet}</p>
-                <img className="imageUpload" src={imageServer+'tweetImages/' + twt.image} />
-              </div>
-              <div className="Tweet-Body-Panel">
-                <button className="Tweet-Body-Panel-Comment" onClick={this.showAddReply.bind(this, twt.tweetId)}><img src={comment} /></button>
-                <button className="Tweet-Body-Panel-ReTweet" onClick={() => this.retweetTweet(twt)}><img src={retweet} /></button>
-                <button className="Tweet-Body-Panel-Like" id="likeview" onClick={() => this.likeTweet(twt)}><span color="white" id="likec">{twt.likes}</span><img src={like} /></button>
-                <button className="Tweet-Body-Panel-Bookmark" onClick={() => this.bookmarkTweet(twt)}><img src={bookmark} /></button>
-                <button className="btn btn-primary" onClick={() => this.loadTweet(twt.tweetId)}>View Tweet</button> <span> </span> <span> </span>
-                {twt.userHandle == localStorage.getItem('userHandle') ? <button className="btn btn-danger" onClick={() => this.deleteTweet(twt.tweetId)}><i class="fa fa-trash"></i></button> : <div></div>}
-                <br />
-                <br />
-                <br />
-              </div>
-              <div style={{ display: "none" }} name={twt.tweetId}>
-                <textarea rows="4" cols="50" placeholder="Reply to this tweet......" id={twt.tweetId} name="tweetReply" /> <br />
-                <button onClick={this.addReply} value={twt.tweetId}>Send</button>
-              </div>
-            </div>
-          </div>
-        )}
+      {dispTweets}
       </div>
-    );
+      
+    )
   }
 }
+
 
 export default Tweet;

@@ -21,6 +21,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import {Redirect} from 'react-router';
+import {imageServer} from '../../config'
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 
@@ -140,7 +141,7 @@ class ProfileTopBar extends React.Component {
 
 //let bio=null, ownTweets=null, birthDate=null
 let bioGlobal=null, ownTweets=null, bdate=null, location=null,followers=0,following=0
-
+let file = null
 
 
 class ProfileEditForm extends React.Component{
@@ -172,20 +173,43 @@ class ProfileEditForm extends React.Component{
     this.setState({bio:e.target.value})//!=''?e.target.value:localStorage.getItem('bio')})
   }
 
+  bioHandleChange=(e)=>{
+    file =  e.target.files[0]
+  }
+
+  
+
     handleSubmit = event => {
       event.preventDefault();
+     
+      const formData = new FormData()
+  
       let data = {
         _id:localStorage.getItem('id'),
         name: this.state.name==''?localStorage.getItem('name'):this.state.name,
         email: this.state.email==''?localStorage.getItem('email'):this.state.email,
         birthDate: this.state.birthDate==''?localStorage.getItem('birthDate'):this.state.birthDate,
         userHandle: this.state.userHandle==''?localStorage.getItem('userHandle'):this.state.userHandle,
-        bio: this.state.bio==''?localStorage.getItem('bio'):this.state.bio
+        bio: this.state.bio==''?localStorage.getItem('bio'):this.state.bio,
+        image: this.state.image==''?localStorage.getItem('image'):file
+
       };
-      console.log('data',data)
+
+      formData.append('name',this.state.name==''?localStorage.getItem('name'):this.state.name)
+      formData.append('email',this.state.email==''?localStorage.getItem('email'):this.state.email)
+      formData.append('birthDate',this.state.birthDate==''?localStorage.getItem('birthDate'):this.state.birthDate)
+      formData.append('userHandle',this.state.userHandle==''?localStorage.getItem('userHandle'):this.state.userHandle)
+      formData.append('bio',this.state.bio==''?localStorage.getItem('bio'):this.state.bio)
+      formData.append('image',this.state.image==''?localStorage.getItem('image'):'')
+      formData.append('_id',localStorage.getItem('id'))
+      formData.append('profileImage',file)
+      
+
+      console.log('data',formData)
       //axios.post(`/profile/updateProfile/${this.state.id}`, user)
       axios.defaults.withCredentials=true
-      axios.post('/profile/updateProfile', data)
+      let config={headers:{'Content-Type':'multipart/form-data'}}
+      axios.post('/profile/updateProfile', formData,config)
         .then(response => {
           console.log('updateProfile response',response.data);
           localStorage.setItem('birthDate', response.data.birthDate);
@@ -193,6 +217,7 @@ class ProfileEditForm extends React.Component{
           localStorage.setItem('name', response.data.name);
           localStorage.setItem('email', response.data.email);
           localStorage.setItem('userHandle', response.data.userHandle);
+          localStorage.setItem('image', response.data.image);
           window.location.reload()
         })
     }
@@ -227,6 +252,13 @@ class ProfileEditForm extends React.Component{
               <Label>Bio</Label>
               <Input type="text" placeholder="Enter bio" name="bio" onChange={this.bioHandleChange.bind(this)}/>
             </FormGroup>
+            
+            <FormGroup>
+              <Label>Profile Image</Label>
+              {/* <input id="file-input" type="file" onChange={onImageHandler}/> */}
+              <Input type="file-input" type="file" onChange={this.bioHandleChange.bind(this)}/>
+            </FormGroup>    
+            
             <Button type="submit" color="success">Submit</Button>
           </Form>
       </div>
@@ -282,6 +314,7 @@ constructor(props)
       localStorage.setItem('name', response.data[0].name);
       localStorage.setItem('email', response.data[0].email);
       localStorage.setItem('userHandle', response.data[0].userHandle);
+      localStorage.setItem('image', response.data[0].image);
         console.log('response ok',response.data[0].tweets)
 
 
@@ -296,7 +329,7 @@ constructor(props)
             <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br/>
-              <img className="image" src={twt.image}/>
+              <img className="image" src={imageServer+'profileImages/'+twt.image}/>
             </div>
             <div className="Tweet-Body">
               <br/>
@@ -335,7 +368,7 @@ constructor(props)
             <img src={Wallpaper}/>
           </div>
           <div className="ProfileCard-Image">
-            <img className = "image" src={Pranav} />
+            <img className = "image" src={imageServer+'profileImages/'+localStorage.getItem('image')} />
           </div>
           <div>
               <EditProfileModal>Edit Profile</EditProfileModal>
