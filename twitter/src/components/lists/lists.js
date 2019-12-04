@@ -8,17 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
-
-import listcreate from '../../svg/listcreate.png';
-
-import like from '../../svg/like.jpeg';
-import retweet from '../../svg/retweet.jpeg';
-import comment from '../../svg/comment.jpeg';
-import bookmark from '../../svg/bookmark.jpeg';
 import classnames from 'classnames';
 import './lists.css';
 
@@ -103,14 +92,15 @@ const CreateListModal = (props) => {
 
       const createList=()=>{
           let mem=listMembers.replace(/ /g,'').split(',')
-          alert(mem)
-        let data = {id:"5de03ca78752b30ca074122d", listName:listName, description:listDesc, members:mem};
+          // alert(mem)
+        let data = {id:localStorage.getItem('id'),userHandle:localStorage.getItem('userHandle'), listName:listName, description:listDesc, members:mem};
         console.log(data)
           let token=localStorage.getItem('bearer-token');
           axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
           axios.post('/list/createList',data)
             .then((response) => {
-                console.log('response ok',response)
+                console.log('response of create list',response)
+                // alert()
                 if(response.data)
                 {window.location.reload()}
             })
@@ -175,14 +165,14 @@ class List extends React.Component{
     }
     constructor(props) {
       super(props);
-      let data = {id:"5de03ca78752b30ca074122d"};
+      let data = {userHandle:localStorage.getItem('userHandle')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/list/getMemberships',data)
+      axios.post('/member/getMemberships',data)
         .then((response) => {
             // alert('success')
             console.log('response allMembersArr',response.data)
-            allListsArr=response.data['lists'];
+            allListsArr=response.data['memberships'];
             memberLists=allListsArr.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">
@@ -191,7 +181,7 @@ class List extends React.Component{
                   <div className="Tweet-Body">
                     <br/>
                     <div className="Tweet-Body-Content">
-                      <h4 className="Tweet-Body-Name">{twt.listName}</h4>
+                      <h4 className="Tweet-Body-Name">{twt.listName} | {twt.listOwner}</h4>
                     </div>
                     <div>
                       <p className="Tweet-Body-Text">{twt.description}</p>
@@ -211,11 +201,11 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/list/getSubscriptions',data)
+      axios.post('/member/getSubscriptions',data)
         .then((response) => {
             // alert('success')
             console.log('response allSubscribedArr',response.data)
-            allListsArr=response.data['lists'];
+            allListsArr=response.data['subscriptions'];
             subscribedLists=allListsArr.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">
@@ -224,7 +214,7 @@ class List extends React.Component{
                   <div className="Tweet-Body">
                     <br/>
                     <div className="Tweet-Body-Content">
-                      <h4 className="Tweet-Body-Name">{twt.listName}</h4>
+                      <h4 className="Tweet-Body-Name">{twt.listName} | {twt.ownerUserHandle}</h4>
                     </div>
                     <div>
                       <p className="Tweet-Body-Text">{twt.description}</p>

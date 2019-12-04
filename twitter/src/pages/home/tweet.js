@@ -17,6 +17,7 @@ import comment from '../../svg/comment.jpeg';
 import bookmark from '../../svg/bookmark.jpeg';
 
 import NotificationAlert from 'react-notification-alert';
+import {imageServer} from '../../config'
 import "react-notification-alert/dist/animate.css";
 
 import {
@@ -204,7 +205,7 @@ class Tweet extends React.Component {
   }
 
   bookmarkTweet = (twt) => {
-    let data = { tweet_id: twt, id: localStorage.getItem('id') };
+    let data = { tweet: twt, id: localStorage.getItem('id') };
     // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
     console.log('Tweet bookmarkTweet data is:', data)
     axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
@@ -238,7 +239,7 @@ class Tweet extends React.Component {
           <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br />
-              <img className="image" src={'http://107.21.150.13:3001/tweetImages/' + twt.image} />
+              <img className="image" src={imageServer+'tweetImages/' + twt.image} />
             </div>
             <div className="Tweet-Body">
               <br />
@@ -256,7 +257,7 @@ class Tweet extends React.Component {
                 <button className="Tweet-Body-Panel-Comment" onClick={this.showAddReply.bind(this, twt.tweetId)}><img src={comment} /></button>
                 <button className="Tweet-Body-Panel-ReTweet" onClick={() => this.retweetTweet(twt)}><img src={retweet} /></button>
                 <button className="Tweet-Body-Panel-Like" id="likeview" onClick={() => this.likeTweet(twt)}><span color="white" id="likec">{twt.likes}</span><img src={like} /></button>
-                <button className="Tweet-Body-Panel-Bookmark" onClick={() => this.bookmarkTweet(twt.tweetId)}><img src={bookmark} /></button>
+                <button className="Tweet-Body-Panel-Bookmark" onClick={() => this.bookmarkTweet(twt)}><img src={bookmark} /></button>
                 <button className="btn btn-primary" onClick={() => this.loadTweet(twt.tweetId)}>View Tweet</button> <span> </span> <span> </span>
                 {twt.userHandle == localStorage.getItem('userHandle') ? <button className="btn btn-danger" onClick={() => this.deleteTweet(twt.tweetId)}><i class="fa fa-trash"></i></button> : <div></div>}
                 <br />

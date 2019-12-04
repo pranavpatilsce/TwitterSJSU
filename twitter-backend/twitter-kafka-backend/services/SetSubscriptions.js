@@ -5,13 +5,15 @@ var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
 
-    profileModel.find({_id:msg.id, "subscriptions.listId":msg.listId},{"subscriptions.$":1},function(errorr,output){
+    profileModel.find({_id:msg.id, subscriptions:{$elemMatch:{listId:mongoose.Types.ObjectId(msg.listId)}}},{"subscriptions.$.listId":1},function(errorr,output){
         if(errorr){
+            console.log("errorrr")
             callback()
         }else{
-            if(output.length<1)
+            if(output.length>0){
             console.log("rukna chahiye",output)
-            else{
+            callback(null,"exists");
+            }else{
                 console.log("chalna chahiye",output)
           
 
@@ -19,16 +21,18 @@ function handle_request(msg, callback) {
     profileModel.find({userHandle: msg.userHandle,
         //  lists:{$elemMatch:{listId:mongoose.Types.ObjectId(msg.listId)}}
         },
-        {lists:{$elemMatch:{listId:mongoose.Types.ObjectId(msg.listId)}}},
+        {lists:{$elemMatch:{listId:mongoose.Types.ObjectId(msg.listId)}}, userHandle:1,name:1},
         function(error,res){
         if(error){
             callback(error,"Error in Finding")
         }else{
-            console.log("list data found is: ",res[0].listId[0])
+            console.log("list data found is: ",res[0].lists[0])
     profileModel.updateOne(
         {_id:msg.id},
         {$push:{
             subscriptions:{
+                ownerUserHandle:res[0].userHandle,
+                ownerName:res[0].name,
                 listId:res[0].lists[0].listId,
                 listName: res[0].lists[0].listName,
                 description: res[0].lists[0].description,
