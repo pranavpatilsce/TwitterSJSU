@@ -7,7 +7,8 @@ function handle_request(msg, callback) {
     console.log("**********************");
     console.log("Inside createChat, msg: ", msg);
     let chat = new Chat({
-        users: [msg.senderId, msg.receiverId]
+        users: [msg.senderId, msg.receiverId],
+        userHandles: [msg.senderHandle, msg.receiverHandle]
     });
     
     let message = new Message({
@@ -16,6 +17,7 @@ function handle_request(msg, callback) {
         receiverId : msg.receiverId
     })
     
+
     
     chat.save( function(err, createdChat){
         if(err){
@@ -33,18 +35,18 @@ function handle_request(msg, callback) {
                 else{
                     console.log("Added the first message to the chat. DONE!!");
                     console.log("**********************");
-                    callback(null, updatedChat);
+                    //callback(null, updatedChat);
                     //saveChatInUserProfiles(updatedChat.users, updatedChat._id,()=>{});
-                    // profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
-                    //     if(err){
-                    //         console.log("INSIDE ERROR OF PROFILE UPDATE - CREATE CHAT");
-                    //         callback(err,null);
-                    //     }
-                    //     else{
-                    //         console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
-                    //         callback(null, updatedChat);
-                    //     }
-                    // })
+                    profileModel.updateMany( {_id:{$in:createdChat.users}}, {$push: {chats:updatedChat._id}}, {upsert: true}, function(err, result){
+                        if(err){
+                            console.log("INSIDE ERROR OF PROFILE UPDATE - CREATE CHAT");
+                            callback(err,null);
+                        }
+                        else{
+                            console.log( "INSIDE SUCCESS OF PROFILE UPDATE - CREATE CHAT");
+                            callback(null, updatedChat);
+                        }
+                    })
                 }
             })
         }

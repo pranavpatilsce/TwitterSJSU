@@ -8,7 +8,9 @@ function Analysis() {
   return (
     <div className="App">
       <TopTenViews/>
+      <br></br>
       <TopTenLiked/>
+      <br></br>
       <TopFiveRetweets/>
     </div>
   );
