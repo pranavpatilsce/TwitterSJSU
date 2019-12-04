@@ -7,6 +7,8 @@ import './login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import {Redirect} from 'react-router';
+import { Link } from 'react-router-dom';
+
 let email=null, password=null, redirectVar=null;
 
 class LogIn extends React.Component {
@@ -84,7 +86,7 @@ class LogIn extends React.Component {
           <h1 className="LogIn-RightSide-Wording">the world right now</h1>
           <h5 className="LogIn-RightSide-Wording">Join Twitter today.</h5>
           <div className="LogIn-RightSide-Button">
-            <Button className="LogIn-RightSide-SignUp">Sign up</Button>
+            <Button className="LogIn-RightSide-SignUp" href="/signup" >Sign up</Button>
             <div className="LogIn-RightSide-LogIn-Padding">
               <Button className="LogIn-RightSide-LogIn">Log in</Button>
             </div>
