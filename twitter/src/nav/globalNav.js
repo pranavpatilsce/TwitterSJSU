@@ -142,7 +142,11 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button className="NavButton NavButton3" href="/dashboard">DashBoard</Button>
+          <Button className="NavButton NavButton3" href="/dashboard">DashBoard</Button> 
+        </div>
+
+        <div className="Button-Padding">
+          <Button className="NavButton NavButton3" href="/dashboardData">DashBoard Profile Data</Button>  
         </div>
 
         <div className="Button-Padding">
