@@ -14,6 +14,7 @@ function handle_request(msg, callback) {
                 bio: msg.bio,
                 location: msg.location,
                 userHandle: msg.userHandle,
+                image:msg.image
             }
         },
         function (error, results) {

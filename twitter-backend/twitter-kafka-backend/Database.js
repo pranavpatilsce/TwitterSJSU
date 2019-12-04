@@ -18,7 +18,7 @@ var profileSchema = new mongoose.Schema({
 	bio: String,
 	location: String,
 	website: String,
-	profileImage:String,
+	image:String,
 	coverImage:String,
 	tweets:Array,
 	followers:Array,
