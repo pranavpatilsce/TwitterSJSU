@@ -21,6 +21,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import {Redirect} from 'react-router';
+import {imageServer} from '../../config'
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 
@@ -140,7 +141,7 @@ class ProfileTopBar extends React.Component {
 
 //let bio=null, ownTweets=null, birthDate=null
 let bioGlobal=null, ownTweets=null, bdate=null, location=null,followers=0,following=0
-
+let file = null
 
 
 class ProfileEditForm extends React.Component{
@@ -156,143 +157,109 @@ class ProfileEditForm extends React.Component{
       bio: ''
     }
   }
+  nameHandleChange=(e)=>{
+    this.setState({name:e.target.value})//!=''?e.target.value:localStorage.getItem('name')})
+  }
+ emailHandleChange=(e)=>{
+  this.setState({email:e.target.value})//!=''?e.target.value:localStorage.getItem('email')})
+  }
+  birthDateHandleChange=(e)=>{
+    this.setState({birthDate:e.target.value})//!=''?e.target.value:localStorage.getItem('birthDate')})
+  }
+  userHandleHandlerChange=(e)=>{
+    this.setState({userHandle:e.target.value})//!=''?e.target.value:localStorage.getItem('userHandle')})
+  }
+  bioHandleChange=(e)=>{
+    this.setState({bio:e.target.value})//!=''?e.target.value:localStorage.getItem('bio')})
+  }
 
-   handleChange = event => {
+  bioHandleChange=(e)=>{
+    file =  e.target.files[0]
+  }
 
-     this.setState({ name: event.target.value });
-     this.setState({ email: event.target.valuel });
-     this.setState({ birthDate: event.target.value });
-     this.setState({ userHandle: event.target.value });
-     this.setState({ bio: event.target.value });
-      // console.log(event.target.email);
-      // console.log(event.target.birthDate);
-      // console.log(event.target.userHandle);
-      // console.log(event.target.bio);
-
-      // if(event.target.name == ''){
-      //   this.setState({ name: localStorage.getItem('name') });
-      //   console.log(event.target.name);
-      // }else{
-      //   localStorage.setItem('name', event.target.value);
-      //   this.setState({ name: event.target.value });
-      // }
-      //
-      // if(event.target.email == ''){
-      //   this.setState({ email: localStorage.getItem('email') });
-      //   console.log(event.target.email);
-      // }else{
-      //   localStorage.setItem('email', event.target.value);
-      //   this.setState({ email: event.target.value });
-      // }
-      //
-      // if(event.target.birthDate == ''){
-      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
-      //   console.log(event.target.birthDate);
-      // }else{
-      //   localStorage.setItem('birthDate', event.target.value);
-      //   this.setState({ birthDate: event.target.value });
-      // }
-      //
-      // if(event.target.userHandle == ''){
-      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
-      //   console.log(event.target.userHandle);
-      // }else{
-      //   localStorage.setItem('userHandle', event.target.userHandle);
-      //   this.setState({ userHandle: event.target.value });
-      // }
-      //
-      // if(event.target.bio == ''){
-      //   this.setState({ bio: localStorage.getItem('bio') });
-      //   console.log(event.target.bio);
-      // }else{
-      //   localStorage.setItem('bio', event.target.bio);
-      //   this.setState({ bio: event.target.value });
-      // }
-
-      this.setState({ id: localStorage.getItem('id') });
-      console.log('id', this.state.id);
-      // if(event.target.email == undefined || event.target.name == ''){
-      //   this.setState({ email: localStorage.getItem('email') });
-      // }else{
-      //   localStorage.setItem('email', event.target.email);
-      //   this.setState({ email: event.target.value });
-      // }
-      //
-      // if(event.target.birthDate == undefined || event.target.name == ''){
-      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
-      // }else{
-      //   localStorage.setItem('birthDate', event.target.birthDate);
-      //   this.setState({ birthDate: event.target.value });
-      // }
-      //
-      // if(event.target.userHandle == undefined || event.target.name == ''){
-      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
-      // }else{
-      //   localStorage.setItem('userHandle', event.target.userHandle);
-      //   this.setState({ userHandle: event.target.value });
-      // }
-      //
-      // if(event.target.bio == undefined || event.target.name == ''){
-      //   this.setState({ bio: localStorage.getItem('bio') });
-      // }else{
-      //   localStorage.setItem('bio', event.target.bio);
-      //   this.setState({ bio: event.target.value });
-      // }
-
-    }
+  
 
     handleSubmit = event => {
       event.preventDefault();
+     
+      const formData = new FormData()
+  
+      let data = {
+        _id:localStorage.getItem('id'),
+        name: this.state.name==''?localStorage.getItem('name'):this.state.name,
+        email: this.state.email==''?localStorage.getItem('email'):this.state.email,
+        birthDate: this.state.birthDate==''?localStorage.getItem('birthDate'):this.state.birthDate,
+        userHandle: this.state.userHandle==''?localStorage.getItem('userHandle'):this.state.userHandle,
+        bio: this.state.bio==''?localStorage.getItem('bio'):this.state.bio,
+        image: this.state.image==''?localStorage.getItem('image'):file
 
-      const user = {
-        name: this.state.name,
-        email: this.state.email,
-        birthDate: this.state.birthDate,
-        userHandle: this.state.userHandle,
-        bio: this.state.bio
       };
 
-      //axios.post(`/profile/updateProfile/${this.state.id}`, user)
+      formData.append('name',this.state.name==''?localStorage.getItem('name'):this.state.name)
+      formData.append('email',this.state.email==''?localStorage.getItem('email'):this.state.email)
+      formData.append('birthDate',this.state.birthDate==''?localStorage.getItem('birthDate'):this.state.birthDate)
+      formData.append('userHandle',this.state.userHandle==''?localStorage.getItem('userHandle'):this.state.userHandle)
+      formData.append('bio',this.state.bio==''?localStorage.getItem('bio'):this.state.bio)
+      formData.append('image',this.state.image==''?localStorage.getItem('image'):'')
+      formData.append('_id',localStorage.getItem('id'))
+      formData.append('profileImage',file)
+      
 
-      axios.post(`/profile/updateProfile/${this.state.id}`, user)
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
+      console.log('data',formData)
+      //axios.post(`/profile/updateProfile/${this.state.id}`, user)
+      axios.defaults.withCredentials=true
+      let config={headers:{'Content-Type':'multipart/form-data'}}
+      axios.post('/profile/updateProfile', formData,config)
+        .then(response => {
+          console.log('updateProfile response',response.data);
+          localStorage.setItem('birthDate', response.data.birthDate);
+          localStorage.setItem('bio', response.data.bio);
+          localStorage.setItem('name', response.data.name);
+          localStorage.setItem('email', response.data.email);
+          localStorage.setItem('userHandle', response.data.userHandle);
+          localStorage.setItem('image', response.data.image);
+          window.location.reload()
         })
     }
 
     render(){
-
       return(
         <div>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit.bind(this)}>
             <Row form>
               <Col md={6}>
                 <FormGroup>
                   <Label>Name</Label>
-                  <Input type="text" placeholder="Enter Twitter Account Name" name="name" onChange={this.handleChange}/>
+                  <Input type="text" placeholder="Update Your Name" name="name" onChange={this.nameHandleChange.bind(this)}/>
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
+                  <Input type="email" placeholder="Update Email" name="email" onChange={this.emailHandleChange.bind(this)}/>
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup>
               <Label>Birth Date</Label>
-              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
+              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.birthDateHandleChange.bind(this)}/>
             </FormGroup>
             <FormGroup>
               <Label>User Handle</Label>
-              <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
+              <Input type="text" placeholder="What you would like your Twitter handle to be?" name="userHandle" onChange={this.userHandleHandlerChange.bind(this)}/>
             </FormGroup>
             <FormGroup>
               <Label>Bio</Label>
-              <Input type="text" placeholder="Enter bio" name="bio" onChange={this.handleChange}/>
+              <Input type="text" placeholder="Enter bio" name="bio" onChange={this.bioHandleChange.bind(this)}/>
             </FormGroup>
-            <Button type="submit" color="success" href="/profile">Submit</Button>
+            
+            <FormGroup>
+              <Label>Profile Image</Label>
+              {/* <input id="file-input" type="file" onChange={onImageHandler}/> */}
+              <Input type="file-input" type="file" onChange={this.bioHandleChange.bind(this)}/>
+            </FormGroup>    
+            
+            <Button type="submit" color="success">Submit</Button>
           </Form>
       </div>
     )
@@ -344,6 +311,10 @@ constructor(props)
       //birthDate=response.data[0].birthDate
       localStorage.setItem('birthDate', response.data[0].birthDate);
       localStorage.setItem('bio', bioGlobal);
+      localStorage.setItem('name', response.data[0].name);
+      localStorage.setItem('email', response.data[0].email);
+      localStorage.setItem('userHandle', response.data[0].userHandle);
+      localStorage.setItem('image', response.data[0].image);
         console.log('response ok',response.data[0].tweets)
 
       
@@ -358,7 +329,7 @@ constructor(props)
             <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br/>
-              <img className="image" src={twt.image}/>
+              <img className="image" src={imageServer+'profileImages/'+twt.image}/>
             </div>
             <div className="Tweet-Body">
               <br/>
@@ -397,7 +368,7 @@ constructor(props)
             <img src={Wallpaper}/>
           </div>
           <div className="ProfileCard-Image">
-            <img className = "image" src={Pranav} />
+            <img className = "image" src={imageServer+'profileImages/'+localStorage.getItem('image')} />
           </div>
           <div>
               <EditProfileModal >Edit Profile</EditProfileModal>

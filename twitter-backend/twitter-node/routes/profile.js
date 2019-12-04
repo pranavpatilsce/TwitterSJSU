@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
         cb(null, './uploads/profileImages/')
     },
     filename: function (req, file, cb) {
-        // console.log(JSON.parse(req.cookies.getItemDetails).itemId)
-        cb(null, file.originalname);
+       // console.log(req.body)
+        cb(null,file.originalname);
     }
 })
 const upload = multer({ storage: storage });
@@ -80,8 +80,12 @@ router.post('/signInProfile', function (req, res, next) {
     });
 });
 
-router.post('/updateProfile',  function (req, res, next) {
-    kafka.make_request('update_profile',req.body, function(error,results){
+router.post('/updateProfile', upload.single('profileImage'), function (req, res, next) {
+    //let data = {image:req.file!=undefined?req.data.userHandle:"",...req.body.data};
+    let data = {name: req.body.name,email:req.body.email,birthDate:req.body.birthDate,userHandle: req.body.userHandle, bio: req.body.bio,image:req.body.image,_id:req.body._id,image:req.file!=undefined?req.file.filename:""};
+    console.log('Profile going for updation!!',data)
+    //res.status(200).send("results");
+    kafka.make_request('update_profile',data, function(error,results){
        if (error) {
            console.log("error in results ");
            res.status(200).send(error)

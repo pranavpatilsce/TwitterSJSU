@@ -280,12 +280,19 @@ class Tweet extends React.Component {
         </div>
       </div>)
     }
+   
+    let redirectVar=null
+    if(!localStorage.getItem('email')){
+      redirectVar = <Redirect to= "/"/>
+  }
     return (
       <div className="tweetCard">
-        {/* <NotificationAlert ref="notify" /> */}
+        {redirectVar}
+        <NotificationAlert ref="notify" />
         {this.state.reDirect}
     {dispTweets}
       </div>
+      
     )
   }
 }
