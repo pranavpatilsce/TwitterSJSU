@@ -16,12 +16,18 @@ import comment from '../../svg/comment.jpeg';
 import bookmark from '../../svg/bookmark.jpeg';
 import Location from '../../svg/location.png';
 import Calendar from '../../svg/calendar.png';
-import Birthday from '../../svg/birthday.jpeg';
+import birthdate from '../../svg/birthday.jpeg';
 import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+
+
 let userTweets=null;
 
 class NoMedia extends React.Component {
@@ -84,7 +90,7 @@ const Tabs = (props) => {
         </NavItem>
         <NavItem  className="ProfileTabs">
           <NavLink
-            className={classnames({ active: activeTab === '4' }) }
+            className={classnames({ active: activeTab === '4' })}
             onClick={() => { toggle('4'); }}
           >
             Likes
@@ -130,7 +136,193 @@ class ProfileTopBar extends React.Component {
   }
 
 }
-let bio=null, ownTweets=null, bdate=null
+
+let bio=null, ownTweets=null, birthDate=null
+
+
+
+class ProfileEditForm extends React.Component{
+
+  constructor(props){
+   super(props)
+    this.state = {
+      id: '',
+      name: '',
+      email: '',
+      birthDate: '',
+      userHandle: '',
+      bio: ''
+    }
+  }
+
+   handleChange = event => {
+
+     this.setState({ name: event.target.value });
+     this.setState({ email: event.target.valuel });
+     this.setState({ birthDate: event.target.value });
+     this.setState({ userHandle: event.target.value });
+     this.setState({ bio: event.target.value });
+      // console.log(event.target.email);
+      // console.log(event.target.birthDate);
+      // console.log(event.target.userHandle);
+      // console.log(event.target.bio);
+
+      // if(event.target.name == ''){
+      //   this.setState({ name: localStorage.getItem('name') });
+      //   console.log(event.target.name);
+      // }else{
+      //   localStorage.setItem('name', event.target.value);
+      //   this.setState({ name: event.target.value });
+      // }
+      //
+      // if(event.target.email == ''){
+      //   this.setState({ email: localStorage.getItem('email') });
+      //   console.log(event.target.email);
+      // }else{
+      //   localStorage.setItem('email', event.target.value);
+      //   this.setState({ email: event.target.value });
+      // }
+      //
+      // if(event.target.birthDate == ''){
+      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
+      //   console.log(event.target.birthDate);
+      // }else{
+      //   localStorage.setItem('birthDate', event.target.value);
+      //   this.setState({ birthDate: event.target.value });
+      // }
+      //
+      // if(event.target.userHandle == ''){
+      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
+      //   console.log(event.target.userHandle);
+      // }else{
+      //   localStorage.setItem('userHandle', event.target.userHandle);
+      //   this.setState({ userHandle: event.target.value });
+      // }
+      //
+      // if(event.target.bio == ''){
+      //   this.setState({ bio: localStorage.getItem('bio') });
+      //   console.log(event.target.bio);
+      // }else{
+      //   localStorage.setItem('bio', event.target.bio);
+      //   this.setState({ bio: event.target.value });
+      // }
+
+      this.setState({ id: localStorage.getItem('id') });
+      console.log('id', this.state.id);
+      // if(event.target.email == undefined || event.target.name == ''){
+      //   this.setState({ email: localStorage.getItem('email') });
+      // }else{
+      //   localStorage.setItem('email', event.target.email);
+      //   this.setState({ email: event.target.value });
+      // }
+      //
+      // if(event.target.birthDate == undefined || event.target.name == ''){
+      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
+      // }else{
+      //   localStorage.setItem('birthDate', event.target.birthDate);
+      //   this.setState({ birthDate: event.target.value });
+      // }
+      //
+      // if(event.target.userHandle == undefined || event.target.name == ''){
+      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
+      // }else{
+      //   localStorage.setItem('userHandle', event.target.userHandle);
+      //   this.setState({ userHandle: event.target.value });
+      // }
+      //
+      // if(event.target.bio == undefined || event.target.name == ''){
+      //   this.setState({ bio: localStorage.getItem('bio') });
+      // }else{
+      //   localStorage.setItem('bio', event.target.bio);
+      //   this.setState({ bio: event.target.value });
+      // }
+
+    }
+
+    handleSubmit = event => {
+      event.preventDefault();
+
+      const user = {
+        name: this.state.name,
+        email: this.state.email,
+        birthDate: this.state.birthDate,
+        userHandle: this.state.userHandle,
+        bio: this.state.bio
+      };
+
+      //axios.post(`/profile/updateProfile/${this.state.id}`, user)
+
+      axios.post(`/profile/updateProfile/${this.state.id}`, user)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+    }
+
+    render(){
+
+      return(
+        <div>
+          <Form onSubmit={this.handleSubmit}>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Name</Label>
+                  <Input type="text" placeholder="Enter Twitter Account Name" name="name" onChange={this.handleChange}/>
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Email</Label>
+                  <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup>
+              <Label>Birth Date</Label>
+              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup>
+              <Label>User Handle</Label>
+              <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Bio</Label>
+              <Input type="text" placeholder="Enter bio" name="bio" onChange={this.handleChange}/>
+            </FormGroup>
+            <Button type="submit" color="success" href="/profile">Submit</Button>
+          </Form>
+      </div>
+    )
+  }
+}
+
+const EditProfileModal = (props) => {
+
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  return (
+    <div>
+      <Button className="EditButton EditButton2" onClick={toggle}>Edit Profile</Button>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Update Profile</ModalHeader>
+        <ModalBody>
+          <div>
+            <ProfileEditForm/>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          {/*<Button color="primary" onClick={toggle}>Do Something</Button>{' '}*/}
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
+}
+
 class ProfileCard extends React.Component {
 
 constructor(props)
@@ -144,7 +336,9 @@ constructor(props)
     .then((response) => {
       bio=response.data.bio
       ownTweets=response.data[0].tweets
-      bdate=response.data.bdate
+      birthDate=response.data.birthDate
+      localStorage.setItem('birthDate', response.data.birthDate);
+      localStorage.setItem('bio', response.data.bio);
         console.log('response ok',response.data[0].tweets)
         userTweets=ownTweets.map((twt, index) =>{
           return(
@@ -175,13 +369,14 @@ constructor(props)
             </div>
           </div>
           )
-        }               
+        }
             )
             console.log('usertw',userTweets)
             this.setState({})
     })
     .catch(()=>{console.log('error')})
-}
+    }
+
   render(){
     return(
       <div className="ProfileCard-Parent">
@@ -192,11 +387,11 @@ constructor(props)
             <img className = "image" src={Pranav} />
           </div>
           <div>
-            <Button className="EditButton EditButton2">Edit Profile</Button>
+              <EditProfileModal >Edit Profile</EditProfileModal>
           </div>
           <div className = "overall">
               <div>
-    <h4 className = "ProfileName">{localStorage.getItem('name')}</h4>
+                <h4 className = "ProfileName">{localStorage.getItem('name')}</h4>
                 <p className = "ProfileHandle">{localStorage.getItem('userHandle')}</p>
               </div>
               <div className = "ProfileBio">
@@ -207,7 +402,7 @@ constructor(props)
                   <p><img top width="17%" src={Location}/>SF Bay Area, CA</p>
                 </div>
                 <div className = "UserInfo-Birthday">
-                  <p><img top width="14%" src={Birthday}/>Born on {bdate}</p>
+                  <p><img top width="20%" src={birthdate}/>Born on {birthDate}</p>
                 </div>
               </div>
 

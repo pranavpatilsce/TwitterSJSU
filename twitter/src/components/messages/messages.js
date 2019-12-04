@@ -119,17 +119,17 @@ const ReceiveModal = (props) => {
 
   const toggle = () => setModal(!modal);
 
+  console.log(props.gettingchat);
+
   return (
     <div>
       <Button color="danger" onClick={toggle}>View Chat</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        {/*<ModalHeader toggle={toggle}>Modal title</ModalHeader> */}
+        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
         <ModalBody>
 
         </ModalBody>
         <ModalFooter>
-          <SendMessageModal/>
-          <Button color="primary" onClick={toggle}></Button>{' '}
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
@@ -137,11 +137,11 @@ const ReceiveModal = (props) => {
   );
 }
 
-
 class MessageCard extends React.Component{
 
   constructor(props){
     super(props)
+
     //this.getChat = this.getChat.bind(this);
     this.state = {
       gettingchat: [],
@@ -194,7 +194,7 @@ class MessageCard extends React.Component{
                           chat.userHandles[0] == localStorage.getItem('userHandle')? chat.userHandles[1]: chat.userHandles[0]
                         }</p>
                         <p className="Messages-Card-Body-Date">{/*{messageList.date}*/}</p>
-                        <ReceiveModal color="danger" chatLaunch={chat} onClick={()=>{this.getChat(chat._id)}}/>
+                        <ReceiveModal color="danger" gettingchat={this.state.gettingchat} onClick={()=>{this.getChat(chat._id)}}/>
                       </div>
                       <br/>
                     </div>
