@@ -173,7 +173,7 @@ class ProfileEditForm extends React.Component{
     this.setState({bio:e.target.value})//!=''?e.target.value:localStorage.getItem('bio')})
   }
 
-  bioHandleChange=(e)=>{
+  imageHandleChange=(e)=>{
     file =  e.target.files[0]
   }
 
@@ -256,7 +256,7 @@ class ProfileEditForm extends React.Component{
             <FormGroup>
               <Label>Profile Image</Label>
               {/* <input id="file-input" type="file" onChange={onImageHandler}/> */}
-              <Input type="file-input" type="file" onChange={this.bioHandleChange.bind(this)}/>
+              <Input type="file-input" type="file" onChange={this.imageHandleChange.bind(this)}/>
             </FormGroup>
 
             <Button type="submit" color="success">Submit</Button>
