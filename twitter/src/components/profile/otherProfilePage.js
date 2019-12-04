@@ -194,8 +194,8 @@ componentWillMount=()=>{
             <div className="Tweet-Body">
               <br/>
               <div className="Tweet-Body-Content">
-                <h5 className="Tweet-Body-Name">{localStorage.getItem('name')}</h5>
-                <p className="Tweet-Body-Handle">{localStorage.getItem('userHandle')}</p>
+                <h5 className="Tweet-Body-Name">{twt.name}</h5>
+                <p className="Tweet-Body-Handle">{twt.userHandle}</p>
                 <p className="Tweet-Body-Date">{twt.date}</p>
               </div>
               <div>

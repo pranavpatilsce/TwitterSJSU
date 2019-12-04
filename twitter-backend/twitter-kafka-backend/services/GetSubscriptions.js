@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 function handle_request(msg, callback) {
 
     console.log("Inside get subscriptions msg----", msg)
-    profileModel.find({_id: msg.id},{subscriptions:1}, function(err, results){
+    profileModel.find({userHandle: msg.userHandle},{subscriptions:1}, function(err, results){
         if (err) {
           console.log('error-->');
           callback(err,"Error");

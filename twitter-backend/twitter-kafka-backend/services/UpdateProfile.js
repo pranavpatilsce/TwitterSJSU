@@ -11,12 +11,9 @@ function handle_request(msg, callback) {
                 name: msg.name,
                 birthDate: msg.birthDate,
                 email: msg.email,
-                password: msg.password,
                 bio: msg.bio,
                 location: msg.location,
                 userHandle: msg.userHandle,
-                profileImage: msg.profileImage,
-                coverImage: msg.coverImage
             }
         },
         function (error, results) {
@@ -36,7 +33,6 @@ function handle_request(msg, callback) {
                 name = '${msg.name}',
                 bio = '${msg.bio}',
                 userhandle = '${msg.userHandle}',
-                coverimage =  '${msg.coverImage}'
             WHERE mongo_id = '${msg._id}'`;
     let output = "Not Updated";
     pool.query(pass, function (error, result) {

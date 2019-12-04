@@ -238,7 +238,7 @@ class Tweet extends React.Component {
           <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br />
-              <img className="image" src={twt.image} />
+              <img className="image" src={'http://107.21.150.13:3001/tweetImages/' + twt.image} />
             </div>
             <div className="Tweet-Body">
               <br />
@@ -247,6 +247,7 @@ class Tweet extends React.Component {
                 <h5 className="Tweet-Body-Name">{twt.name}</h5>
                 <p className="Tweet-Body-Handle">{twt.userHandle}</p>
                 <p className="Tweet-Body-Date">{twt.date}</p>
+                <p className="Tweet-Body-Date">{twt.time}</p>
               </div>
               <div>
                 <p className="Tweet-Body-Text">{twt.tweet}</p>

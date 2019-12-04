@@ -8,6 +8,7 @@ import Navigation from '../../nav/globalNav.js';
 import RightSide from '../search/search.js';
 import ViewListTweets from './viewListTweets';
 import '../../pages/home/tweet.css';
+import {Redirect} from 'react-router';
 
 class ProfileTopBar extends React.Component {
 
@@ -23,7 +24,13 @@ class ProfileTopBar extends React.Component {
 }
 
 function ViewListTweetsPage() {
+  let redirectVar = null;
+      if(!localStorage.getItem('userHandle')){
+          redirectVar = <Redirect to= "/"/>
+      }
   return (
+    <div>
+      {redirectVar}
     <div className="Home">
 
       <div className="Home-Navigation">
@@ -41,6 +48,7 @@ function ViewListTweetsPage() {
       <div className="Home-RightSide">
         <RightSide />
       </div>
+    </div>
     </div>
   );
 }

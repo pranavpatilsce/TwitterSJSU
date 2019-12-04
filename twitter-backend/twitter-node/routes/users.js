@@ -3,6 +3,18 @@ var router = express.Router();
 var passport = require("passport");
 const kafka = require("../kafka/kafka/client");
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/tweetImages/')
+    },
+    filename: function (req, file, cb) {
+        // console.log(JSON.parse(req.cookies.getItemDetails).itemId)
+        cb(null, file.originalname);
+    }
+})
+const upload = multer({ storage: storage });
+
 //Bookmark the tweet
 router.post('/bookmark',  function (req, res, next) {
     console.log('Inside bookmark kafka.');
@@ -19,9 +31,18 @@ router.post('/bookmark',  function (req, res, next) {
 });
 
 //Post Tweets
-router.post('/tweet',  function (req, res, next) {
-    console.log('Inside create tweet kafka.');
-     kafka.make_request('tweet',req.body, function(error,results){
+router.post('/tweet', upload.single('tweetimg'), function (req, res, next) {
+    console.log('Inside create tweet kafka.------------------------------------>',JSON.stringify(req.body.reqdata));
+
+    // const tweet = new User({
+    //     _id: new mongoose.Types.ObjectId(),
+    //     name: req.body.name,
+    //     profileImg: url + '/public/tweetImages' + req.file.filename
+    // });
+
+    let data = {tweet: req.body.tweet, id: req.body.id, name: req.body.name,userHandle: req.body.userHandle,image:req.file.filename};
+    console.log('Tweet going for creation!!',data)
+     kafka.make_request('tweet',data, function(error,results){
         if (error) {
             console.log("error in results ");
             res.status(200).send(error)
@@ -133,5 +154,18 @@ router.post('/deleteTweet',  function (req, res, next) {
     });
 });
 
+//SearchByHashTags
+router.post('/SearchByHashTags',  function (req, res, next) {
+    console.log('Inside SearchByHashTags');
+     kafka.make_request('searchByHashTags',req.body, function(error,results){
+        if (error) {
+            console.log("error in results ");
+            res.status(200).send(error)
+        }
+        else {
+            res.status(200).send(results);
+        };
+    });
+});
 
 module.exports = router;
