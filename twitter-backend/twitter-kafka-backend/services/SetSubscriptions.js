@@ -5,6 +5,16 @@ var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
 
+    profileModel.find({_id:msg.id, "subscriptions.listId":msg.listId},{"subscriptions.$":1},function(errorr,output){
+        if(errorr){
+            callback()
+        }else{
+            if(output.length<1)
+            console.log("rukna chahiye",output)
+            else{
+                console.log("chalna chahiye",output)
+          
+
     console.log("Inside set subscriptions msg----", msg)
     profileModel.find({userHandle: msg.userHandle,
         //  lists:{$elemMatch:{listId:mongoose.Types.ObjectId(msg.listId)}}
@@ -14,7 +24,7 @@ function handle_request(msg, callback) {
         if(error){
             callback(error,"Error in Finding")
         }else{
-            console.log("list data found is: ",res[0].lists[0])
+            console.log("list data found is: ",res[0].listId[0])
     profileModel.updateOne(
         {_id:msg.id},
         {$push:{
@@ -33,5 +43,9 @@ function handle_request(msg, callback) {
       }})
     }
     })
+}
+
+}
+})
 };
 exports.handle_request = handle_request;

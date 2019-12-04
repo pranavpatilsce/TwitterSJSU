@@ -48,6 +48,9 @@ var GetMemberships= require('./services/GetMemberships');
 var SetSubscriptions= require('./services/SetSubscriptions')
 var GetSubscriptions= require('./services/GetSubscriptions')
 
+//hashtags
+var SearchByHashTags=require('./services/SearchByHashTags')
+
 
 function handleTopicRequest(topic_name,fname){ 
     //var topic_name = 'root_topic';
@@ -113,4 +116,5 @@ handleTopicRequest("setSubscriptions",SetSubscriptions)
 handleTopicRequest("getSubscriptions",GetSubscriptions)
 handleTopicRequest("unfollow",Unfollow)
 handleTopicRequest("deleteTweet",DeleteTweet)
+handleTopicRequest("searchByHashTags",SearchByHashTags);
 
