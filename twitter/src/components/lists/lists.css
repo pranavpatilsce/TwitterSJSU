@@ -44,6 +44,12 @@
 .ProfileTabsDiv{
   background-color: #15202B;
   backface-visibility: hidden;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
 }
 
 .ProfileTabsDiv:focus{
@@ -57,13 +63,23 @@
   border-right: 1px;
 }
 
-
 .ProfileTabs{
   background-color: #15202B;
   backface-visibility: hidden;
 }
 
 .ProfileTabs:focus{
+  background-color: #15202B;
+  backface-visibility: hidden;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
+}
+
+.ProfileTabs:hover{
   background-color: #15202B;
   backface-visibility: hidden;
   border-style: solid;

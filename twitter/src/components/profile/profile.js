@@ -461,6 +461,7 @@ class UserProfileHome extends React.Component {
         <div className="Profile-Navigation">
           <Navigation />
         </div>
+        {/*
         <div className = "ProfileBar">
           <div>
             <Button className = "BarTitle"><h4>{localStorage.getItem('name')}</h4></Button>
@@ -468,7 +469,7 @@ class UserProfileHome extends React.Component {
           <div>
            <Button className = "BackButton"><img top width="500%" src={BackButton}/></Button>
           </div>
-        </div>
+        </div>*/}
         <div>
           <ProfileCard/>
         </div>

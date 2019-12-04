@@ -22,7 +22,7 @@
   border-style: solid; */
 }
 
-.image {
+.imageUpload {
   margin-left: 12px;
   border-radius: 50%;
   border-top-width: thin;
@@ -112,4 +112,5 @@
 
 .tweetCard-indi{
   background-color: #15202B;
+  height: auto;
 }

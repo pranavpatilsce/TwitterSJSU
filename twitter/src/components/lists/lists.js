@@ -11,6 +11,8 @@ import RightSide from '../../components/search/search.js';
 import classnames from 'classnames';
 import './lists.css';
 
+import listcreate from '../../svg/listcreate.png';
+
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap';
 import {Redirect} from 'react-router'
 import {

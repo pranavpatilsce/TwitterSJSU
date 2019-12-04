@@ -12,6 +12,7 @@
     "react-chartjs": "^1.2.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.11.0",
+    "react-image": "^2.2.1",
     "react-notification-alert": "0.0.12",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",

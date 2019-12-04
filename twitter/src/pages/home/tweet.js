@@ -239,7 +239,7 @@ class Tweet extends React.Component {
           <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br />
-              <img className="image" src={imageServer+'tweetImages/' + twt.image} />
+              <img className="imageUpload" src={imageServer+'tweetImages/' + twt.image} />
             </div>
             <div className="Tweet-Body">
               <br />
@@ -252,6 +252,7 @@ class Tweet extends React.Component {
               </div>
               <div>
                 <p className="Tweet-Body-Text">{twt.tweet}</p>
+                <img className="imageUpload" src={imageServer+'tweetImages/' + twt.image} />
               </div>
               <div className="Tweet-Body-Panel">
                 <button className="Tweet-Body-Panel-Comment" onClick={this.showAddReply.bind(this, twt.tweetId)}><img src={comment} /></button>
