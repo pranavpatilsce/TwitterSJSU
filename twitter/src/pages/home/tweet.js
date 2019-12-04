@@ -231,8 +231,13 @@ class Tweet extends React.Component {
     //     document.getElementById("unfollo").disabled = true;
     //   }
     // }
+    let redirectVar=null
+    if(!localStorage.getItem('email')){
+      redirectVar = <Redirect to= "/"/>
+  }
     return (
       <div className="tweetCard">
+        {redirectVar}
         <NotificationAlert ref="notify" />
         {this.state.reDirect}
         {otherTweets.map((twt, index) =>

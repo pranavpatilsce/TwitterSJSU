@@ -156,143 +156,78 @@ class ProfileEditForm extends React.Component{
       bio: ''
     }
   }
-
-   handleChange = event => {
-
-     this.setState({ name: event.target.value });
-     this.setState({ email: event.target.valuel });
-     this.setState({ birthDate: event.target.value });
-     this.setState({ userHandle: event.target.value });
-     this.setState({ bio: event.target.value });
-      // console.log(event.target.email);
-      // console.log(event.target.birthDate);
-      // console.log(event.target.userHandle);
-      // console.log(event.target.bio);
-
-      // if(event.target.name == ''){
-      //   this.setState({ name: localStorage.getItem('name') });
-      //   console.log(event.target.name);
-      // }else{
-      //   localStorage.setItem('name', event.target.value);
-      //   this.setState({ name: event.target.value });
-      // }
-      //
-      // if(event.target.email == ''){
-      //   this.setState({ email: localStorage.getItem('email') });
-      //   console.log(event.target.email);
-      // }else{
-      //   localStorage.setItem('email', event.target.value);
-      //   this.setState({ email: event.target.value });
-      // }
-      //
-      // if(event.target.birthDate == ''){
-      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
-      //   console.log(event.target.birthDate);
-      // }else{
-      //   localStorage.setItem('birthDate', event.target.value);
-      //   this.setState({ birthDate: event.target.value });
-      // }
-      //
-      // if(event.target.userHandle == ''){
-      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
-      //   console.log(event.target.userHandle);
-      // }else{
-      //   localStorage.setItem('userHandle', event.target.userHandle);
-      //   this.setState({ userHandle: event.target.value });
-      // }
-      //
-      // if(event.target.bio == ''){
-      //   this.setState({ bio: localStorage.getItem('bio') });
-      //   console.log(event.target.bio);
-      // }else{
-      //   localStorage.setItem('bio', event.target.bio);
-      //   this.setState({ bio: event.target.value });
-      // }
-
-      this.setState({ id: localStorage.getItem('id') });
-      console.log('id', this.state.id);
-      // if(event.target.email == undefined || event.target.name == ''){
-      //   this.setState({ email: localStorage.getItem('email') });
-      // }else{
-      //   localStorage.setItem('email', event.target.email);
-      //   this.setState({ email: event.target.value });
-      // }
-      //
-      // if(event.target.birthDate == undefined || event.target.name == ''){
-      //   this.setState({ birthDate: localStorage.getItem('birthDate') });
-      // }else{
-      //   localStorage.setItem('birthDate', event.target.birthDate);
-      //   this.setState({ birthDate: event.target.value });
-      // }
-      //
-      // if(event.target.userHandle == undefined || event.target.name == ''){
-      //   this.setState({ userHandle: localStorage.getItem('userHandle') });
-      // }else{
-      //   localStorage.setItem('userHandle', event.target.userHandle);
-      //   this.setState({ userHandle: event.target.value });
-      // }
-      //
-      // if(event.target.bio == undefined || event.target.name == ''){
-      //   this.setState({ bio: localStorage.getItem('bio') });
-      // }else{
-      //   localStorage.setItem('bio', event.target.bio);
-      //   this.setState({ bio: event.target.value });
-      // }
-
-    }
+  nameHandleChange=(e)=>{
+    this.setState({name:e.target.value})//!=''?e.target.value:localStorage.getItem('name')})
+  }
+ emailHandleChange=(e)=>{
+  this.setState({email:e.target.value})//!=''?e.target.value:localStorage.getItem('email')})
+  }
+  birthDateHandleChange=(e)=>{
+    this.setState({birthDate:e.target.value})//!=''?e.target.value:localStorage.getItem('birthDate')})
+  }
+  userHandleHandlerChange=(e)=>{
+    this.setState({userHandle:e.target.value})//!=''?e.target.value:localStorage.getItem('userHandle')})
+  }
+  bioHandleChange=(e)=>{
+    this.setState({bio:e.target.value})//!=''?e.target.value:localStorage.getItem('bio')})
+  }
 
     handleSubmit = event => {
       event.preventDefault();
-
-      const user = {
-        name: this.state.name,
-        email: this.state.email,
-        birthDate: this.state.birthDate,
-        userHandle: this.state.userHandle,
-        bio: this.state.bio
+      let data = {
+        _id:localStorage.getItem('id'),
+        name: this.state.name==''?localStorage.getItem('name'):this.state.name,
+        email: this.state.email==''?localStorage.getItem('email'):this.state.email,
+        birthDate: this.state.birthDate==''?localStorage.getItem('birthDate'):this.state.birthDate,
+        userHandle: this.state.userHandle==''?localStorage.getItem('userHandle'):this.state.userHandle,
+        bio: this.state.bio==''?localStorage.getItem('bio'):this.state.bio
       };
-
+      console.log('data',data)
       //axios.post(`/profile/updateProfile/${this.state.id}`, user)
-
-      axios.post(`/profile/updateProfile/${this.state.id}`, user)
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
+      axios.defaults.withCredentials=true
+      axios.post('/profile/updateProfile', data)
+        .then(response => {
+          console.log('updateProfile response',response.data);
+          localStorage.setItem('birthDate', response.data.birthDate);
+          localStorage.setItem('bio', response.data.bio);
+          localStorage.setItem('name', response.data.name);
+          localStorage.setItem('email', response.data.email);
+          localStorage.setItem('userHandle', response.data.userHandle);
+          window.location.reload()
         })
     }
 
     render(){
-
       return(
         <div>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit.bind(this)}>
             <Row form>
               <Col md={6}>
                 <FormGroup>
                   <Label>Name</Label>
-                  <Input type="text" placeholder="Enter Twitter Account Name" name="name" onChange={this.handleChange}/>
+                  <Input type="text" placeholder="Update Your Name" name="name" onChange={this.nameHandleChange.bind(this)}/>
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
+                  <Input type="email" placeholder="Update Email" name="email" onChange={this.emailHandleChange.bind(this)}/>
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup>
               <Label>Birth Date</Label>
-              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
+              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.birthDateHandleChange.bind(this)}/>
             </FormGroup>
             <FormGroup>
               <Label>User Handle</Label>
-              <Input type="text" placeholder="Enter what you would like your Twitter handle to be. Example: @earth" name="userHandle" onChange={this.handleChange}/>
+              <Input type="text" placeholder="What you would like your Twitter handle to be?" name="userHandle" onChange={this.userHandleHandlerChange.bind(this)}/>
             </FormGroup>
             <FormGroup>
               <Label>Bio</Label>
-              <Input type="text" placeholder="Enter bio" name="bio" onChange={this.handleChange}/>
+              <Input type="text" placeholder="Enter bio" name="bio" onChange={this.bioHandleChange.bind(this)}/>
             </FormGroup>
-            <Button type="submit" color="success" href="/profile">Submit</Button>
+            <Button type="submit" color="success">Submit</Button>
           </Form>
       </div>
     )
@@ -344,6 +279,9 @@ constructor(props)
       //birthDate=response.data[0].birthDate
       localStorage.setItem('birthDate', response.data[0].birthDate);
       localStorage.setItem('bio', bioGlobal);
+      localStorage.setItem('name', response.data[0].name);
+      localStorage.setItem('email', response.data[0].email);
+      localStorage.setItem('userHandle', response.data[0].userHandle);
         console.log('response ok',response.data[0].tweets)
 
       

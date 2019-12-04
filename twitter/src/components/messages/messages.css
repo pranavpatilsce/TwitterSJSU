@@ -116,3 +116,8 @@
   background-color: #15202B;
   text-align: left;
 }
+.left{
+  float: left;
+}
+.right{
+float: right;}
