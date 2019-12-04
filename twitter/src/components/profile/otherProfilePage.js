@@ -311,7 +311,7 @@ const sendMessage=()=>{
   axios.post('/messages/createChat',data)
   .then((response)=>{
     console.log('create cht resp',response.data)
-    if(localStorage.getItem('chats')==null)
+    if(localStorage.getItem('chats')==null ||localStorage.getItem('chats')=='')
       localStorage.setItem('chats',response.data._id)
     else
       localStorage.setItem('chats',localStorage.getItem('chats')+","+response.data._id)

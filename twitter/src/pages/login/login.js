@@ -50,11 +50,14 @@ class LogIn extends React.Component {
           {
               alert("Server Error");
           }
-          this.setState({});
+          // this.setState({});
+          window.location.reload()
       })
       .catch (response => {
           alert("Invalid");
-          this.setState({});
+          // this.setState({});
+          window.location.reload()
+
         }
       )
   }
