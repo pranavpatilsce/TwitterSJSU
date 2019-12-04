@@ -8,15 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
-
-import like from '../../svg/like.jpeg';
-import retweet from '../../svg/retweet.jpeg';
-import comment from '../../svg/comment.jpeg';
-import bookmark from '../../svg/bookmark.jpeg';
 import classnames from 'classnames';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input, Label } from 'reactstrap';
 import {Redirect} from 'react-router'
@@ -101,7 +92,7 @@ const CreateListModal = (props) => {
         console.log(data)
           let token=localStorage.getItem('bearer-token');
           axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-          axios.post('http://10.0.0.30:3001/list/createList',data)
+          axios.post('/list/createList',data)
             .then((response) => {
                 console.log('response of create list',response)
                 // alert()
@@ -157,7 +148,7 @@ class List extends React.Component{
         console.log(members)
         let data={members:members}
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-        axios.post('http://10.0.0.30:3001/list/getListTweets',data)
+        axios.post('/list/getListTweets',data)
           .then((response) => {
               console.log('getlisttweets response',response.data)
               listTweets=response.data
@@ -172,7 +163,7 @@ class List extends React.Component{
       let data = {userHandle:localStorage.getItem('userHandle')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/member/getMemberships',data)
+      axios.post('/member/getMemberships',data)
         .then((response) => {
             // alert('success')
             console.log('response allMembersArr',response.data)
@@ -205,7 +196,7 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/member/getSubscriptions',data)
+      axios.post('/member/getSubscriptions',data)
         .then((response) => {
             // alert('success')
             console.log('response allSubscribedArr',response.data)
@@ -238,7 +229,7 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('http://10.0.0.30:3001/list/getList',data)
+      axios.post('/list/getList',data)
         .then((response) => {
             // alert('success')
             console.log('response allListsArr',response.data)

@@ -35,7 +35,7 @@ class ShowUserLists extends React.Component{
         // let data={id:"5de2f6f76156b960fccd9e01"}
         console.log('set subc data',data)
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-        axios.post('http://10.0.0.30:3001/member/setSubscriptions',data)
+        axios.post('/member/setSubscriptions',data)
           .then((response) => {
               console.log('setSubscribers response',response.data)
               if(response.data!='exists')
