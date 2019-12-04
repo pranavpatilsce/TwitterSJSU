@@ -21,6 +21,7 @@ import bookmark from '../../svg/bookmark.jpeg';
 
 import NotificationAlert from 'react-notification-alert';
 import "react-notification-alert/dist/animate.css";
+import {Redirect} from 'react-router';
 
 import {
   Card, CardImg, CardText, CardBody,
@@ -214,9 +215,12 @@ deleteTweet = (twt) => {
     }
 
     render() {
-     
+      let redirectVar = null;
+      if(!localStorage.getItem('userHandle')){
+          redirectVar = <Redirect to= "/"/>
+      }
       return(
-        
+      
         <div className = "tweetCard">
            <NotificationAlert ref="notify" /> 
             {otherTweets.map((twt, index) =>
@@ -261,6 +265,7 @@ deleteTweet = (twt) => {
                 </div>
             )}
         </div>
+        
       );
     }
   }
