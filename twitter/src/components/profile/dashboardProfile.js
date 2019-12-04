@@ -475,8 +475,6 @@ class dashboardProfile extends React.Component {
                     <Navigation />
                 </div>
 
-                <ProfileTopBar />
-
                 <div>
                     <ProfileCard />
                 </div>
