@@ -78,7 +78,15 @@ class TopFiveRetweets extends React.Component {
 						legend:{
 							display:true,
 							position:'bottom'
-						}
+						},
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        min: 0  
+                    }
+                  }]
+            }
 					}
 				}
 				/>

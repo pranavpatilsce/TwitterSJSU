@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bar, Doughnut} from 'react-chartjs-2';
+import {Bar, Doughnut, Polar, Line, Radar, Bubble} from 'react-chartjs-2';
 import axios from 'axios';
 
 let response_data = [
@@ -7,7 +7,7 @@ let response_data = [
 
 let labels = []
 
-class TopTenLiked extends React.Component {
+class NumberOfTweets extends React.Component {
 
   constructor(props){
 	super(props);
@@ -30,14 +30,34 @@ class TopTenLiked extends React.Component {
         response_data = response.data;
         response_data.sort((a, b) => (a.likes < b.likes) ? 1 : -1)
         response_data = (response_data.length > 10) ? response_data.slice(0,10) : response_data;
-        let data = []
+        
         let bc = []
 
+        let lastDay = 0;
+        let lastMonth = 0; 
+        let lastYear = 0;
+
+        let today = new Date();
+
         for(let tweet of response_data){
-            data.push(tweet.likes);
-            labels.push(tweet.tweet);
-            let c= "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
-            bc.push(c)
+            console.log(tweet);
+            let tweetDate = tweet.date.split('-');
+            
+            if(tweetDate[2] == today.getFullYear()){
+                lastYear++;
+                if(tweetDate[0] == (today.getMonth() + 1)){
+                    lastMonth++;
+                    if(tweetDate[1] == today.getDate()){
+                        lastDay++;
+                    }
+                }
+            }
+        }
+
+        let data =[lastDay, lastMonth, lastYear];
+        let labels = ["Last Day", "Last Month", "Last Year"];
+        for(let i = 0; i <3; i++){
+            bc.push("#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16)));
         }
     
         this.setState({
@@ -45,7 +65,7 @@ class TopTenLiked extends React.Component {
                 labels : labels,
                 datasets : [
                     {
-                        label : "Likes",
+                        label : "Tweet Count",
                         data: data,
                         backgroundColor : bc
                     }
@@ -65,27 +85,27 @@ class TopTenLiked extends React.Component {
     return(
 		<div>
 			<div className="chart">
-				<Doughnut
+				<Bar
 					data={this.state.chartData}
 					options={
 					{
 						title:{
 							display:true,
-							text:`Showing Top 10 Liked Tweets`,
+							text:`Showing Tweets per Day / Month / Year`,
 							fontSize:25
 						},
 						legend:{
 							display:true,
 							position:'bottom'
-						},
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true,
-                        min: 0  
-                    }
-                  }]
-            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true,
+                                    min: 0  
+                                }
+                              }]
+                        }
 					}
 				}
 				/>
@@ -98,4 +118,4 @@ class TopTenLiked extends React.Component {
   }
 }
 
-export default TopTenLiked;
+export default NumberOfTweets;

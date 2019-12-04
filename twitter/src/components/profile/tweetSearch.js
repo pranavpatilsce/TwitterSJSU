@@ -172,19 +172,25 @@ unfollow = (tobeunfollowdid)=>{
 }
 
 componentWillMount=()=>{
-  console.log('User handle loaded!!!!',localStorage.getItem('otherUserHandle'))
-  let data = {userHandle:localStorage.getItem('otherUserHandle')};
+  console.log('Search Tweet loaded!!!!',localStorage.getItem('searchTweet'))
+  let data = {hashTag:localStorage.getItem('searchTweet')};
   let token=localStorage.getItem('bearer-token');
   // alert('asd')
   axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-  axios.post('/profile/getProfileKafka', data)
+  axios.post('/users/searchByHashTags', data)
     .then((response) => {
-      console.log('response is getprofile !!!',response.data[0]['_id'])
-      bio=response.data.bio
-      localStorage.setItem('otherUserId',response.data[0]['_id'])
-      ownTweets=response.data[0].tweets
-      bdate=response.data.bdate
-        console.log('response ok',response.data[0].tweets)
+      console.log('response is searchTweet !!!',response.data)
+      let res=response.data
+      let ownTweets = [];
+      res.forEach(elem => {
+          console.log('Tweet object outer is',elem)
+          elem.tweets.forEach(el=>{
+            console.log('Tweet object is',el)
+            ownTweets.push(el);
+          })
+      });
+      console.log('Tweet Searched are!!!!!',ownTweets)
+        console.log('response ok',response.data)
         userTweets=ownTweets.map((twt, index) =>{
           return(
             <div className="tweetCard-indi">
@@ -216,8 +222,6 @@ componentWillMount=()=>{
           )
         }               
             )
-            console.log('usertweeetssssssssssssssssssssssssssssssssss------------------>',userTweets)
-            this.setState({profiledata:response.data})
             this.setState({})
     })
     .catch(()=>{console.log('error')})
@@ -227,17 +231,8 @@ showList=()=>{
   this.setState({})
 }
   render(){
-    console.log('This profiledata state is!!!!!!!!!!!!!!!!!!!!!!!!!!!',this.state.profiledata)
-    if(this.state.profiledata[0]!=undefined)
-    {
-      if(this.state.profiledata[0].followers.includes(localStorage.getItem('id')))
-      {
-        document.getElementById("follo").disabled = true;
-      }
-      else{
-        document.getElementById("unfollo").disabled = true;
-      }
-    }
+   // console.log('This profiledata state is!!!!!!!!!!!!!!!!!!!!!!!!!!!',this.state.profiledata)
+    
     if(redirectToViewListFlag)
     {
       redirectToViewList=<Redirect to="/showUserListPage"/>
@@ -255,32 +250,7 @@ showList=()=>{
           <div>
             <Button className="EditButton EditButton2">Edit Profile</Button>
           </div>
-          <div className = "overall">
-              <div>
-    <h4 className = "ProfileName">{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].name}</h4>
-                <p className = "ProfileHandle">{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].userHandle}</p>
-              </div>
-              <div className = "ProfileBio">
-                <p>{this.state.profiledata.bio}</p>
-              </div>
-              <div className = "UserInfo">
-                <div className = "UserInfo-Location">
-                  <p><img top width="17%" src={Location}/>{this.state.profiledata[0]==undefined?"":this.state.profiledata[0].location}</p>
-                </div>
-                <div className = "UserInfo-Birthday">
-                  <p><img top width="14%" src={Birthday}/>Born on {this.state.profiledata[0]==undefined?"":this.state.profiledata[0].birthDate}</p>
-                </div>
-              </div>
-              <div>
-               
-                <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].following.length} Following</a>{'  '}
-                <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].followers.length} Followers</a>
-                <span> </span> <button className="btn btn-primary" id="follo" onClick={()=>{this.follow(this.state.profiledata[0]._id)}} >Follow</button><span> </span>
-                <button className="btn btn-primary" id="unfollo" onClick={()=>{this.unfollow(this.state.profiledata[0]._id)}}>UnFollow</button><span> </span>
-                <Button color="primary" className="btn btn-primary" href="/showUserListPage">View List</Button><span> </span>
-                <CreateChatModal/>
-              </div>
-          </div>
+       
           <div>
             {/* <Tabs/> */}
             {userTweets}
@@ -356,7 +326,7 @@ class ProfileTabs extends React.Component {
 
 }
 
-class otherProfilePage extends React.Component {
+class tweetSearchPage extends React.Component {
 
   render(){
     return(
@@ -380,4 +350,4 @@ class otherProfilePage extends React.Component {
 
 }
 
-export default otherProfilePage;
+export default tweetSearchPage;

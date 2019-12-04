@@ -8,11 +8,23 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import {Redirect} from 'react-router'
  
 let searchHandler="", redirectFlag=false, redirectVar=null
+let searchTweet=false;
 class RightSide extends React.Component {
  searchHandler = (e) => {
    if (e.key === 'Enter') {
     redirectFlag=true;
-     localStorage.setItem('otherUserHandle',searchHandler)
+    localStorage.removeItem('searchTweet')
+    localStorage.removeItem('otherUserHandle')
+    if(searchHandler.includes('#'))
+    {
+      localStorage.setItem('searchTweet',searchHandler)
+      searchTweet=true
+    }
+    else
+    {
+      localStorage.setItem('otherUserHandle',searchHandler)
+    }
+     
      this.setState({})
    }
  }
@@ -22,8 +34,18 @@ class RightSide extends React.Component {
  render(){
    if(redirectFlag)
    {
-     redirectVar=<Redirect to="/otherProfilePage"/>
-     redirectFlag=false;
+     if(searchTweet)
+     {
+      redirectVar=<Redirect to="/showtweetsearch"/>
+      redirectFlag=false;
+      searchTweet = false;
+     }
+     else{
+      redirectVar=<Redirect to="/otherProfilePage"/>
+      redirectFlag=false;
+      searchTweet = false;
+     }
+     
    }
    return(
      <div className="search-div">

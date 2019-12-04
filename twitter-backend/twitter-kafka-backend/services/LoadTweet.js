@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 function handle_request(msg, callback) {
 
     console.log("Inside Load Tweet Kafka Backend!");
+    var today = new Date();
+// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     // profileModel.findById(msg.id, function (err, tweet){
     //     if(err){
     //         console.log("Error inside twitter kafka backend -> Load Tweet");
@@ -22,6 +25,9 @@ function handle_request(msg, callback) {
         {
             $inc: {
                 "tweets.$.views": 1
+            },
+            $push:{
+                "tweets.$.viewDate":date
             }
         },
         function (err, user) {

@@ -27,6 +27,7 @@ function handle_request(msg, callback) {
               {userHandle:{$in:msg.members}},
               {$push:{
                   memberships:{
+                      listOwner:msg.userHandle,
                       listId:lId,
                       listName: msg.listName,
                       description: msg.description,

@@ -29,3 +29,14 @@ getList
 createList
 loadTweet
 get_all_tweets
+loadTweet
+createList
+getList
+getListTweets
+getMemberships
+setSubscriptions
+getSubscriptions
+get_all_chats
+unfollow
+deleteTweet
+searchByHashTags

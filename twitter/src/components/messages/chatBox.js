@@ -5,10 +5,7 @@ import logo from '../../svg/logo.svg';
 import './chatBox.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
+
 
 import {
   Card, CardImg, CardText, CardBody,
