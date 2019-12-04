@@ -155,7 +155,7 @@ router.post('/deleteTweet',  function (req, res, next) {
 });
 
 //SearchByHashTags
-router.post('/SearchByHashTags',  function (req, res, next) {
+router.post('/searchByHashTags',  function (req, res, next) {
     console.log('Inside SearchByHashTags');
      kafka.make_request('searchByHashTags',req.body, function(error,results){
         if (error) {
