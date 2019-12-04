@@ -31,7 +31,8 @@ console.log('Matches is',matches);
         image:msg.image,
         name:msg.name,
         userHandle:msg.userHandle,
-        views:0
+        views:0,
+        viewDate:[]
     }}}, {upsert: true}, function(err, docs){
         if (err) {
           console.log('error-->');
