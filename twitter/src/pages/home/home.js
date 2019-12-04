@@ -35,9 +35,11 @@ function Home() {
       <div className="Home-Navigation">
         <Navigation />
       </div>
-
-      <ProfileTopBar />
-
+      <div className = "ProfileBar">
+        <div>
+          <Button className = "BarTitle"> <h3>Home</h3></Button>
+        </div>
+      </div>
       <div className="Home-Home">
         <div className="Home-Home-Card" jumbotron-fluid>
             <Tweet />

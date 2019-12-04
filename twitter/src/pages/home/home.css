@@ -4,6 +4,10 @@
   background-color: #15202B;
 }
 
+body{
+  background-color: #15202B;
+}
+
 .Home-Navigation{
   position: fixed;
   background-color: #15202B;
@@ -69,7 +73,7 @@
 .ProfileBar {
   overflow: hidden;
   background-color: #15202B;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 50%;
   z-index: 1;

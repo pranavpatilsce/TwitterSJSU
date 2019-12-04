@@ -11,14 +11,14 @@ class NumberOfTweets extends React.Component {
 
   constructor(props){
 	super(props);
-	
+
 
     this.state = {
     	chartData :{
 
       	}
     }
-    
+
   }
 
   componentWillMount(){
@@ -28,11 +28,11 @@ class NumberOfTweets extends React.Component {
     .then(response => {
         console.log('data loaded is -------------->',response.data)
         response_data = response.data;
-        
+
         let bc = []
 
         let lastDay = 0;
-        let lastMonth = 0; 
+        let lastMonth = 0;
         let lastYear = 0;
 
         let today = new Date();
@@ -40,7 +40,7 @@ class NumberOfTweets extends React.Component {
         for(let tweet of response_data){
            // console.log(tweet);
             let tweetDate = tweet.date.split('-');
-            
+
             if(tweetDate[2] == today.getFullYear()){
                 lastYear++;
                 if(tweetDate[0] == (today.getMonth() + 1)){
@@ -57,7 +57,7 @@ class NumberOfTweets extends React.Component {
         for(let i = 0; i <3; i++){
             bc.push("#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16)));
         }
-    
+
         this.setState({
             chartData : {
                 labels : labels,
@@ -79,7 +79,7 @@ class NumberOfTweets extends React.Component {
   }
 
   render(){
-	
+
     return(
 		<div>
 			<div className="chart">
@@ -90,20 +90,20 @@ class NumberOfTweets extends React.Component {
 						title:{
 							display:true,
 							text:`Tweets per Day / Month / Year`,
-							fontSize:25
+							fontSize: 25
 						},
 						legend:{
 							display:true,
 							position:'bottom'
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    min: 0  
-                                }
-                              }]
-                        }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        min: 0
+                    }
+                  }]
+            }
 					}
 				}
 				/>
