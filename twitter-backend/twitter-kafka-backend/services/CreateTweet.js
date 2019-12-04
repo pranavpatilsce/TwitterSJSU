@@ -15,8 +15,7 @@ var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() 
 var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
 console.log('Matches is',matches);
-if(msg.image='') 
-{msg.image='defaulttweet.jpeg'}
+
 
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
         tweetId: new mongoose.Types.ObjectId(),
@@ -32,7 +31,8 @@ if(msg.image='')
         image:msg.image,
         name:msg.name,
         userHandle:msg.userHandle,
-        views:0
+        views:0,
+        viewDate:[]
     }}}, {upsert: true}, function(err, docs){
         if (err) {
           console.log('error-->');

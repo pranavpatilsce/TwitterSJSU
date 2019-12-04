@@ -68,10 +68,10 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
         .then(res => {
           console.log(res);
           console.log(res.data);
-          localStorage.setItem('name', this.state.name);
-          localStorage.setItem('email', this.state.email);
-          localStorage.setItem('birthDate', this.state.birthDate);
-          localStorage.setItem('userHandle', this.state.userHandle);
+          // localStorage.setItem('name', this.state.name);
+          // localStorage.setItem('email', this.state.email);
+          // localStorage.setItem('birthDate', this.state.birthDate);
+          // localStorage.setItem('userHandle', this.state.userHandle);
           this.refs.notify.notificationAlert(options);
       })
     }
@@ -93,7 +93,7 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Col >
                 <FormGroup>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="password placeholder" name="email" onChange={this.handleChange}/>
+                  <Input type="email" placeholder="enter email" name="email" onChange={this.handleChange}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -132,7 +132,8 @@ console.log('Inside signup !!!!!!!!!!!!!!!111111')
               <Input type="checkbox" name="checkbox" onChange={this.handleChange}/>
               <Label>I understand terms and conditions.</Label>
             </FormGroup>*/}
-          <Button type="submit">Sign Up!</Button>
+          <Button type="submit">Sign Up!</Button><span> </span>
+          <Button type="submit" href="/home" >Log In!</Button>
         </Form>
       </div>
     )

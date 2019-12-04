@@ -29,6 +29,11 @@ router.post('/getAllChats', function (req, res, next) {
     let chats = req.body.chats;
     console.log("Inside /getAllChats. : ");
 
+    if(chats==null || chats=='')
+    {
+        res.status(201).end()
+    }
+
     kafka.make_request('get_all_chats',chats, function(error,kafkaResult){
         if (error) {
             console.log("error in /getAllChats results ");
