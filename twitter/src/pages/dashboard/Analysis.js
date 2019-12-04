@@ -3,6 +3,7 @@ import TopTenViews from './topTenViews.js';
 import TopTenLiked from './topTenLiked.js';
 import TopFiveRetweets from './topFiveRetweets.js';
 import NumberOfTweets from './numberOfTweets.js';
+import NumberOfViews from './numberOfViews.js';
 import {Redirect} from 'react-router';
 
 
@@ -22,6 +23,8 @@ function Analysis() {
       <TopFiveRetweets/>
       <br></br>
       <NumberOfTweets/>
+      <br></br>
+      <NumberOfViews/>
     </div>
     </div>
   );

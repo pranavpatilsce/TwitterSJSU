@@ -1,1 +1,1 @@
-export const imageServer = 'http://localhost:3001/'
+export const imageServer = 'http://18.232.98.156:3001/'
