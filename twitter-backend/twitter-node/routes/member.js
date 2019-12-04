@@ -11,7 +11,7 @@ router.post('/getMemberships',  function (req, res, next) {
             res.status(200).send(error)
         }
         else {
-            res.status(200).send({response:true});
+            res.status(200).send(results);
         };
     });
 });
@@ -39,7 +39,7 @@ router.post('/setSubscriptions',  function (req, res, next) {
             res.status(200).send(error)
         }
         else {
-            res.status(200).send({response:true});
+            res.status(200).send(results);
         };
     });
 });
