@@ -141,13 +141,15 @@
 .ProfileCard-Image{
   position: absolute;
   top: 250px;
-  left: 5px;
+  left: 10px;
 }
 
-.image {
+/* .ProfileOFImage {
   border-radius: 50%;
   border-style: solid;
-}
+  height: 200px;
+  width: 200px;
+} */
 
 .EditButton{
   background-color: #15202B;
