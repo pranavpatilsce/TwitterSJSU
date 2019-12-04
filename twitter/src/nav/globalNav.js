@@ -83,7 +83,7 @@ class Navigation extends React.Component {
 
   logoutHandler = () =>{
     localStorage.clear();
-    
+
   }
 
 
@@ -98,12 +98,12 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button href="/home">Home</Button>
+          <Button className="NavButton NavButton2" href="/home">Home</Button>
         </div>
 
         <div className="Button-Padding">
 
-          <Button href="/bookmarks">Bookmarks</Button>
+          <Button className="NavButton NavButton2" href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
