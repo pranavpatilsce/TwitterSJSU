@@ -25,7 +25,6 @@ class ProfileTopBar  extends React.Component {
 function TweetLoadHome() {
   return (
     <div className="Home">
-
       <div className="Home-Navigation">
         <Navigation />
       </div>

@@ -24,7 +24,7 @@ class ProfileTopBar extends React.Component {
 
 function Home() {
   let redirectVar = null;
-  if(!localStorage.getItem('userHandle')){
+  if(!localStorage.getItem('email')){
       redirectVar = <Redirect to= "/"/>
   }
   return (
