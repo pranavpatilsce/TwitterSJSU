@@ -13,7 +13,10 @@ while (match = re.exec(sentence)) {
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() 
 var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
-if(msg.image='') msg.image='defaulttweet.jpeg'
+if(msg.image='') 
+{
+  msg.image='defaulttweet.jpeg'
+}
 console.log('Matches is',matches);
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
         tweetId: new mongoose.Types.ObjectId(),
