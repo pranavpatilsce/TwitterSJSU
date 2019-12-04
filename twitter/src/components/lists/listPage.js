@@ -9,7 +9,9 @@ import Lists from './lists';
 import '../../pages/home/tweet.css';
 import {Redirect} from 'react-router'
 
-let redirectVar=null;
+import './lists.css';
+
+{/*
 class ProfileTopBar extends React.Component {
 
   render(){
@@ -22,6 +24,8 @@ class ProfileTopBar extends React.Component {
     )
   }
 }
+*/}
+let redirectVar = null;
 
 function ListPage() {
   if(!localStorage.getItem('email')){
@@ -34,10 +38,15 @@ function ListPage() {
         <Navigation />
       </div>
 
-      <ProfileTopBar />
+      <div className = "ProfileBar">
+        <div>
+          <Button className = "BarTitle"><h3>Lists</h3></Button>
+        </div>
+      </div>
+      {/*<ProfileTopBar />*/}
 
-      <div className="Home-Home">
-        <div className="Home-Home-Card" jumbotron-fluid>
+      <div className="Messages-Messages">
+        <div className="Messages-Messages-Card" jumbotron-fluid>
             <Lists />
         </div>
       </div>

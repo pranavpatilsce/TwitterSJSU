@@ -137,7 +137,7 @@ class ProfileCard extends React.Component {
 
 constructor(props)
 {
- 
+
   super(props)
   this.state={
     profiledata:{}
@@ -214,7 +214,7 @@ componentWillMount=()=>{
             </div>
           </div>
           )
-        }               
+        }
             )
             console.log('usertweeetssssssssssssssssssssssssssssssssss------------------>',userTweets)
             this.setState({profiledata:response.data})
@@ -272,7 +272,7 @@ showList=()=>{
                 </div>
               </div>
               <div>
-               
+
                 <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].following.length} Following</a>{'  '}
                 <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].followers.length} Followers</a>
                 <span> </span> <button className="btn btn-primary" id="follo" onClick={()=>{this.follow(this.state.profiledata[0]._id)}} >Follow</button><span> </span>
@@ -369,7 +369,7 @@ class otherProfilePage extends React.Component {
           <Navigation />
         </div>
 
-          <ProfileTopBar/>
+          {/*<ProfileTopBar/>*/}
 
         <div>
           <ProfileCard/>

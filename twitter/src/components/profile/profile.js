@@ -317,7 +317,7 @@ constructor(props)
       localStorage.setItem('image', response.data[0].image);
         console.log('response ok',response.data[0].tweets)
 
-      
+
       location = response.data[0].location
       localStorage.setItem('location', location);
       followers=response.data[0].followers.length
@@ -371,7 +371,7 @@ constructor(props)
             <img className = "image" src={imageServer+'profileImages/'+localStorage.getItem('image')} />
           </div>
           <div>
-              <EditProfileModal >Edit Profile</EditProfileModal>
+              <EditProfileModal>Edit Profile</EditProfileModal>
           </div>
           <div className = "overall">
               <div>
@@ -383,13 +383,12 @@ constructor(props)
               </div>
               <div className = "UserInfo">
                 <div className = "UserInfo-Location">
-    <p><img top width="17%" src={Location}/>{location}</p>
+                <p><img top width="17%" src={Location}/>{location}</p>
                 </div>
                 <div className = "UserInfo-Birthday">
-                  <p><img top width="20%" src={birthdate}/>Born on {bdate}</p>
+                  <p><img top width="17%" src={birthdate}/>Born on {bdate}</p>
                 </div>
               </div>
-
               <div>
     <a className = "profileFollowers" href='#'>{following} Following</a>{'  '}
     <a className = "profileFollowers" href='#'>{followers} Followers</a>
@@ -419,7 +418,7 @@ class ProfileTabs extends React.Component {
 
 class UserProfileHome extends React.Component {
 
- 
+
 
   render(){
     let redirectVar = null;
@@ -433,9 +432,15 @@ class UserProfileHome extends React.Component {
         <div className="Profile-Navigation">
           <Navigation />
         </div>
-
-          <ProfileTopBar/>
-
+        {/*
+        <div className = "ProfileBar">
+          <div>
+            <Button className = "BarTitle"><h4>{localStorage.getItem('name')}</h4></Button>
+          </div>
+          <div>
+           <Button className = "BackButton"><img top width="500%" src={BackButton}/></Button>
+          </div>
+        </div>*/}
         <div>
           <ProfileCard/>
         </div>

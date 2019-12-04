@@ -4,6 +4,10 @@
   background-color: #15202B;
 }
 
+body{
+  background-color: #15202B;
+}
+
 .Home-Navigation{
   position: fixed;
   background-color: #15202B;
@@ -40,7 +44,7 @@
 
 .Home-Home-Card {
   padding-left: 25%;
-  padding-top: 6%;
+  padding-top: 5%;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -66,11 +70,10 @@
   color: white;
 }
 
-
 .ProfileBar {
   overflow: hidden;
   background-color: #15202B;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 50%;
   z-index: 1;
@@ -79,16 +82,17 @@
 
 .BarTitle {
   width: 85%;
-  float: left;
+  float: right;
   color: white;
   padding-top:14px;
   padding-bottom: 9px;
   background-color: #15202B;
   text-align: left;
+  border: 1px;
 }
 .BarTitle:hover {
   width: 85%;
-  float: left;
+  float: right;
   color: white;
   padding-top:14px;
   padding-bottom: 9px;
