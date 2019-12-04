@@ -39,7 +39,7 @@ class TopTenViews extends React.Component {
 		let data = []
 		for(let tweet of response_data){
 			data.push(tweet.views);
-			labels.push(tweet.tweet);
+			labels.push(tweet.date);
 			let c= "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
           	bc.push(c)
 		}
