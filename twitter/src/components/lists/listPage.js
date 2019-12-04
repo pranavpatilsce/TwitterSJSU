@@ -14,7 +14,7 @@ class ProfileTopBar extends React.Component {
     return(
       <div className = "ProfileBar">
         <div>
-          <Button className = "BarTitle"> <h3>Lists</h3></Button>
+          <Button className = "BarTitle"> <h3>Lists | {localStorage.getItem('userHandle')}</h3></Button>
         </div>
       </div>
     )

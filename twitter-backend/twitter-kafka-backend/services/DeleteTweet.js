@@ -3,6 +3,7 @@ var profileModel = db.Profile;
 var mongoose = require('mongoose');
 
 function handle_request(msg, callback) {
+    console.log('Inside delete tweet!!',msg)
     profileModel.updateOne({ userHandle: msg.userHandle },
         {$pull:{tweets:{tweetId:  mongoose.Types.ObjectId(msg.tweetId)}}},
         function (error, results) {

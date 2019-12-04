@@ -5,14 +5,6 @@ import logo from '../../svg/logo.svg';
 import '../../pages/home/home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navigation from '../../nav/globalNav.js';
-import RightSide from '../../components/search/search.js';
-
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
-
 import like from '../../svg/like.jpeg';
 import retweet from '../../svg/retweet.jpeg';
 import comment from '../../svg/comment.jpeg';

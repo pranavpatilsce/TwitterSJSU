@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 import logo from '../../svg/logo.svg';
-import './home.css';
+import '../../pages/home/home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
-import RightSide from '../../components/search/search.js';
-import {Redirect} from 'react-router';
-import Tweet from './tweet.js';
-import './tweet.css';
+import RightSide from '../search/search.js';
+import ShowUserLists from './showUserLists';
+import '../../pages/home/tweet.css';
+
 
 class ProfileTopBar extends React.Component {
 
@@ -15,21 +15,15 @@ class ProfileTopBar extends React.Component {
     return(
       <div className = "ProfileBar">
         <div>
-          <Button className = "BarTitle"> <h3>Home</h3></Button>
+          <Button className = "BarTitle"> <h3>Lists | {localStorage.getItem('otherUserHandle')}</h3></Button>
         </div>
       </div>
     )
   }
 }
 
-function Home() {
-  let redirectVar = null;
-  if(!localStorage.getItem('userHandle')){
-      redirectVar = <Redirect to= "/"/>
-  }
+function showUserListPage() {
   return (
-    <div>
-      {redirectVar}
     <div className="Home">
 
       <div className="Home-Navigation">
@@ -37,10 +31,9 @@ function Home() {
       </div>
 
       <ProfileTopBar />
-
       <div className="Home-Home">
         <div className="Home-Home-Card" jumbotron-fluid>
-            <Tweet />
+            <ShowUserLists />
         </div>
       </div>
 
@@ -48,8 +41,7 @@ function Home() {
         <RightSide />
       </div>
     </div>
-    </div>
   );
 }
 
-export default Home;
+export default showUserListPage;

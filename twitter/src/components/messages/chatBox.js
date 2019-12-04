@@ -5,10 +5,7 @@ import logo from '../../svg/logo.svg';
 import './chatBox.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
+
 
 import {
   Card, CardImg, CardText, CardBody,
@@ -22,29 +19,29 @@ const receivedId = "689d9ddd"
 
 class MessageBox extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      messagesList: this.props.messagesList,
-    };
-    //this.sendMessage = this.sendMessage.bind(this)
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     messagesList: this.props.messagesList,
+  //     //messages: []
+  //   };
+  //   //this.sendMessage = this.sendMessage.bind(this)
+  // }
 
   // sendMessage(text) {
-  //     this.currentUser.sendMessage({
+  //     this.state.sendMessage({
   //       text: text,
   //       chatId: chatId,
   //     })
   //   }
-
 
   render() {
         return (
           <div className="Messages-RightSide">
             <div className="chat-div">
               <Title />
-              <MessageList messagesList={this.state.messagesList}/>
-              <SendMessageForm sendMessage={this.sendMessage} />
+              <MessageList messagesList={'Hi'} />
+              {/*<SendMessageForm sendMessage={this.sendMessage} />*/}
             </div>
           </div>
         );
@@ -54,17 +51,16 @@ class MessageBox extends React.Component {
 class MessageList extends React.Component {
     render() {
         return (
-            <ul className="message-list">
-                {this.props.messagesList.map((message, index) => {
+          <ul className="message-list">
+                {/*{this.props.messagesList.map((message, index) => {*/}
                     return (
-                      <li  key={message.chatId} className="message">
-                        <div>{message.name}</div> {/* this was sender id*/}
-                        <div>{message.text}</div>
+                      <li className="message">
+                        <div>{this.props.messagesList}</div> {/* this was sender id*/}
                       </li>
                     )
-                })}
+            {/*    })} */}
             </ul>
-        )
+       )
     }
 }
 
@@ -80,6 +76,7 @@ class SendMessageForm extends React.Component {
 
 
     handleChange(e) {
+        this.props.messagesList(this.state.message)
         this.setState({
             message: e.target.value
         })
@@ -94,7 +91,7 @@ class SendMessageForm extends React.Component {
         	"chatId" : "5de48e956528003d3887b7b3",
           "senderId" : "5de03ca78752b30ca074122d",
           "receiverId" : "5de2f6f76156b960fccd9e01",
-        	"message" : this.state.message
+        	"message" : this.state.text
         }
         axios.post('/messages/addMessageToChat', data)
           .then((response) => {
@@ -104,7 +101,9 @@ class SendMessageForm extends React.Component {
               {
                   alert("Invalid credentials");
               }
-              this.setState({});
+              this.setState({
+                messagesList: [...this.state.messagesList, response.data.message]
+              });
 
           })
           .catch (response => {
@@ -122,9 +121,10 @@ class SendMessageForm extends React.Component {
                 className="send-message-form">
                 <input
                     onChange={this.handleChange}
-                    value={this.state.message}
+                    value={this.state.text}
                     placeholder="Type your message and hit ENTER"
                     type="text" />
+                <br/>
                 <Button type="submit"/>
             </form>
         )

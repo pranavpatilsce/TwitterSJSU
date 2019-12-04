@@ -69,6 +69,8 @@ app.get('/ping', function(req,res){
     res.end("Health Check Passed!");
 })
 
+app.use(express.static('uploads'));
+
 app.use('/profile', profileRouter);
 app.use('/messages', messagesRouter);
 app.use('/users', userRouter);

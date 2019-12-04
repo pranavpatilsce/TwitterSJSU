@@ -8,10 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../../components/search/search.js';
 
-import Pranav from '../../svg/Pranav.jpeg';
-import Kalyani from '../../svg/Kalyani.jpeg';
-import Mukesh from '../../svg/Mukesh.jpeg';
-import Kartik from '../../svg/Kartik.png';
+
 
 import like from '../../svg/like.jpeg';
 import retweet from '../../svg/retweet.jpeg';
@@ -21,6 +18,7 @@ import bookmark from '../../svg/bookmark.jpeg';
 
 import NotificationAlert from 'react-notification-alert';
 import "react-notification-alert/dist/animate.css";
+import {Redirect} from 'react-router';
 
 import {
   Card, CardImg, CardText, CardBody,
@@ -142,6 +140,21 @@ class LoadTweet extends React.Component{
     );
 }
 
+deleteTweet = (twt) => {
+
+  let data = { tweetId: twt, userHandle: localStorage.getItem('userHandle') }
+
+  console.log('Tweet delete data is:', data)
+  axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+  axios.post('/users/deleteTweet', data)
+    .then((response) => {
+      // this.refs.notify.notificationAlert(likeTweet);
+      window.location.reload();
+
+    })
+    .catch(() => { console.log('error') })
+}
+
     likeTweet = (twt)=>{
       if(twt.likedBy.includes(localStorage.getItem('userHandle')))
       {
@@ -163,21 +176,23 @@ class LoadTweet extends React.Component{
         .catch(()=>{console.log('error')})
     }
 
-    retweetTweet = (twt)=>{
-      let data = {tweet:twt.tweet, id:localStorage.getItem('id'), name:localStorage.getItem('name'),originalTweetOwner:twt.orignalHandle};
-     // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
-      console.log('Tweet retweet data is:',data)
-        axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/users/tweet/retweet',data)
+  
+    retweetTweet = (twt) => {
+      let data = { tweet: twt.tweet, tweetId:twt.tweetId, userHandle:localStorage.getItem('userHandle'), id: localStorage.getItem('id'), name: localStorage.getItem('name'), orignalHandle:twt.userHandle };
+      // let data = {tweetId:tweetid,likedBy:localStorage.getItem('userHandle'),id:localStorage.getItem('id')}
+      console.log('Tweet retweet data is:', data)
+      axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
+      axios.post('/users/tweet/retweet', data)
         .then((response) => {
-            // alert('success')
-            console.log('response othertweets',response.data)
-            otherTweets=response.data;
-            this.refs.notify.notificationAlert(retweete);
-           window.location.reload();
-           
+          // alert('success')
+          // console.log
+          console.log('response othertweets', response.data)
+          otherTweets = response.data;
+          this.refs.notify.notificationAlert(retweete);
+          window.location.reload();
+  
         })
-        .catch(()=>{console.log('error')})
+        .catch(() => { console.log('error') })
     }
 
     bookmarkTweet = (twt)=>{
@@ -197,9 +212,12 @@ class LoadTweet extends React.Component{
     }
 
     render() {
-     
+      let redirectVar = null;
+      if(!localStorage.getItem('userHandle')){
+          redirectVar = <Redirect to= "/"/>
+      }
       return(
-        
+      
         <div className = "tweetCard">
            <NotificationAlert ref="notify" /> 
             {otherTweets.map((twt, index) =>
@@ -223,6 +241,7 @@ class LoadTweet extends React.Component{
                       <button className="Tweet-Body-Panel-ReTweet" onClick={()=>this.retweetTweet(twt)}><img src={retweet}/></button>
                       <button className="Tweet-Body-Panel-Like" onClick={()=>this.likeTweet(twt)}><span color="white" id="likec">{twt.likes}</span><img src={like}/></button>
                       <button className="Tweet-Body-Panel-Bookmark" onClick={()=>this.bookmarkTweet(twt.tweetId)}><img src={bookmark}/></button>
+                      {twt.userHandle == localStorage.getItem('userHandle') ? <button className="btn btn-danger" onClick={() => this.deleteTweet(twt.tweetId)}><i class="fa fa-trash"></i></button> : <div></div>}
                       {/* <button className="btn btn-primary" onClick={()=>this.loadTweet(twt.tweetId)}>View Tweet</button> */}
                       <br/>
                       <br/>
@@ -243,6 +262,7 @@ class LoadTweet extends React.Component{
                 </div>
             )}
         </div>
+        
       );
     }
   }

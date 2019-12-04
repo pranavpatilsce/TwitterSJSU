@@ -8,9 +8,12 @@ import axios from 'axios'
 import Bird from '../svg/twitterBird.svg';
 import Pranav from '../svg/Pranav.jpeg';
 import ImageUploader from '../svg/imageUpload.svg';
+import {Redirect} from 'react-router';
 
 
 let tweet=null
+let reDirect = ""
+let file = null
 const ModalExample = (props) => {
   const {
     buttonLabel,
@@ -26,15 +29,31 @@ const ModalExample = (props) => {
       alert('works');
     }
   }
+
+  const onImageHandler = event => {
+   
+    file =  event.target.files[0]
+    console.log('Files is------------------> ',file)
+  }
+
   const tweetBodyChangeHandler=(e)=>{
     console.log(e.target.value);
     tweet=e.target.value;
   }
   const sendTweet=()=>{
-    let data = {tweet:tweet, id:localStorage.getItem('id'), name:localStorage.getItem('name'),orignalHandle:localStorage.getItem('userHandle')};
+    let data = {tweet:tweet, id:localStorage.getItem('id'), name:localStorage.getItem('name'),userHandle:localStorage.getItem('userHandle')};
+    console.log('State Value isss----------->',file)
+    const formData = new FormData()
+    formData.append('tweetimg',file)
+    formData.append('tweet',data.tweet)
+    formData.append('id',data.id)
+    formData.append('name',data.name)
+    formData.append('userHandle',data.userHandle)
+
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/users/tweet',data)
+      let config={headers:{'Content-Type':'multipart/form-data'}}
+      axios.post('/users/tweet',formData,config)
         .then((response) => {
             console.log('response ok',response)
             window.location.reload()
@@ -62,7 +81,7 @@ const ModalExample = (props) => {
             <label for="file-input">
                 <img src={ImageUploader}/>
             </label>
-            <input id="file-input" type="file" onChange={Navigation.onImageHandler}/>
+            <input id="file-input" type="file" onChange={onImageHandler}/>
           </div>
           <Button color="primary" onClick={sendTweet.bind(this)}>Tweet</Button>{' '}
           {/*<Button color="secondary" onClick={toggle}>Cancel</Button>*/}
@@ -74,23 +93,25 @@ const ModalExample = (props) => {
 
 class Navigation extends React.Component {
 
-  onImageHandler = event => {
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    })
-  }
+
 
   logoutHandler = () =>{
     localStorage.clear();
-    
+
   }
 
 
 
   render(){
 
+    let redirectVar = null;
+    if(!localStorage.getItem('userHandle')){
+        redirectVar = <Redirect to= "/"/>
+    }
+
     return(
+      <div>
+        {reDirect}
       <div className="App-header">
 
         <div className="Button-Padding">
@@ -98,12 +119,12 @@ class Navigation extends React.Component {
         </div>
 
         <div className="Button-Padding">
-          <Button href="/home">Home</Button>
+          <Button className="NavButton NavButton2" href="/home">Home</Button>
         </div>
 
         <div className="Button-Padding">
 
-          <Button href="/bookmarks">Bookmarks</Button>
+          <Button className="NavButton NavButton2" href="/bookmarks">Bookmarks</Button>
         </div>
 
         <div className="Button-Padding">
@@ -129,6 +150,7 @@ class Navigation extends React.Component {
         <div className="Button-Padding">
           <Button href="/" onClick = {this.logoutHandler.bind(this)}>Logout</Button>
         </div>
+      </div>
       </div>
     )
   }
