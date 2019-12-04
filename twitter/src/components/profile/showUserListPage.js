@@ -5,8 +5,9 @@ import '../../pages/home/home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../../nav/globalNav.js';
 import RightSide from '../search/search.js';
-import Lists from './lists';
+import ShowUserLists from './showUserLists';
 import '../../pages/home/tweet.css';
+
 
 class ProfileTopBar extends React.Component {
 
@@ -14,14 +15,14 @@ class ProfileTopBar extends React.Component {
     return(
       <div className = "ProfileBar">
         <div>
-          <Button className = "BarTitle"> <h3>Lists | {localStorage.getItem('userHandle')}</h3></Button>
+          <Button className = "BarTitle"> <h3>Lists | {localStorage.getItem('otherUserHandle')}</h3></Button>
         </div>
       </div>
     )
   }
 }
 
-function ListPage() {
+function showUserListPage() {
   return (
     <div className="Home">
 
@@ -30,10 +31,9 @@ function ListPage() {
       </div>
 
       <ProfileTopBar />
-
       <div className="Home-Home">
         <div className="Home-Home-Card" jumbotron-fluid>
-            <Lists />
+            <ShowUserLists />
         </div>
       </div>
 
@@ -44,4 +44,4 @@ function ListPage() {
   );
 }
 
-export default ListPage;
+export default showUserListPage;

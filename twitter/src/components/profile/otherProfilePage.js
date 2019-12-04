@@ -21,9 +21,10 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import classnames from 'classnames';
 import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Redirect} from 'react-router';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-let userTweets=null;
+let userTweets=null, redirectToViewListFlag=false, redirectToViewList=null;
 
 class NoMedia extends React.Component {
   render(){
@@ -221,7 +222,10 @@ componentWillMount=()=>{
     })
     .catch(()=>{console.log('error')})
 }
-
+showList=()=>{
+  redirectToViewListFlag=true;
+  this.setState({})
+}
   render(){
     console.log('This profiledata state is!!!!!!!!!!!!!!!!!!!!!!!!!!!',this.state.profiledata)
     if(this.state.profiledata[0]!=undefined)
@@ -234,8 +238,14 @@ componentWillMount=()=>{
         document.getElementById("unfollo").disabled = true;
       }
     }
+    if(redirectToViewListFlag)
+    {
+      redirectToViewList=<Redirect to="/showUserListPage"/>
+      redirectToViewListFlag=false;
+    }
     return(
       <div className="ProfileCard-Parent">
+        {redirectToViewList}
           <div className="ProfileCard-Wallpaper">
             <img src={Wallpaper}/>
           </div>
@@ -267,7 +277,7 @@ componentWillMount=()=>{
                 <a className = "profileFollowers" href='#'>{this.state.profiledata[0]==undefined?0:this.state.profiledata[0].followers.length} Followers</a>
                 <span> </span> <button className="btn btn-primary" id="follo" onClick={()=>{this.follow(this.state.profiledata[0]._id)}} >Follow</button><span> </span>
                 <button className="btn btn-primary" id="unfollo" onClick={()=>{this.unfollow(this.state.profiledata[0]._id)}}>UnFollow</button><span> </span>
-                <button className="btn btn-primary">View List</button><span> </span>
+                <Button color="primary" className="btn btn-primary" href="/showUserListPage">View List</Button><span> </span>
                 <CreateChatModal/>
               </div>
           </div>

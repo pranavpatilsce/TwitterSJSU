@@ -96,14 +96,15 @@ const CreateListModal = (props) => {
     
       const createList=()=>{
           let mem=listMembers.replace(/ /g,'').split(',')
-          alert(mem)
-        let data = {id:"5de03ca78752b30ca074122d", listName:listName, description:listDesc, members:mem};
+          // alert(mem)
+        let data = {id:localStorage.getItem('id'),userHandle:localStorage.getItem('userHandle'), listName:listName, description:listDesc, members:mem};
         console.log(data)
           let token=localStorage.getItem('bearer-token');
           axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-          axios.post('/list/createList',data)
+          axios.post('http://10.0.0.30:3001/list/createList',data)
             .then((response) => {
-                console.log('response ok',response)
+                console.log('response of create list',response)
+                // alert()
                 if(response.data)
                 {window.location.reload()}
             })
@@ -156,7 +157,7 @@ class List extends React.Component{
         console.log(members)
         let data={members:members}
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-        axios.post('/list/getListTweets',data)
+        axios.post('http://10.0.0.30:3001/list/getListTweets',data)
           .then((response) => {
               console.log('getlisttweets response',response.data)
               listTweets=response.data
@@ -168,14 +169,14 @@ class List extends React.Component{
     }
     constructor(props) {
       super(props);
-      let data = {id:"5de03ca78752b30ca074122d"};
+      let data = {userHandle:localStorage.getItem('userHandle')};
       let token=localStorage.getItem('bearer-token');
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/list/getMemberships',data)
+      axios.post('http://10.0.0.30:3001/member/getMemberships',data)
         .then((response) => {
             // alert('success')
             console.log('response allMembersArr',response.data)
-            allListsArr=response.data['lists'];
+            allListsArr=response.data['memberships'];
             memberLists=allListsArr.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">
@@ -184,7 +185,7 @@ class List extends React.Component{
                   <div className="Tweet-Body">
                     <br/>
                     <div className="Tweet-Body-Content">
-                      <h4 className="Tweet-Body-Name">{twt.listName}</h4>
+                      <h4 className="Tweet-Body-Name">{twt.listName} | {twt.listOwner}</h4>
                     </div>
                     <div>
                       <p className="Tweet-Body-Text">{twt.description}</p>
@@ -204,11 +205,11 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/list/getSubscriptions',data)
+      axios.post('http://10.0.0.30:3001/member/getSubscriptions',data)
         .then((response) => {
             // alert('success')
             console.log('response allSubscribedArr',response.data)
-            allListsArr=response.data['lists'];
+            allListsArr=response.data['subscriptions'];
             subscribedLists=allListsArr.map((twt, index) =>
                 <div className="tweetCard-indi">
                   <div className="Tweet-Image">
@@ -217,7 +218,7 @@ class List extends React.Component{
                   <div className="Tweet-Body">
                     <br/>
                     <div className="Tweet-Body-Content">
-                      <h4 className="Tweet-Body-Name">{twt.listName}</h4>
+                      <h4 className="Tweet-Body-Name">{twt.listName} | {twt.ownerUserHandle}</h4>
                     </div>
                     <div>
                       <p className="Tweet-Body-Text">{twt.description}</p>
@@ -237,7 +238,7 @@ class List extends React.Component{
         })
         .catch(()=>{console.log('error in getting subscriptions')})
       axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
-      axios.post('/list/getList',data)
+      axios.post('http://10.0.0.30:3001/list/getList',data)
         .then((response) => {
             // alert('success')
             console.log('response allListsArr',response.data)
