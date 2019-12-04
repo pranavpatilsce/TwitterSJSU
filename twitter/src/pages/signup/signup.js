@@ -11,7 +11,7 @@ class SignUp extends React.Component{
     state = {
       name: '',
       email: '',
-      birthday: '',
+      birthDate: '',
       userHandle: '',
       password: '',
       checkbox: '',
@@ -20,7 +20,7 @@ class SignUp extends React.Component{
     handleChange = event => {
       this.setState({ name: event.target.value });
       this.setState({ email: event.target.value });
-      this.setState({ birthday: event.target.value });
+      this.setState({ birthDate: event.target.value });
       this.setState({ userHandle: event.target.value });
       this.setState({ password: event.target.value });
       this.setState({ checkbox: event.target.value });
@@ -32,17 +32,20 @@ class SignUp extends React.Component{
       const user = {
         name: this.state.name,
         email: this.state.email,
-        birthday: this.state.birthday,
+        birthDate: this.state.birthDate,
         userHandle: this.state.userHandle,
-        password: this.state.password,
-        checkbox: this.state.password
+        password: this.state.password
       };
-      
+
       axios.post(`/profile/addProfile`, { user })
         .then(res => {
           console.log(res);
           console.log(res.data);
-        })
+          localStorage.setItem('name', this.state.name);
+          localStorage.setItem('email', this.state.email);
+          localStorage.setItem('birthDate', this.state.birthDate);
+          localStorage.setItem('userHandle', this.state.userHandle);
+      })
     }
 
     render(){
@@ -66,7 +69,7 @@ class SignUp extends React.Component{
             </Row>
             <FormGroup>
               <Label>Birth Date</Label>
-              <Input type="text" placeholder="MM-DD-YYYY" name="birthday" onChange={this.handleChange}/>
+              <Input type="text" placeholder="MM-DD-YYYY" name="birthDate" onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup>
               <Label>User Handle</Label>

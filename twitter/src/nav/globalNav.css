@@ -17,13 +17,18 @@
   float: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items:flex-start;
+  justify-content:flex-start;
   color: white;
+  padding-left: 100px;
 }
 
 .App-link {
   color: #09d3ac;
+}
+
+.NavBird{
+  width:100%;
 }
 
 .Tweet-Modal-Header {
@@ -84,7 +89,7 @@
 }
 
 img {
-  max-width:69%;
+  max-width:100%;
   height:auto;
 }
 
@@ -133,4 +138,33 @@ textarea {
   width: auto;
   height: auto;
   color: white;
+}
+
+
+.NavButton{
+  background-color: #15202B;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  //margin-left: 680px;
+  //margin-top: 20px;
+  color: white;
+  border-color: #15202B;
+}
+
+.NavButton2:focus {
+  background-color: #15202B;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  //margin-left: 680px;
+  //margin-top: 20px;
+  color: #00acee;
+}
+
+.NavButton3:hover {
+  background-color: #15202B;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  //margin-left: 680px;
+  //margin-top: 20px;
+  color: #00acee;
 }
