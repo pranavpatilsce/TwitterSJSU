@@ -13,6 +13,7 @@ while (match = re.exec(sentence)) {
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() 
 var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
+if(msg.image='') msg.image='defaulttweet.jpeg'
 console.log('Matches is',matches);
     profileModel.update({_id:msg.id}, { $push: { tweets:  {
         tweetId: new mongoose.Types.ObjectId(),
@@ -27,7 +28,8 @@ console.log('Matches is',matches);
         type:"Retweet",
         originalTweetOwner:msg.orignalHandle,
         name:msg.name,
-        userHandle:msg.userHandle
+        userHandle:msg.userHandle,
+        image:msg.image
 
     }}}, {upsert: true}, function(err, docs){
         if (err) {
