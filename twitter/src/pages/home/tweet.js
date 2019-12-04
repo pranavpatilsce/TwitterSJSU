@@ -259,7 +259,6 @@ class Tweet extends React.Component {
                 <button className="Tweet-Body-Panel-Bookmark" onClick={() => this.bookmarkTweet(twt.tweetId)}><img src={bookmark} /></button>
                 <button className="btn btn-primary" onClick={() => this.loadTweet(twt.tweetId)}>View Tweet</button> <span> </span> <span> </span>
                 {twt.userHandle == localStorage.getItem('userHandle') ? <button className="btn btn-danger" onClick={() => this.deleteTweet(twt.tweetId)}><i class="fa fa-trash"></i></button> : <div></div>}
-
                 <br />
                 <br />
                 <br />

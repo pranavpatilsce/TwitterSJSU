@@ -45,43 +45,82 @@
 .ProfileBar {
   overflow: hidden;
   background-color: #15202B;
-  position: fixed;
+  position:fixed;
   top: 0;
   width: 50%;
   z-index: 1;
-  left: 400px;
+  left: 200px;
 }
 
 .BarTitle {
-  width: 85%;
+  width: 80%;
+  float: right;
+  color: white;
+  padding-top: 14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  border: 1px;
+  font-size: 10px;
+}
+
+.BarTitle:hover {
+  width: 80%;
   float: right;
   color: white;
   padding-top:14px;
   padding-bottom: 9px;
   background-color: #15202B;
   text-align: left;
+  border: 1px;
+
+}
+
+/* .ProfileBar {
+  //overflow: hidden;
+  overflow: auto;
+  background-color: #15202B;
+  //position: fixed;
+  top: 0;
+  width: 40%;
+  z-index: 1;
+  left: 469px;
+}
+
+.BarTitle {
+  width: 100%;
+  float: left;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  background-color: #15202B;
+  text-align: left;
+  font-size: 40px;
   border: 1px;
 }
 .BarTitle:hover {
-  width: 85%;
-  float: right;
+  width: 100%;
+  float: left;
   color: white;
-  padding-top:14px;
-  padding-bottom: 9px;
+  padding-top:30px;
+  padding-bottom: 15px;
+  padding-left: 20px;
   background-color: #15202B;
   text-align: left;
+  font-size: 40px;
   border: 1px;
-}
+} */
 
 .BackButton {
-  width: 15%;
+  width: 10%;
   float: left;
   background-color: #15202B;
   border: 1px;
 }
 
 .BackButton:hover {
-  width: 15%;
+  width: 10%;
   float: left;
   background-color: #15202B;
   border: 1px;

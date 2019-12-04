@@ -8,6 +8,9 @@ import RightSide from '../search/search.js';
 import Lists from './lists';
 import '../../pages/home/tweet.css';
 
+import './lists.css';
+
+{/*
 class ProfileTopBar extends React.Component {
 
   render(){
@@ -20,6 +23,7 @@ class ProfileTopBar extends React.Component {
     )
   }
 }
+*/}
 
 function ListPage() {
   return (
@@ -29,10 +33,15 @@ function ListPage() {
         <Navigation />
       </div>
 
-      <ProfileTopBar />
+      <div className = "ProfileBar">
+        <div>
+          <Button className = "BarTitle"><h3>Lists</h3></Button>
+        </div>
+      </div>
+      {/*<ProfileTopBar />*/}
 
-      <div className="Home-Home">
-        <div className="Home-Home-Card" jumbotron-fluid>
+      <div className="Messages-Messages">
+        <div className="Messages-Messages-Card" jumbotron-fluid>
             <Lists />
         </div>
       </div>

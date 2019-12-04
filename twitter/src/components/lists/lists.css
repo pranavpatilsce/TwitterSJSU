@@ -1,0 +1,137 @@
+.ListCreateButton{
+  float: right;
+  width: 10%;
+  //height: 10%;
+  padding-top: 0px;
+}
+
+.ProfileBar {
+  //overflow: hidden;
+  overflow: auto;
+  background-color: #15202B;
+  //position: fixed;
+  top: 0;
+  width: 40%;
+  z-index: 1;
+  left: 469px;
+}
+
+.BarTitle {
+  width: 100%;
+  float: left;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  background-color: #15202B;
+  text-align: left;
+  font-size: 40px;
+  border: 1px;
+}
+.BarTitle:hover {
+  width: 100%;
+  float: left;
+  color: white;
+  padding-top:30px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  background-color: #15202B;
+  text-align: left;
+  font-size: 40px;
+  border: 1px;
+}
+
+.ProfileTabsDiv{
+  background-color: #15202B;
+  backface-visibility: hidden;
+}
+
+.ProfileTabsDiv:focus{
+  background-color: #15202B;
+  backface-visibility: hidden;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
+}
+
+
+.ProfileTabs{
+  background-color: #15202B;
+  backface-visibility: hidden;
+}
+
+.ProfileTabs:focus{
+  background-color: #15202B;
+  backface-visibility: hidden;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
+}
+
+.ProfileLink{
+  background-color: #15202B;
+}
+
+.ProfileLink:focus{
+  background-color: #15202B;
+}
+
+/*
+
+.MessagesBar {
+  background-color: #15202B;
+  float: left;
+  width: 65%;
+  overflow: auto;
+  padding-left: 250px;
+  border-width: thin;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-style: solid;
+  border-color: gray;
+}
+
+.MessagesBarTitle {
+  color: white;
+  width: 100%;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+  padding-left: 30%;
+}
+.MessagesBarTitle:hover {
+  color: white;
+  width: 100%;
+  padding-top:14px;
+  padding-bottom: 9px;
+  background-color: #15202B;
+  text-align: left;
+}
+
+.Messages-Messages{
+  float: left;
+  width: 100%;
+  overflow: auto;
+  background-color: #15202B;
+}
+
+.Messages-Messages-Card {
+  padding-left: 25%;
+  padding-top: 0%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+  background-color: #15202B;
+
+} */

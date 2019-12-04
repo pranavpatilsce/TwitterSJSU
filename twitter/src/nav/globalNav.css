@@ -150,7 +150,7 @@ textarea {
   color: white;
   border-color: #15202B;
 }
-
+/*
 .NavButton2:focus {
   background-color: #15202B;
   border: 1px solid #00acee;
@@ -158,13 +158,21 @@ textarea {
   //margin-left: 680px;
   //margin-top: 20px;
   color: #00acee;
+} */
+
+.TweetNavButton{
+  background-color: #00acee;
+  border: 1px solid #00acee;
+  border-radius: 30px;
+  //margin-left: 680px;
+  //margin-top: 20px;
+  color: white;
+  border-color: #15202B;
 }
 
 .NavButton3:hover {
   background-color: #15202B;
   border: 1px solid #00acee;
   border-radius: 30px;
-  //margin-left: 680px;
-  //margin-top: 20px;
   color: #00acee;
 }
