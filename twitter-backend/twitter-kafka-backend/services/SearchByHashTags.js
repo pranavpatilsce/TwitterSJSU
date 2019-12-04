@@ -6,7 +6,11 @@ function handle_request(msg, callback) {
     console.log("**********************");
     console.log("Inside SearchByHashTags, msg: ", msg);
     
-    Profile.findById({},{tweets:{$elemMatch:{tweetHash:{elemMatch:{$in:[msg.hashTag]}}}}}, function(err, profile){
+    Profile.find(
+        {"tweets.tweetHash":msg.hashTag},
+        {"tweets.$":1},
+//  {tweets:{$elemMatch:{tweetHash:{elemMatch:{$in:[msg.hashTag]}}}}}, 
+        function(err, profile){
         if(err){
             console.log("Error in Kafka Backend -> SearchByHashTags",err);
             callback(err, null);
