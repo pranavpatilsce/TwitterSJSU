@@ -22,6 +22,7 @@ import BookmarkPage from './components/bookmarks/bookmarkPage.js';
 import ListPage from './components/lists/listPage.js';
 import ViewListTweetsPage from './components/lists/viewListTweetsPage.js';
 import OtherProfilePage from './components/profile/otherProfilePage.js';
+import dashboardProfile from './components/profile/dashboardProfile';
 
 //TODO: Add redux for isLoggedIn or not state
 
@@ -45,6 +46,7 @@ class Routes extends React.Component {
        <Route exact path='/listPage' component={ListPage} />
        <Route exact path='/viewListTweetsPage' component={ViewListTweetsPage} />
        <Route exact path='/otherProfilePage' component={OtherProfilePage} />
+       <Route exact path='/dashboardData' component={dashboardProfile} />
       </Switch>
     </Router>
     )

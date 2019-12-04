@@ -20,6 +20,7 @@ import Birthday from '../../svg/birthday.jpeg';
 import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import {Redirect} from 'react-router';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 let userTweets=null;
@@ -243,9 +244,16 @@ class ProfileTabs extends React.Component {
 
 class UserProfileHome extends React.Component {
 
-  render(){
-    return(
+ 
 
+  render(){
+    let redirectVar = null;
+    if(!localStorage.getItem('userHandle')){
+        redirectVar = <Redirect to= "/"/>
+    }
+    return(
+      <div>
+        {redirectVar}
       <div className="Profile">
         <div className="Profile-Navigation">
           <Navigation />
@@ -259,6 +267,7 @@ class UserProfileHome extends React.Component {
         <div className="Profile-RightSide">
           <RightSide />
         </div>
+      </div>
       </div>
     )
   }

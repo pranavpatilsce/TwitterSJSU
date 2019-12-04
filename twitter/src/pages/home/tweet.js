@@ -238,7 +238,7 @@ class Tweet extends React.Component {
           <div className="tweetCard-indi">
             <div className="Tweet-Image">
               <br />
-              <img className="image" src={twt.image} />
+              <img className="image" src={'http://localhost:3001/tweetImages/' + twt.image} />
             </div>
             <div className="Tweet-Body">
               <br />
