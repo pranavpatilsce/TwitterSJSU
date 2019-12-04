@@ -339,8 +339,8 @@ class ProfileCard extends React.Component {
     // }
 
     componentWillMount = () => {
-        console.log('User handle loaded!!!!', localStorage.getItem('otherUserHandle'))
-        let data = { userHandle: localStorage.getItem('otherUserHandle') };
+        console.log('User handle loaded!!!!', localStorage.getItem('userHandle'))
+        let data = { userHandle: localStorage.getItem('userHandle') };
         let token = localStorage.getItem('bearer-token');
         // alert('asd')
         axios.defaults.withCredentials = true;//very imp, sets credentials so that backend can load cookies
@@ -383,7 +383,7 @@ class ProfileCard extends React.Component {
                 }
                 )
                 console.log('usertweeetssssssssssssssssssssssssssssssssss------------------>', userTweets)
-                this.setState({ profiledata: response.data })
+                // this.setState({ profiledata: response.data })
                 this.setState({})
             })
             .catch(() => { console.log('error') })
@@ -401,29 +401,18 @@ class ProfileCard extends React.Component {
                 <div className="ProfileCard-Image">
                     <img className="image" src={Pranav} />
                 </div>
-                <div>
-                    <Button className="EditButton EditButton2">Edit Profile</Button>
-                </div>
+               
                 <div className="overall">
                     <div>
-                        <h4 className="ProfileName">{this.state.profiledata[0] == undefined ? "" : this.state.profiledata[0].name}</h4>
-                        <p className="ProfileHandle">{this.state.profiledata[0] == undefined ? "" : this.state.profiledata[0].userHandle}</p>
+                        <h4 className="ProfileName">{localStorage.getItem('name') == undefined ? "" : localStorage.getItem('name')}</h4>
+                        <p className="ProfileHandle">{localStorage.getItem('userHandle') == undefined ? "" : localStorage.getItem('userHandle')}</p>
                     </div>
                     <div className="ProfileBio">
-                        <p>{this.state.profiledata.bio}</p>
+                        <p>{localStorage.getItem("bio")}</p>
                     </div>
-                    <div className="UserInfo">
-                        <div className="UserInfo-Location">
-                            <p><img top width="17%" src={Location} />{this.state.profiledata[0] == undefined ? "" : this.state.profiledata[0].location}</p>
-                        </div>
-                        <div className="UserInfo-Birthday">
-                            <p><img top width="14%" src={Birthday} />Born on {this.state.profiledata[0] == undefined ? "" : this.state.profiledata[0].birthDate}</p>
-                        </div>
-                    </div>
+                  
                     <div>
 
-                        <a className="profileFollowers" href='#'>{this.state.profiledata[0] == undefined ? 0 : this.state.profiledata[0].following.length} Following</a>{'  '}
-                        <a className="profileFollowers" href='#'>{this.state.profiledata[0] == undefined ? 0 : this.state.profiledata[0].followers.length} Followers</a>
                         <span> </span> <button className="btn btn-primary" onClick={() => { this.follow('followers') }} >Followers</button><span> </span>
                         <button className="btn btn-primary" onClick={() => { this.follow('following') }}>Following</button><span> </span>
                         <button className="btn btn-primary" onClick={() => { this.follow('bookmarked') }}>View BookMarked</button><span> </span>
