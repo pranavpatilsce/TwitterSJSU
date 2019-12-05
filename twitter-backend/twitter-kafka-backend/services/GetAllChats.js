@@ -7,7 +7,7 @@ function handle_request(msg, callback) {
     console.log("Inside getAllChats kafka backend, msg: ", typeof(msg) );
     if(msg==null || msg=='')
     {
-        callback(err, null);
+        callback(null , true);
     }
   let chatIds = msg.split(',');
     console.log("-------",chatIds,"---------------------------------------------------");
