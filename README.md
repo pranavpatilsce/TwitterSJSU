@@ -1,3 +1,3 @@
 
-# TwiiiifhbitterSJSU Manav
+# Twitter Prototype
 
