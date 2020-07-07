@@ -24,7 +24,7 @@
     "mysql": "^2.17.1",
     "nodemailer": "^4.6.4",
     "nodemon": "^1.19.4",
-    "npm": "^6.12.1",
+    "npm": "^6.14.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "redis": "^2.8.0",
